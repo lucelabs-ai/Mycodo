@@ -1,13 +1,13 @@
 # Spanish translations for Mycodo.
-# Copyright (C) 2025 Kyle T. Gabriel
+# Copyright (C) 2026 Kyle T. Gabriel
 # This file is distributed under the same license as the Mycodo project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Mycodo VERSION\n"
 "Report-Msgid-Bugs-To: mycodo@kylegabriel.com\n"
-"POT-Creation-Date: 2025-04-26 00:34-0400\n"
+"POT-Creation-Date: 2026-08-02 20:39-0400\n"
 "PO-Revision-Date: 2024-10-16 17:32+0000\n"
 "Last-Translator: Kyle Gabriel <kyletgabriel@gmail.com>\n"
 "Language: es\n"
@@ -40,13 +40,13 @@ msgstr "Angulo"
 msgid "Battery"
 msgstr "Batería"
 
-#: config_devices_units.py:45 config_devices_units.py:351
+#: config_devices_units.py:45 config_devices_units.py:359
 msgid "Boolean"
 msgstr "booleano"
 
 #: actions/led_kasa_bulb_change_color.py:60 config_devices_units.py:49
-#: functions/camera_libcamera.py:259 mycodo_flask/forms/forms_camera.py:57
-#: outputs/on_off_kasa_rgb_bulbs.py:97
+#: functions/camera_libcamera.py:259 functions/camera_rpicam.py:259
+#: mycodo_flask/forms/forms_camera.py:57 outputs/on_off_kasa_rgb_bulbs.py:97
 msgid "Brightness"
 msgstr "Brillo"
 
@@ -79,11 +79,11 @@ msgid "Color Temperature"
 msgstr "Temperatura del color"
 
 #: config_devices_units.py:85 config_devices_units.py:89
-#: config_devices_units.py:93 config_devices_units.py:369
+#: config_devices_units.py:93 config_devices_units.py:377
 msgid "CPU Load"
 msgstr "Carga de la CPU"
 
-#: config_devices_units.py:85 config_devices_units.py:462
+#: config_devices_units.py:85 config_devices_units.py:476
 msgid "Minute"
 msgstr "Minuto"
 
@@ -112,8 +112,8 @@ msgstr "Oxígeno disuelto"
 
 #: actions/output_on_off.py:61 actions/output_ramp_pwm.py:77
 #: actions/pause_actions.py:35 config_devices_units.py:113
-#: config_translations.py:70 config_translations.py:307
-#: config_translations.py:308 mycodo_flask/forms/forms_method.py:58
+#: config_translations.py:72 config_translations.py:313
+#: config_translations.py:314 mycodo_flask/forms/forms_method.py:58
 #: mycodo_flask/forms/forms_method.py:119
 #: mycodo_flask/templates/pages/energy_usage_outputs.html:68
 #: mycodo_flask/templates/pages/energy_usage_outputs.html:103
@@ -122,7 +122,7 @@ msgstr "Duracion"
 
 #: actions/output_pwm.py:48 actions/output_ramp_pwm.py:50
 #: actions/output_ramp_pwm.py:59 actions/output_ramp_pwm.py:68
-#: config_devices_units.py:117 config_translations.py:250
+#: config_devices_units.py:117 config_translations.py:256
 msgid "Duty Cycle"
 msgstr "Ciclo de Trabajo"
 
@@ -146,7 +146,7 @@ msgstr "Potencial eléctrico"
 msgid "Energy"
 msgstr "Energia"
 
-#: config_devices_units.py:141 config_translations.py:351
+#: config_devices_units.py:141 config_translations.py:357
 #: mycodo_flask/forms/forms_method.py:67
 msgid "Frequency"
 msgstr "Frecuencia"
@@ -170,7 +170,7 @@ msgstr "Humedad"
 msgid "Humidity Ratio"
 msgstr "Relación de Humedad"
 
-#: config_devices_units.py:161 config_devices_units.py:501
+#: config_devices_units.py:161 config_devices_units.py:515
 msgid "Ion Concentration"
 msgstr "Concentración de iones"
 
@@ -247,356 +247,380 @@ msgid "Radiation Dose Rate"
 msgstr "Tasa de Dosis de Radiación"
 
 #: config_devices_units.py:249
+#, fuzzy
+msgid "PPM Rate"
+msgstr "Tasa de muestreo"
+
+#: config_devices_units.py:253
 msgid "Volume Flow Rate"
 msgstr "Caudal volumétrico"
 
-#: config_devices_units.py:253
+#: config_devices_units.py:257
 msgid "Resistance"
 msgstr "Resistencia"
 
-#: config_devices_units.py:257
+#: config_devices_units.py:261
 msgid "Rotation"
 msgstr "Rotación"
 
-#: config_devices_units.py:261
+#: config_devices_units.py:265
 msgid "Revolutions"
 msgstr "Revoluciones"
 
-#: config_devices_units.py:265
+#: config_devices_units.py:269
 msgid "Salinity"
 msgstr "Salinidad"
 
-#: actions/led_kasa_bulb_change_color.py:52 config_devices_units.py:269
-#: functions/camera_libcamera.py:275 mycodo_flask/forms/forms_camera.py:67
-#: outputs/on_off_kasa_rgb_bulbs.py:143
+#: actions/led_kasa_bulb_change_color.py:52 config_devices_units.py:273
+#: functions/camera_libcamera.py:275 functions/camera_rpicam.py:275
+#: mycodo_flask/forms/forms_camera.py:67 outputs/on_off_kasa_rgb_bulbs.py:143
 msgid "Saturation"
 msgstr "Saturación"
 
 #: actions/pid_setpoint.py:17 actions/pid_setpoint.py:49
 #: actions/pid_setpoint_lower.py:17 actions/pid_setpoint_raise.py:17
-#: config_devices_units.py:273 config_devices_units.py:525
-#: config_translations.py:178 functions/bang_bang.py:73
+#: config_devices_units.py:277 config_devices_units.py:542
+#: config_translations.py:184 functions/bang_bang.py:73
 #: functions/bang_bang_on_off.py:82 functions/bang_bang_pwm.py:70
 #: functions/pid_autotune.py:97
 msgid "Setpoint"
 msgstr "Punto de consigna"
 
-#: config_devices_units.py:277
+#: config_devices_units.py:281
 msgid "Band Min"
 msgstr "Banda min"
 
-#: config_devices_units.py:281
+#: config_devices_units.py:285
 msgid "Band Max"
 msgstr "Banda max"
 
-#: config_devices_units.py:285
+#: config_devices_units.py:289
 msgid "Specific Enthalpy"
 msgstr "Entalpía Específica"
 
-#: config_devices_units.py:289
+#: config_devices_units.py:293
 msgid "Specific Gravity"
 msgstr "Gravedad Específica"
 
-#: config_devices_units.py:293
+#: config_devices_units.py:297
 msgid "Specific Volume"
 msgstr "Volumen Específico"
 
-#: config_devices_units.py:297
+#: config_devices_units.py:301
 msgid "Speed"
 msgstr "Velocidad"
 
-#: config_devices_units.py:301 functions/vapor_pressure_deficit.py:94
+#: config_devices_units.py:305 functions/vapor_pressure_deficit.py:94
 #: inputs/atlas_pt1000.py:76
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: config_devices_units.py:305
+#: config_devices_units.py:309
 msgid "Total Dissolved Solids"
 msgstr "Total de sólidos disueltos"
 
-#: config_devices_units.py:309 config_devices_units.py:333
-#: config_devices_units.py:489
+#: config_devices_units.py:313 config_devices_units.py:341
+#: config_devices_units.py:503
 msgid "Unitless"
 msgstr "sin unidad"
 
-#: config_devices_units.py:313
+#: config_devices_units.py:317
 msgid "Vapor Pressure Deficit"
 msgstr "Déficit de presión de vapor"
 
-#: config_devices_units.py:317
+#: config_devices_units.py:321
 msgid "Version"
 msgstr "Versión"
 
-#: config_devices_units.py:321
+#: config_devices_units.py:325
 msgid "VOC"
 msgstr "VOC"
 
+#: config_devices_units.py:329
+msgid "Mass"
+msgstr ""
+
 #: actions/clear_total_volume.py:13 actions/output_volume.py:48
-#: config_devices_units.py:325 config_translations.py:214
-#: config_translations.py:316 config_translations.py:317
+#: config_devices_units.py:333 config_translations.py:220
+#: config_translations.py:322 config_translations.py:323
 #: inputs/atlas_flow.py:204 inputs/hall_flow.py:61
 msgid "Volume"
 msgstr "Volumen"
 
-#: config_devices_units.py:336
+#: config_devices_units.py:344
 msgid "Microsecond"
 msgstr "Microsegundo"
 
-#: config_devices_units.py:339
+#: config_devices_units.py:347
 msgid "Microsiemens per centimeter"
 msgstr "Microsiemens por centímetro"
 
-#: config_devices_units.py:342
+#: config_devices_units.py:350
 msgid "Microsieverts per hour"
 msgstr "Microsieverts por hora"
 
-#: config_devices_units.py:345 mycodo_flask/forms/forms_misc.py:27
+#: config_devices_units.py:353 mycodo_flask/forms/forms_misc.py:27
 #: mycodo_flask/forms/forms_misc.py:35
 msgid "Amp"
 msgstr "Amperio"
 
-#: config_devices_units.py:348
+#: config_devices_units.py:356
 msgid "Bearing"
 msgstr "Rodamiento"
 
-#: config_devices_units.py:354
+#: config_devices_units.py:362
 msgid "Celsius"
 msgstr "Celsius"
 
-#: config_devices_units.py:357
+#: config_devices_units.py:365
 msgid "CIE"
 msgstr "CIE"
 
-#: config_devices_units.py:360
+#: config_devices_units.py:368
 msgid "Centimeter"
 msgstr "Centímetro"
 
-#: config_devices_units.py:363
+#: config_devices_units.py:371
 msgid "Centimeters of water"
 msgstr "Centímetros de agua"
 
-#: config_devices_units.py:366
+#: config_devices_units.py:374
 msgid "Counts per minute"
 msgstr "Cuentas por minuto"
 
-#: config_devices_units.py:372
+#: config_devices_units.py:380
 msgid "Day"
 msgstr "Día"
 
-#: config_devices_units.py:375
+#: config_devices_units.py:383
 msgid "Decimal"
 msgstr "Decimal"
 
-#: actions/led_kasa_bulb_change_color.py:44 config_devices_units.py:378
+#: actions/led_kasa_bulb_change_color.py:44 config_devices_units.py:386
 #: outputs/on_off_kasa_rgb_bulbs.py:120
 msgid "Degree"
 msgstr "Grados"
 
-#: config_devices_units.py:381
+#: config_devices_units.py:389
 msgid "8-Bit Color"
 msgstr "Color de 8 bits"
 
-#: config_devices_units.py:384
+#: config_devices_units.py:392
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: config_devices_units.py:387
+#: config_devices_units.py:395
 msgid "Foot"
 msgstr "Pie"
 
-#: config_devices_units.py:390
+#: config_devices_units.py:398
+#, fuzzy
+msgid "Gram"
+msgstr "Rampa"
+
+#: config_devices_units.py:401
 msgid "Full"
 msgstr "Completo"
 
-#: config_devices_units.py:393
+#: config_devices_units.py:404
 msgid "G-Force"
 msgstr "Fuerza G"
 
-#: config_devices_units.py:396
+#: config_devices_units.py:407
 msgid "Gigabyte"
 msgstr "Gigabyte"
 
-#: config_devices_units.py:399
+#: config_devices_units.py:410
 msgid "Hour"
 msgstr "Hora"
 
-#: config_devices_units.py:402
+#: config_devices_units.py:413
 msgid "Hectopascals"
 msgstr "Hectopascales"
 
-#: config_devices_units.py:405 config_translations.py:351
+#: config_devices_units.py:416 config_translations.py:357
 msgid "Hertz"
 msgstr "Hertzio"
 
-#: config_devices_units.py:408
+#: config_devices_units.py:419
 msgid "Infrared"
 msgstr "Infrarrojo"
 
-#: config_devices_units.py:411 outputs/on_off_kasa_rgb_bulbs.py:166
+#: config_devices_units.py:422 outputs/on_off_kasa_rgb_bulbs.py:166
 msgid "Kelvin"
 msgstr "Kelvin"
 
-#: config_devices_units.py:414
+#: config_devices_units.py:425
 msgid "Kilobyte"
 msgstr "Kilobyte"
 
-#: config_devices_units.py:417
+#: config_devices_units.py:428
 msgid "Kilogram per kilogram"
 msgstr "Kilogramo por kilogramo"
 
-#: config_devices_units.py:420
+#: config_devices_units.py:431
 msgid "Kilohertz"
 msgstr "Kilohercio"
 
-#: config_devices_units.py:423
+#: config_devices_units.py:434
 msgid "Kilojoule per kilogram"
 msgstr "Kilojulio por kilogramo"
 
-#: config_devices_units.py:426
+#: config_devices_units.py:437
 msgid "Knot"
 msgstr "Nudo"
 
-#: config_devices_units.py:429
+#: config_devices_units.py:440
 msgid "Kilopascal"
 msgstr "Kilopascal"
 
-#: actions/clear_total_kWh.py:13 config_devices_units.py:432
+#: config_devices_units.py:443
+#, fuzzy
+msgid "Kilogram"
+msgstr "Programa"
+
+#: actions/clear_total_kWh.py:13 config_devices_units.py:446
 #: inputs/kasa_energy_meter.py:77
 msgid "Kilowatt-hour"
 msgstr "Kilowatio/hora"
 
-#: config_devices_units.py:435
+#: config_devices_units.py:449
 msgid "Liter"
 msgstr "Litro"
 
-#: config_devices_units.py:438
+#: config_devices_units.py:452
 msgid "Liters per Hour"
 msgstr "Litros por hora"
 
-#: config_devices_units.py:441
+#: config_devices_units.py:455
 msgid "Liters per Minute"
 msgstr "Litros por minuto"
 
-#: config_devices_units.py:444
+#: config_devices_units.py:458
 msgid "Liters Per Second"
 msgstr "Litros por segundo"
 
-#: config_devices_units.py:447
+#: config_devices_units.py:461
 msgid "Lux"
 msgstr "Lux"
 
-#: config_devices_units.py:450
+#: config_devices_units.py:464
 msgid "Meter"
 msgstr "Metro"
 
-#: config_devices_units.py:453
+#: config_devices_units.py:467
 msgid "Meters per second"
 msgstr "Metros por segundo"
 
-#: config_devices_units.py:456
+#: config_devices_units.py:470
 msgid "Meters per second per second"
 msgstr "Metros por segundo por segundo"
 
-#: config_devices_units.py:459
+#: config_devices_units.py:473
 msgid "Milligram per Liter"
 msgstr "Miligramo por litro"
 
-#: config_devices_units.py:465
+#: config_devices_units.py:479
 msgid "Milliamp"
 msgstr "Miliamperio"
 
-#: config_devices_units.py:468
+#: config_devices_units.py:482
 msgid "Milliliter"
 msgstr "Mililitro"
 
-#: config_devices_units.py:471
+#: config_devices_units.py:485
 msgid "Millimeter"
 msgstr "Milímetro"
 
-#: config_devices_units.py:474
+#: config_devices_units.py:488
 msgid "Miles per hour"
 msgstr "Millas por hora"
 
-#: config_devices_units.py:477
+#: config_devices_units.py:491
 msgid "Millivolt"
 msgstr "milivoltios"
 
-#: config_devices_units.py:480
+#: config_devices_units.py:494
 msgid "Cubic meters per kilogram"
 msgstr "Metros cúbicos por kilogramo"
 
-#: config_devices_units.py:483
+#: config_devices_units.py:497
 msgid "Megahertz"
 msgstr "Megahercio"
 
-#: config_devices_units.py:486
+#: config_devices_units.py:500
 msgid "Megabyte"
 msgstr "Megabyte"
 
-#: config_devices_units.py:492 config_translations.py:358
+#: config_devices_units.py:506 config_translations.py:364
 msgid "Ohm"
 msgstr "Ohmio"
 
-#: config_devices_units.py:495
+#: config_devices_units.py:509
 msgid "Pascal"
 msgstr "Pascal"
 
 #: actions/led_kasa_bulb_change_color.py:52
-#: actions/led_kasa_bulb_change_color.py:60 config_devices_units.py:498
+#: actions/led_kasa_bulb_change_color.py:60 config_devices_units.py:512
 #: outputs/on_off_kasa_rgb_bulbs.py:97 outputs/on_off_kasa_rgb_bulbs.py:143
 msgid "Percent"
 msgstr "Por ciento"
 
-#: config_devices_units.py:504
+#: config_devices_units.py:518
 msgid "PID values"
 msgstr "Valores PID"
 
-#: config_devices_units.py:507
+#: config_devices_units.py:521
 msgid "Parts per billion"
 msgstr "Partes por mil millones"
 
-#: config_devices_units.py:510
+#: config_devices_units.py:524
 msgid "Parts per million"
 msgstr "Partes por millón"
 
-#: config_devices_units.py:513
+#: config_devices_units.py:527
+#, fuzzy
+msgid "Parts per million per minute"
+msgstr "Partes por millón"
+
+#: config_devices_units.py:530
 msgid "Parts per thousand"
 msgstr "Partes por mil"
 
-#: config_devices_units.py:516
+#: config_devices_units.py:533
 msgid "Pounds per square inch"
 msgstr "Libras por pulgada cuadrada"
 
-#: config_devices_units.py:519
+#: config_devices_units.py:536
 msgid "Revolutions per minute"
 msgstr "Revoluciones por minuto"
 
-#: config_devices_units.py:522
+#: config_devices_units.py:539
 msgid "Second"
 msgstr "Segundo"
 
-#: config_devices_units.py:528
+#: config_devices_units.py:545
 msgid "Steps"
 msgstr "Pasos"
 
-#: config_devices_units.py:531
+#: config_devices_units.py:548
 msgid "Microgram per cubic meter"
 msgstr "Microgramo por metro cúbico"
 
-#: config_devices_units.py:534
+#: config_devices_units.py:551
 msgid "Microtesla"
 msgstr "Microtesla"
 
-#: config_devices_units.py:543
+#: config_devices_units.py:560
 msgid "Volt"
 msgstr "Voltio"
 
-#: config_devices_units.py:546
+#: config_devices_units.py:563
 msgid "Watt"
 msgstr "Watio"
 
 #: config_translations.py:12 mycodo_flask/templates/layout-settings.html:37
-#: mycodo_flask/templates/pages/data_options/input_options.html:303
+#: mycodo_flask/templates/pages/data_options/input_options.html:333
 #: mycodo_flask/templates/pages/function_options/conditional_options.html:143
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:275
 #: mycodo_flask/templates/pages/function_options/trigger_options.html:70
@@ -604,7 +628,7 @@ msgid "Actions"
 msgstr "Comportamiento"
 
 #: config_translations.py:14 mycodo_flask/forms/forms_conditional.py:53
-#: mycodo_flask/templates/pages/data_options/input_options.html:320
+#: mycodo_flask/templates/pages/data_options/input_options.html:350
 #: mycodo_flask/templates/pages/function.html:64
 #: mycodo_flask/templates/pages/function_options/conditional_options.html:131
 #: mycodo_flask/templates/pages/function_options/conditional_options.html:160
@@ -655,10 +679,11 @@ msgstr "Calibración"
 msgid "Calculate"
 msgstr "Calcular"
 
-#: actions/camera_timelapse_pause.py:38 actions/camera_timelapse_resume.py:38
-#: actions/photo.py:36 actions/photo_email.py:40 config_translations.py:32
-#: functions/camera_libcamera.py:81 functions/camera_libcamera.py:82
-#: mycodo_flask/templates/layout.html:220
+#: actions/camera_capture_photo.py:40 actions/camera_timelapse_pause.py:38
+#: actions/camera_timelapse_resume.py:38 actions/photo_email.py:40
+#: config_translations.py:32 functions/camera_libcamera.py:81
+#: functions/camera_libcamera.py:82 functions/camera_rpicam.py:81
+#: functions/camera_rpicam.py:82 mycodo_flask/templates/layout.html:220
 #: mycodo_flask/templates/layout_default.html:220
 #: mycodo_flask/templates/pages/camera.html:5 widgets/widget_camera.py:245
 msgid "Camera"
@@ -673,7 +698,7 @@ msgid "Clear"
 msgstr "Claro"
 
 #: config_translations.py:38
-#: mycodo_flask/templates/pages/data_options/input_options.html:114
+#: mycodo_flask/templates/pages/data_options/input_options.html:144
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:132
 #: mycodo_flask/templates/pages/output_options.html:93
 msgid "Commands"
@@ -749,6 +774,7 @@ msgstr "Defecto"
 #: mycodo_flask/templates/pages/function_options/pid_options.html:23
 #: mycodo_flask/templates/pages/function_options/trigger_options.html:15
 #: mycodo_flask/templates/pages/output_options.html:20
+#: mycodo_flask/utils/utils_settings.py:1024
 msgid "Delete"
 msgstr "Borrar"
 
@@ -760,35 +786,45 @@ msgstr "Dispositivo"
 msgid "Diagnostic"
 msgstr "Diagnóstico"
 
+#: config_translations.py:64
+#, fuzzy
+msgid "Disable"
+msgstr "Deshabilitar"
+
 #: actions/display_backlight_color.py:37 actions/display_backlight_off.py:38
 #: actions/display_backlight_on.py:37 actions/display_flash_off.py:37
-#: actions/display_flash_on.py:37 config_translations.py:64
+#: actions/display_flash_on.py:37 config_translations.py:66
 msgid "Display"
 msgstr "Pantalla"
 
-#: config_translations.py:66
+#: config_translations.py:68
 msgid "Down"
 msgstr "Abajo"
 
-#: config_translations.py:68
+#: config_translations.py:70
 #: mycodo_flask/templates/pages/data_options/input_options.html:27
 msgid "Duplicate"
 msgstr "Dupicar"
 
-#: config_translations.py:72 config_translations.py:399
+#: config_translations.py:74 config_translations.py:405
 #: mycodo_flask/forms/forms_input.py:157
 msgid "Edge"
 msgstr "Transición"
 
-#: config_translations.py:74 mycodo_flask/templates/pages/method-list.html:76
+#: config_translations.py:76 mycodo_flask/templates/pages/method-list.html:76
 msgid "Edit"
 msgstr "Editar"
 
-#: config_translations.py:76
+#: config_translations.py:78
 msgid "E-Mail"
 msgstr "Correo electrónico"
 
-#: config_translations.py:78 mycodo_flask/templates/layout.html:223
+#: config_translations.py:80
+#, fuzzy
+msgid "Enable"
+msgstr "Habilitar SSH"
+
+#: config_translations.py:82 mycodo_flask/templates/layout.html:223
 #: mycodo_flask/templates/layout.html:224
 #: mycodo_flask/templates/layout_default.html:223
 #: mycodo_flask/templates/layout_default.html:224
@@ -801,7 +837,7 @@ msgstr "Correo electrónico"
 msgid "Energy Usage"
 msgstr "Uso de energía"
 
-#: config_translations.py:80 mycodo_flask/templates/flash_messages.html:46
+#: config_translations.py:84 mycodo_flask/templates/flash_messages.html:46
 #: mycodo_flask/templates/user_templates/widget_template_widget_measurement_js.html:40
 #: mycodo_flask/templates/user_templates/widget_template_widget_measurement_multi_js.html:41
 #: mycodo_flask/templates/user_templates/widget_template_widget_output_js.html:58
@@ -809,100 +845,99 @@ msgstr "Uso de energía"
 msgid "Error"
 msgstr "Error"
 
-#: config_translations.py:82
+#: config_translations.py:86
 msgid "Export"
 msgstr "Exportar"
 
-#: config_translations.py:84
+#: config_translations.py:88
 msgid "Fail"
 msgstr "Fallar"
 
-#: config_translations.py:86 mycodo_flask/forms/forms_settings.py:153
+#: config_translations.py:90 mycodo_flask/forms/forms_settings.py:153
 #: mycodo_flask/templates/pages/function.html:56
 #: widgets/widget_function_status.py:54 widgets/widget_graph_synchronous.py:373
 msgid "Function"
 msgstr "Función"
 
-#: config_translations.py:88 mycodo_flask/templates/layout-settings.html:33
+#: config_translations.py:92 mycodo_flask/templates/layout-settings.html:33
 msgid "General"
 msgstr "General"
 
-#: config_translations.py:90 mycodo_flask/forms/forms_pid.py:111
+#: config_translations.py:94 mycodo_flask/forms/forms_pid.py:111
 #: mycodo_flask/templates/pages/function_options/pid_entry.html:43
 msgid "Hold"
 msgstr "Mantener"
 
-#: config_translations.py:92
+#: config_translations.py:96
 msgid "I2C Bus"
 msgstr "Bus I2C"
 
-#: config_translations.py:94
+#: config_translations.py:98
 msgid "I2C Address"
 msgstr "Dirección I2C"
 
-#: config_translations.py:96
+#: config_translations.py:100
 msgid "Indicator"
 msgstr "Indicador"
 
-#: config_translations.py:98
+#: config_translations.py:102
 msgid "Invert"
 msgstr "Invertir"
 
-#: config_translations.py:100 mycodo_flask/templates/tools/notes.html:149
+#: config_translations.py:104 mycodo_flask/templates/tools/notes.html:149
 #: mycodo_flask/utils/utils_notes.py:453
 #: mycodo_flask/utils/utils_settings.py:495
 #: mycodo_flask/utils/utils_settings.py:590
-#: mycodo_flask/utils/utils_settings.py:625
-#: mycodo_flask/utils/utils_settings.py:720
-#: mycodo_flask/utils/utils_settings.py:754
+#: mycodo_flask/utils/utils_settings.py:760
+#: mycodo_flask/utils/utils_settings.py:855
 #: mycodo_flask/utils/utils_settings.py:889
-#: mycodo_flask/utils/utils_settings.py:923
-#: mycodo_flask/utils/utils_settings.py:1040
-#: mycodo_flask/utils/utils_settings.py:1073
-#: mycodo_flask/utils/utils_settings.py:1166
+#: mycodo_flask/utils/utils_settings.py:1241
+#: mycodo_flask/utils/utils_settings.py:1358
+#: mycodo_flask/utils/utils_settings.py:1391
+#: mycodo_flask/utils/utils_settings.py:1620
 msgid "Import"
 msgstr "Importar"
 
-#: actions/force_input_measurements.py:13 config_translations.py:102
+#: actions/force_input_measurements.py:13 config_translations.py:106
 #: mycodo_flask/forms/forms_settings.py:156
 #: mycodo_flask/templates/layout-remote.html:50
 #: mycodo_flask/templates/pages/function_options/pid_options.html:273
 msgid "Input"
 msgstr "Entrada"
 
-#: config_translations.py:104
+#: config_translations.py:108
 msgid "Invalid"
 msgstr "Inválido"
 
-#: config_translations.py:106
+#: config_translations.py:110
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement.html:2
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_and_ts.html:2
 msgid "Last"
 msgstr "Último"
 
-#: config_translations.py:108
+#: config_translations.py:112
 msgid "LCD"
 msgstr "LCD"
 
-#: config_translations.py:110
+#: config_translations.py:114
 msgid "Line"
 msgstr "Línea"
 
-#: config_translations.py:112
+#: config_translations.py:116
 msgid "Lock"
 msgstr "Bloquear"
 
-#: config_translations.py:114
+#: config_translations.py:118
 msgid "Login"
 msgstr "Iniciar Sesión"
 
-#: config_translations.py:116
+#: config_translations.py:120
 msgid "Math"
 msgstr "Mates"
 
 #: actions/examples/example_action_for_input.py:35
 #: actions/input_action_equation.py:30 actions/input_action_mqtt_publish.py:13
-#: actions/input_action_mqtt_publish.py:36 config_translations.py:118
+#: actions/input_action_mqtt_publish.py:36 config_translations.py:122
 #: functions/average_past_single.py:89 functions/bang_bang.py:45
 #: functions/bang_bang.py:53 functions/bang_bang_on_off.py:43
 #: functions/bang_bang_on_off.py:51 functions/bang_bang_pwm.py:42
@@ -929,45 +964,45 @@ msgstr "Mates"
 msgid "Measurement"
 msgstr "Valores"
 
-#: actions/pid_method.py:51 config_translations.py:120
+#: actions/pid_method.py:51 config_translations.py:124
 #: mycodo_flask/routes_method.py:216
 #: mycodo_flask/templates/pages/function_options/pid_options.html:272
 #: mycodo_flask/templates/pages/method-list.html:41
 msgid "Method"
 msgstr "Método"
 
-#: config_translations.py:122
+#: config_translations.py:126
 msgid "Modify"
 msgstr "Modificar"
 
-#: config_translations.py:124
+#: config_translations.py:128
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_dict.html:2
 msgid "Multiple"
 msgstr "Múltiple"
 
-#: config_translations.py:126
+#: config_translations.py:130
 msgid "None Available"
 msgstr "Ninguno Disponible"
 
-#: actions/create_note.py:54 config_translations.py:128
+#: actions/create_note.py:54 config_translations.py:132
 msgid "Note"
 msgstr "Nota"
 
 #: actions/display_backlight_off.py:15 actions/display_flash_off.py:14
-#: actions/led_neopixel_flash_off.py:14 config_translations.py:130
+#: actions/led_neopixel_flash_off.py:14 config_translations.py:134
 #: mycodo_flask/templates/user_templates/widget_template_widget_indicator_js.html:24
 #: outputs/on_off_kasa_rgb_bulbs.py:228
 msgid "Off"
 msgstr "Apague"
 
 #: actions/display_backlight_on.py:14 actions/display_flash_on.py:14
-#: actions/led_neopixel_flash_on.py:14 config_translations.py:132
+#: actions/led_neopixel_flash_on.py:14 config_translations.py:136
 #: mycodo_flask/templates/user_templates/widget_template_widget_indicator_js.html:22
 #: outputs/on_off_kasa_rgb_bulbs.py:212
 msgid "On"
 msgstr "Encienda"
 
-#: config_translations.py:134 functions/bang_bang.py:65
+#: config_translations.py:138 functions/bang_bang.py:65
 #: functions/bang_bang_pwm.py:62 functions/pid_autotune.py:79
 #: mycodo_flask/forms/forms_pid.py:101 mycodo_flask/forms/forms_pid.py:103
 #: mycodo_flask/forms/forms_settings.py:159 widgets/widget_output.py:52
@@ -975,7 +1010,7 @@ msgstr "Encienda"
 msgid "Output"
 msgstr "Salida"
 
-#: config_translations.py:136
+#: config_translations.py:140
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_dict.html:2
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_past_average.html:2
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_past_sum.html:2
@@ -983,68 +1018,74 @@ msgid "Past"
 msgstr "Pasado"
 
 #: actions/input_action_mqtt_publish.py:100 actions/mqtt_publish.py:116
-#: config_translations.py:138 inputs/mqtt_paho.py:118
+#: config_translations.py:142 inputs/mqtt_paho.py:118
 #: inputs/mqtt_paho_json.py:133 mycodo_flask/templates/settings/users.html:117
 #: outputs/on_off_mqtt.py:176 outputs/pwm_mqtt.py:134 outputs/value_mqtt.py:121
 msgid "Password"
 msgstr "Contraseña"
 
-#: config_translations.py:140 mycodo_flask/forms/forms_pid.py:112
+#: config_translations.py:144 mycodo_flask/forms/forms_pid.py:112
 #: mycodo_flask/templates/pages/function_options/pid_entry.html:40
 msgid "Pause"
 msgstr "Pausar"
 
-#: config_translations.py:142 mycodo_flask/forms/forms_settings.py:162
+#: config_translations.py:146 mycodo_flask/forms/forms_settings.py:162
 msgid "PID"
 msgstr "PID"
 
-#: config_translations.py:144 config_translations.py:265
-#: config_translations.py:322 config_translations.py:323
-#: config_translations.py:325 config_translations.py:326
+#: config_translations.py:148 config_translations.py:271
 #: config_translations.py:328 config_translations.py:329
 #: config_translations.py:331 config_translations.py:332
+#: config_translations.py:334 config_translations.py:335
+#: config_translations.py:337 config_translations.py:338
 #: inputs/rpi_signal_revolutions_pigpio_callback.py:52
 #: mycodo_flask/forms/forms_conditional.py:71 outputs/on_off_gpio.py:58
 #: outputs/on_off_pinctrl.py:55 outputs/on_off_wireless_rpi_rf.py:61
 #: outputs/pump_gpio.py:84 outputs/pwm_gpio.py:81 outputs/pwm_rpi_gpio.py:79
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:66
 msgid "Pin"
 msgstr "Alfiler"
 
 #: actions/input_action_mqtt_publish.py:13 actions/mqtt_publish.py:12
-#: config_translations.py:146
+#: config_translations.py:150
 msgid "Publish"
 msgstr "Publicar"
 
-#: config_translations.py:148 outputs/pwm_gpio.py:36 outputs/pwm_mqtt.py:37
+#: config_translations.py:152 outputs/pwm_gpio.py:36 outputs/pwm_mqtt.py:37
 #: outputs/pwm_pca9685.py:57 outputs/pwm_python.py:167
 #: outputs/pwm_rpi_gpio.py:36 outputs/pwm_shell.py:37
 #: outputs/remote_output_pwm.py:36
 msgid "PWM"
 msgstr "PWM"
 
-#: config_translations.py:150
+#: config_translations.py:154
 msgid "Ramp"
 msgstr "Rampa"
 
-#: config_translations.py:152
+#: config_translations.py:156
+#, fuzzy
+msgid "Regulation"
+msgstr "Ecuación"
+
+#: config_translations.py:158
 msgid "Rename"
 msgstr "Rebautizar"
 
-#: config_translations.py:154
+#: config_translations.py:160
 msgid "Reorder"
 msgstr "Reordenar"
 
-#: config_translations.py:156
+#: config_translations.py:162
 #: mycodo_flask/templates/user_templates/widget_template_widget_graph_synchronous_title_bar.html:11
 msgid "Reset"
 msgstr "Reiniciar"
 
-#: config_translations.py:158 mycodo_flask/forms/forms_pid.py:113
+#: config_translations.py:164 mycodo_flask/forms/forms_pid.py:113
 #: mycodo_flask/templates/pages/function_options/pid_entry.html:37
 msgid "Resume"
 msgstr "Continuar"
 
-#: config_translations.py:160 mycodo_flask/forms/forms_settings.py:323
+#: config_translations.py:166 mycodo_flask/forms/forms_settings.py:338
 #: mycodo_flask/templates/layout.html:323
 #: mycodo_flask/templates/layout_default.html:323
 #: mycodo_flask/templates/pages/actions.html:30
@@ -1059,31 +1100,31 @@ msgstr "Continuar"
 msgid "Save"
 msgstr "Guardar"
 
-#: config_translations.py:162
+#: config_translations.py:168
 msgid "Save Order"
 msgstr "Guardar orden"
 
-#: config_translations.py:164
+#: config_translations.py:170
 msgid "Scale"
 msgstr "Escala"
 
-#: config_translations.py:166
+#: config_translations.py:172
 msgid "Unscaled Unit Min"
 msgstr "Unidad sin escalar Min"
 
-#: config_translations.py:168
+#: config_translations.py:174
 msgid "Unscaled Unit Max"
 msgstr "Unidad sin escala máxima"
 
-#: config_translations.py:170
+#: config_translations.py:176
 msgid "Rescaled Unit Min"
 msgstr "Unidad Rescaled Min"
 
-#: config_translations.py:172
+#: config_translations.py:178
 msgid "Rescaled Unit Max"
 msgstr "Unidad escalada max"
 
-#: config_translations.py:174
+#: config_translations.py:180
 #: mycodo_flask/templates/pages/form_options/FTDI.html:23
 #: mycodo_flask/templates/pages/function_options/pid_options.html:183
 #: mycodo_flask/templates/pages/function_options/pid_options.html:235
@@ -1092,15 +1133,15 @@ msgstr "Unidad escalada max"
 msgid "Select One"
 msgstr "Seleccione Uno"
 
-#: config_translations.py:176
+#: config_translations.py:182
 msgid "Sensitivity"
 msgstr "Sensibilidad"
 
-#: config_translations.py:180
+#: config_translations.py:186
 msgid "Settings"
 msgstr "Configuraciones"
 
-#: config_translations.py:182
+#: config_translations.py:188
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement.html:2
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_and_ts.html:2
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_past_average.html:2
@@ -1108,144 +1149,147 @@ msgstr "Configuraciones"
 msgid "Single"
 msgstr "Soltero"
 
-#: config_translations.py:184
+#: config_translations.py:190
 msgid "Stops"
 msgstr "paradas"
 
-#: config_translations.py:186 mycodo_flask/templates/flash_messages.html:7
+#: config_translations.py:192 mycodo_flask/templates/flash_messages.html:7
 msgid "Success"
 msgstr "Éxito"
 
-#: config_translations.py:188
+#: config_translations.py:194
 #: mycodo_flask/templates/pages/function_options/conditional_options/measurement_past_sum.html:2
 msgid "Sum"
 msgstr "Suma"
 
-#: config_translations.py:190
+#: config_translations.py:196
 msgid "System"
 msgstr "Sistema"
 
-#: config_translations.py:192
+#: config_translations.py:198
 msgid "Tag"
 msgstr "Etiqueta"
 
-#: config_translations.py:194
+#: config_translations.py:200
 msgid "Text"
 msgstr "Texto"
 
-#: config_translations.py:196 mycodo_flask/forms/forms_settings.py:356
-#: mycodo_flask/forms/forms_settings.py:362
-#: mycodo_flask/forms/forms_settings.py:402
+#: config_translations.py:202 mycodo_flask/forms/forms_settings.py:371
+#: mycodo_flask/forms/forms_settings.py:377
+#: mycodo_flask/forms/forms_settings.py:417
 #: mycodo_flask/templates/layout.html:305
 #: mycodo_flask/templates/layout_default.html:305
 msgid "Theme"
 msgstr "Apariencia"
 
-#: config_translations.py:198
+#: config_translations.py:204
 msgid "Time-lapse"
 msgstr "Time-lapse"
 
-#: config_translations.py:200
+#: config_translations.py:206
 msgid "Timer"
 msgstr "Minutero"
 
-#: config_translations.py:202
+#: config_translations.py:208
 msgid "Trigger"
 msgstr "Desencadenar"
 
-#: config_translations.py:204
+#: config_translations.py:210
 msgid "Unlock"
 msgstr "Desbloquear"
 
-#: config_translations.py:206
+#: config_translations.py:212
 msgid "Up"
 msgstr "Arriba"
 
-#: actions/command_bash.py:32 config_translations.py:208
-#: config_translations.py:277 inputs/linux_command.py:58
+#: actions/command_bash.py:32 config_translations.py:214
+#: config_translations.py:283 inputs/linux_command.py:58
 #: outputs/on_off_shell.py:67 outputs/pwm_python.py:232 outputs/pwm_shell.py:68
 msgid "User"
 msgstr "Usuario"
 
-#: actions/output_value.py:47 config_translations.py:210
-#: config_translations.py:310 config_translations.py:311
+#: actions/output_value.py:47 config_translations.py:216
+#: config_translations.py:316 config_translations.py:317
 #: inputs/mycodo_test_input_save_value.py:72
 #: mycodo_flask/templates/user_templates/widget_template_widget_indicator_js.html:60
 #: outputs/value_gp8xxx_iic_dual_dac.py:40 outputs/value_mqtt.py:32
 msgid "Value"
 msgstr "Valor"
 
-#: config_translations.py:212 config_translations.py:313
-#: config_translations.py:314 config_translations.py:381
+#: config_translations.py:218 config_translations.py:319
+#: config_translations.py:320 config_translations.py:387
 #: inputs/anyleaf_orp.py:52 mycodo_flask/forms/forms_settings.py:123
 msgid "Voltage"
 msgstr "Tensión"
 
-#: config_translations.py:216 mycodo_flask/forms/forms_settings.py:165
+#: config_translations.py:222 mycodo_flask/forms/forms_settings.py:165
 msgid "Widget"
 msgstr "Widget"
 
-#: config_translations.py:220
+#: config_translations.py:226
 msgid "1-Wire Device ID"
 msgstr "ID de dispositivo de 1 cable"
 
-#: config_translations.py:223 functions/camera_libcamera.py:299
-#: inputs/as7262.py:83 mycodo_flask/forms/forms_camera.py:63
+#: config_translations.py:229 functions/camera_libcamera.py:299
+#: functions/camera_rpicam.py:299 inputs/as7262.py:83
+#: mycodo_flask/forms/forms_camera.py:63
 msgid "Gain"
 msgstr "Ganancia"
 
-#: config_translations.py:226 config_translations.py:363
-#: config_translations.py:366 functions/camera_libcamera.py:242
+#: config_translations.py:232 config_translations.py:369
+#: config_translations.py:372 functions/camera_libcamera.py:242
 #: functions/camera_libcamera.py:251 functions/camera_libcamera.py:398
-#: functions/camera_libcamera.py:407
+#: functions/camera_libcamera.py:407 functions/camera_rpicam.py:242
+#: functions/camera_rpicam.py:251 functions/camera_rpicam.py:398
+#: functions/camera_rpicam.py:407
 msgid "Resolution"
 msgstr "Resolución"
 
-#: config_translations.py:229
+#: config_translations.py:235
 msgid "Sample Speed"
 msgstr "Velocidad de muestreo"
 
-#: config_translations.py:232
+#: config_translations.py:238
 msgid "Baud Rate"
 msgstr "Velocidad en baudios"
 
-#: config_translations.py:233
+#: config_translations.py:239
 msgid "The UART baud rate"
 msgstr "Velocidad de Baudios UART"
 
-#: actions/command_bash.py:40 config_translations.py:235
+#: actions/command_bash.py:40 config_translations.py:241
 msgid "Command"
 msgstr "Ordenador"
 
-#: config_translations.py:236
+#: config_translations.py:242
 msgid "The command to be executed"
 msgstr "El comando a ejecutar"
 
-#: config_translations.py:239
+#: config_translations.py:245
 msgid "Select the unit of the measurement to be stored in the database"
 msgstr "Seleccione la unidad de la medida que se almacenará en la base de datos"
 
-#: config_translations.py:241
+#: config_translations.py:247
 msgid "Convert to Unit"
 msgstr "Convertir a Unidad"
 
-#: config_translations.py:242
+#: config_translations.py:248
 msgid "Convert the measurement to a different unit"
 msgstr "Convertir la medida a una unidad diferente"
 
-#: config_translations.py:245
+#: config_translations.py:251
 msgid "click to copy to the clipboard"
 msgstr "clic para copiar al portapapeles"
 
-#: config_translations.py:247
+#: config_translations.py:253
 msgid "Deadline"
 msgstr "Fecha límite"
 
 #: actions/output_on_off.py:61 actions/output_ramp_pwm.py:77
-#: actions/pause_actions.py:35 config_translations.py:247
-#: config_translations.py:283 config_translations.py:319
-#: config_translations.py:337 config_translations.py:360
-#: config_translations.py:387 config_translations.py:405
+#: actions/pause_actions.py:35 config_translations.py:253
+#: config_translations.py:289 config_translations.py:325
+#: config_translations.py:343 config_translations.py:366
+#: config_translations.py:393 config_translations.py:411
 #: functions/average_last_multiple.py:67 functions/average_last_multiple.py:75
 #: functions/average_last_multiple.py:83 functions/average_past_single.py:70
 #: functions/average_past_single.py:78 functions/average_past_single.py:97
@@ -1339,32 +1383,32 @@ msgstr "Fecha límite"
 msgid "Seconds"
 msgstr "Segundos"
 
-#: config_translations.py:248
+#: config_translations.py:254
 msgid "Time to wait until failure"
 msgstr "Tiempo de espera hasta el fracaso"
 
 #: actions/output_pwm.py:49 actions/output_ramp_pwm.py:51
-#: actions/output_ramp_pwm.py:60 config_translations.py:251
+#: actions/output_ramp_pwm.py:60 config_translations.py:257
 msgid "Duty cycle for the PWM (percent, 0.0 - 100.0)"
 msgstr "Ciclo de trabajo para el PWM (porcentaje, 0.0 - 100.0)"
 
-#: config_translations.py:253 outputs/pump_gpio.py:130
+#: config_translations.py:259 outputs/pump_gpio.py:130
 msgid "Desired Flow Rate"
 msgstr "Caudal deseado"
 
-#: config_translations.py:253 outputs/pump_gpio.py:130
+#: config_translations.py:259 outputs/pump_gpio.py:130
 msgid "ml/min"
 msgstr "ml/min"
 
-#: config_translations.py:256
+#: config_translations.py:262
 msgid "Name Font Size (em)"
 msgstr "Nombre de fuente Tamaño (em)"
 
-#: config_translations.py:257
+#: config_translations.py:263
 msgid "The font size of the Name text"
 msgstr "El tamaño de fuente del texto Nombre"
 
-#: config_translations.py:259 outputs/on_off_kasa_hs300.py:126
+#: config_translations.py:265 outputs/on_off_kasa_hs300.py:126
 #: outputs/on_off_kasa_hs300_0_4_2.py:139 outputs/on_off_kasa_kp303.py:126
 #: outputs/on_off_kasa_kp303_0_4_2.py:139 outputs/on_off_kasa_plugs.py:128
 #: outputs/on_off_kasa_rgb_bulbs.py:297 outputs/on_off_mqtt.py:145
@@ -1375,75 +1419,76 @@ msgstr "El tamaño de fuente del texto Nombre"
 msgid "Force Command"
 msgstr "Comando de la fuerza"
 
-#: config_translations.py:260 outputs/on_off_python.py:259
+#: config_translations.py:266 outputs/on_off_python.py:259
 #: outputs/pwm_shell.py:131
 msgid "Always send the command if instructed, regardless of the current state"
 msgstr ""
 "Siempre envía el comando si se le ordena, sin tener en cuenta el estado "
 "actual"
 
-#: config_translations.py:262
+#: config_translations.py:268
 msgid "FTDI Device"
 msgstr "Dispositivo FTDI"
 
-#: config_translations.py:263
+#: config_translations.py:269
 msgid "The FTDI device connected to the input/output/etc."
 msgstr "El dispositivo FTDI conectado a la entrada/salida/etc."
 
-#: config_translations.py:265
+#: config_translations.py:271
 #: inputs/rpi_signal_revolutions_pigpio_callback.py:52
 #: mycodo_flask/forms/forms_conditional.py:71 outputs/on_off_gpio.py:58
 #: outputs/on_off_pinctrl.py:55 outputs/on_off_wireless_rpi_rf.py:61
 #: outputs/pump_gpio.py:84 outputs/pwm_gpio.py:81 outputs/pwm_rpi_gpio.py:79
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:66
 msgid "GPIO"
 msgstr "GPIO"
 
-#: config_translations.py:266 config_translations.py:323
-#: config_translations.py:326 config_translations.py:329
-#: config_translations.py:332
+#: config_translations.py:272 config_translations.py:329
+#: config_translations.py:332 config_translations.py:335
+#: config_translations.py:338
 msgid "GPIO (using BCM numbering)"
 msgstr "GPIO (utilizando la numeración del BCM)"
 
-#: config_translations.py:268 outputs/pump_grove_motor_driver_v1_3.py:132
+#: config_translations.py:274 outputs/pump_grove_motor_driver_v1_3.py:132
 msgid "Flow Rate Method"
 msgstr "Método del caudal"
 
-#: config_translations.py:269 outputs/pump_grove_motor_driver_v1_3.py:133
+#: config_translations.py:275 outputs/pump_grove_motor_driver_v1_3.py:133
 msgid "The flow rate to use when pumping a volume"
 msgstr "El caudal a utilizar cuando se bombea un volumen"
 
-#: config_translations.py:271
+#: config_translations.py:277
 msgid "Host"
 msgstr "Host"
 
-#: config_translations.py:272
+#: config_translations.py:278
 msgid "Host or IP address"
 msgstr "Host o dirección IP"
 
-#: config_translations.py:274
+#: config_translations.py:280
 #: mycodo_flask/templates/pages/data_options/input_options.html:43
 msgid "Interface"
 msgstr "Interfaz"
 
-#: config_translations.py:275
+#: config_translations.py:281
 msgid "The interface used to communicate"
 msgstr "La interfaz utilizada para comunicarse"
 
-#: actions/command_bash.py:33 config_translations.py:278
+#: actions/command_bash.py:33 config_translations.py:284
 #: inputs/linux_command.py:59 outputs/on_off_shell.py:68
 #: outputs/pwm_python.py:233 outputs/pwm_shell.py:69
 msgid "The user to execute the command"
 msgstr "El usuario para ejecutar el comando"
 
-#: config_translations.py:280
+#: config_translations.py:286
 msgid "Log Level: Debug"
 msgstr "Nivel de registro: Depuración"
 
-#: config_translations.py:281
+#: config_translations.py:287
 msgid "Show debug lines in the Daemon Log"
 msgstr "Mostrar líneas de depuración en el Demonio de Registro"
 
-#: config_translations.py:283 functions/average_last_multiple.py:83
+#: config_translations.py:289 functions/average_last_multiple.py:83
 #: functions/average_past_single.py:97 functions/bang_bang.py:53
 #: functions/bang_bang_on_off.py:51 functions/bang_bang_pwm.py:50
 #: functions/difference.py:83 functions/difference.py:102
@@ -1479,35 +1524,35 @@ msgstr "Mostrar líneas de depuración en el Demonio de Registro"
 msgid "Max Age"
 msgstr "Edad máxima"
 
-#: config_translations.py:284
+#: config_translations.py:290
 msgid "The maximum allowable measurement age"
 msgstr "La edad máxima de medición permitida"
 
-#: config_translations.py:286
+#: config_translations.py:292
 msgid "Unit Measurement"
 msgstr "Medida de unidad"
 
-#: config_translations.py:287
+#: config_translations.py:293
 msgid "Select a unit for the stored value"
 msgstr "Seleccione una unidad para el valor almacenado"
 
-#: config_translations.py:289
+#: config_translations.py:295
 msgid "Measurements Enabled"
 msgstr "Mediciones habilitadas"
 
-#: config_translations.py:290
+#: config_translations.py:296
 msgid "The measurements to record"
 msgstr "Las medidas a grabar"
 
-#: config_translations.py:292
+#: config_translations.py:298
 msgid "Message Includes Code"
 msgstr "Incluye mensaje Código"
 
-#: config_translations.py:293
+#: config_translations.py:299
 msgid "Include the code in the message variable"
 msgstr "Incluir el código en la variable mensaje"
 
-#: actions/create_note.py:46 config_translations.py:295
+#: actions/create_note.py:46 config_translations.py:301
 #: mycodo_flask/templates/pages/energy_usage_outputs.html:43
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:37
 #: mycodo_flask/templates/pages/function_options/function_options.html:31
@@ -1519,49 +1564,51 @@ msgstr "Incluir el código en la variable mensaje"
 msgid "Name"
 msgstr "Nombre"
 
-#: config_translations.py:296
+#: config_translations.py:302
 msgid "A name to distinguish this from others"
 msgstr "Un nombre para distinguir esto de los demás"
 
-#: config_translations.py:298 outputs/on_off_python.py:220
+#: config_translations.py:304 outputs/on_off_python.py:220
 #: outputs/on_off_shell.py:60 outputs/on_off_wireless_rpi_rf.py:77
 msgid "Off Command"
 msgstr "Comando Apagado"
 
-#: config_translations.py:299 outputs/on_off_wireless_rpi_rf.py:78
+#: config_translations.py:305 outputs/on_off_wireless_rpi_rf.py:78
 msgid "Command to execute when the output is instructed to turn off"
 msgstr "Comando a ejecutar cuando se ordena el apagado de la salida"
 
-#: config_translations.py:301 outputs/on_off_python.py:208
+#: config_translations.py:307 outputs/on_off_python.py:208
 #: outputs/on_off_shell.py:51 outputs/on_off_wireless_rpi_rf.py:69
 msgid "On Command"
 msgstr "Comando Encendido"
 
-#: config_translations.py:302 outputs/on_off_wireless_rpi_rf.py:70
+#: config_translations.py:308 outputs/on_off_wireless_rpi_rf.py:70
 msgid "Command to execute when the output is instructed to turn on"
 msgstr "Comando a ejecutar cuando se ordena el encendido de la salida"
 
-#: config_translations.py:304 outputs/on_off_gpio.py:91
+#: config_translations.py:310 outputs/on_off_gpio.py:91
 #: outputs/on_off_grove_multichannel_relay.py:163
 #: outputs/on_off_mcp23017.py:100 outputs/on_off_pcf8574.py:99
 #: outputs/on_off_pcf8575.py:99 outputs/on_off_pinctrl.py:88
+#: outputs/on_off_piplates_relayplate.py:156
 #: outputs/on_off_sequent_8_relay_hat.py:121
 #: outputs/on_off_sparkfun_board_4_relays.py:102 outputs/on_off_xl9535.py:99
 #: outputs/pump_gpio.py:95 outputs/pump_mcp23017.py:104
 #: outputs/pump_pcf8574.py:97
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:99
 msgid "On State"
 msgstr "En estado"
 
-#: config_translations.py:305
+#: config_translations.py:311
 msgid "What state triggers the output to turn on? High or Low?"
 msgstr "¿Qué estado activa el relé para encenderse, Alto o Bajo?"
 
-#: config_translations.py:308 config_translations.py:311
 #: config_translations.py:314 config_translations.py:317
+#: config_translations.py:320 config_translations.py:323
 msgid "Send to output controller"
 msgstr "Enviar al controlador de salida"
 
-#: config_translations.py:319 functions/average_last_multiple.py:67
+#: config_translations.py:325 functions/average_last_multiple.py:67
 #: functions/average_past_single.py:70 functions/backup_rsync.py:70
 #: functions/bang_bang.py:103 functions/bang_bang_on_off.py:113
 #: functions/bang_bang_pwm.py:101 functions/difference.py:64
@@ -1590,7 +1637,7 @@ msgstr "Enviar al controlador de salida"
 msgid "Period"
 msgstr "Periodo"
 
-#: config_translations.py:320 functions/average_last_multiple.py:68
+#: config_translations.py:326 functions/average_last_multiple.py:68
 #: functions/average_past_single.py:71 functions/backup_rsync.py:71
 #: functions/bang_bang.py:104 functions/bang_bang_on_off.py:114
 #: functions/bang_bang_pwm.py:102 functions/difference.py:65
@@ -1616,37 +1663,37 @@ msgstr "Periodo"
 msgid "The duration between measurements or actions"
 msgstr "La duración entre medidas o acciones"
 
-#: config_translations.py:322 config_translations.py:323
+#: config_translations.py:328 config_translations.py:329
 msgid "Clock"
 msgstr "Reloj"
 
-#: config_translations.py:325 config_translations.py:326
+#: config_translations.py:331 config_translations.py:332
 msgid "Cable Select"
 msgstr "Selección de cables"
 
-#: config_translations.py:328 config_translations.py:329
+#: config_translations.py:334 config_translations.py:335
 msgid "MISO"
 msgstr "MISO"
 
-#: config_translations.py:331 config_translations.py:332
+#: config_translations.py:337 config_translations.py:338
 msgid "MOSI"
 msgstr "MOSI"
 
 #: actions/input_action_mqtt_publish.py:52 actions/mqtt_publish.py:47
-#: config_translations.py:334 mycodo_flask/forms/forms_settings.py:113
+#: config_translations.py:340 mycodo_flask/forms/forms_settings.py:113
 #: outputs/on_off_mqtt.py:66 outputs/pwm_mqtt.py:86 outputs/value_mqtt.py:65
 msgid "Port"
 msgstr "Puerto"
 
-#: config_translations.py:335
+#: config_translations.py:341
 msgid "Host port number"
 msgstr "Número de puerto de host"
 
-#: config_translations.py:337
+#: config_translations.py:343
 msgid "Pre Out Duration"
 msgstr "Duración de la pre-salida"
 
-#: config_translations.py:339
+#: config_translations.py:345
 msgid ""
 "If a Pre Output is selected, set the duration to turn the Pre Output on "
 "for before every measurement is acquired."
@@ -1654,11 +1701,11 @@ msgstr ""
 "Si se selecciona una salida previa, establezca la duración de la "
 "activación de la salida previa antes de adquirir cada medición."
 
-#: config_translations.py:342
+#: config_translations.py:348
 msgid "Pre During Measure"
 msgstr "Pre durante la medida"
 
-#: config_translations.py:343
+#: config_translations.py:349
 msgid ""
 "Check to turn the output off after (opposed to before) the measurement is"
 " complete"
@@ -1666,34 +1713,34 @@ msgstr ""
 "Marque para desactivar la salida después de (a diferencia de antes) la "
 "medición está completa"
 
-#: config_translations.py:345
+#: config_translations.py:351
 msgid "Pre Output"
 msgstr "Salida para Antes"
 
-#: config_translations.py:346
+#: config_translations.py:352
 msgid "Turn the selected output on before taking every measurement"
 msgstr "Enciende el relé seleccionado antes de tomar cada valor"
 
-#: config_translations.py:348
+#: config_translations.py:354
 msgid "PWM Command"
 msgstr "Comando PWM"
 
-#: config_translations.py:349 outputs/pwm_shell.py:62
+#: config_translations.py:355 outputs/pwm_shell.py:62
 msgid "Command to execute to set the PWM duty cycle (%)"
 msgstr "Comando a ejecutar para ajustar el ciclo de trabajo PWM (%)"
 
-#: config_translations.py:352
+#: config_translations.py:358
 msgid "The Hertz to output the PWM signal (0 - 70,000)"
 msgstr "Hertz para emitir la señal PWM (0 - 70,000)"
 
-#: config_translations.py:354 mycodo_flask/forms/forms_camera.py:23
+#: config_translations.py:360 mycodo_flask/forms/forms_camera.py:23
 #: mycodo_flask/templates/pages/data_options/input_options.html:55
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:49
 #: mycodo_flask/templates/pages/output_options.html:34 outputs/pwm_gpio.py:133
 msgid "Library"
 msgstr "Catálogo"
 
-#: config_translations.py:355
+#: config_translations.py:361
 msgid ""
 "Which method to produce the PWM signal (hardware pins can produce higher "
 "frequencies)"
@@ -1701,11 +1748,11 @@ msgstr ""
 "Qué método producir la señal PWM (los pernos de hardware pueden producir "
 "frecuencias más altas)"
 
-#: config_translations.py:357 config_translations.py:358
+#: config_translations.py:363 config_translations.py:364
 msgid "Reference Resistance"
 msgstr "Resistencia de referencia"
 
-#: config_translations.py:360 widgets/widget_camera.py:274
+#: config_translations.py:366 widgets/widget_camera.py:274
 #: widgets/widget_controller_activate_deactivate.py:146
 #: widgets/widget_function_status.py:62 widgets/widget_gauge_angular.py:169
 #: widgets/widget_gauge_solid.py:191 widgets/widget_graph_synchronous.py:261
@@ -1716,19 +1763,19 @@ msgstr "Resistencia de referencia"
 msgid "Refresh"
 msgstr "Actualizar"
 
-#: config_translations.py:361
+#: config_translations.py:367
 msgid "Duration to wait between acquiring new measurements"
 msgstr "Tiempo de espera entre la adquisición de nuevas mediciones"
 
-#: config_translations.py:364 config_translations.py:367
+#: config_translations.py:370 config_translations.py:373
 msgid "Measurement resolution"
 msgstr "Resolución de la medida"
 
-#: config_translations.py:369
+#: config_translations.py:375
 msgid "Pulses Per Rev"
 msgstr "Pulsos por Revolución"
 
-#: config_translations.py:370
+#: config_translations.py:376
 msgid ""
 "The number of pulses per revolution to calculate revolutions per minute "
 "(RPM)"
@@ -1736,47 +1783,47 @@ msgstr ""
 "La cantidad de pulsos por revolución para calcular revoluciones por "
 "minuto (RPM)"
 
-#: config_translations.py:372
+#: config_translations.py:378
 msgid "Sample Time"
 msgstr "Tiempo de muestra"
 
-#: config_translations.py:373
+#: config_translations.py:379
 msgid "The duration of time to sample"
 msgstr "La duración del tiempo de muestreo"
 
-#: config_translations.py:375
+#: config_translations.py:381
 msgid "Measurement Unit"
 msgstr "Unidad de medida"
 
-#: config_translations.py:376
+#: config_translations.py:382
 msgid "Select the measurement and unit to store this measurement in the database"
 msgstr ""
 "Seleccione la medida y la unidad para almacenar esta medida en la base de"
 " datos"
 
-#: config_translations.py:378
+#: config_translations.py:384
 msgid "Setpoint Tracking Type"
 msgstr "Tipo de seguimiento de punto de ajuste"
 
-#: config_translations.py:379
+#: config_translations.py:385
 msgid "Select the type of setpoint tracking"
 msgstr "Seleccione el tipo de seguimiento de consigna"
 
-#: config_translations.py:382
+#: config_translations.py:388
 msgid "The input voltage to the sensor"
 msgstr "La tensión de entrada al sensor"
 
-#: config_translations.py:384 outputs/pwm_gpio.py:122 outputs/pwm_mqtt.py:196
+#: config_translations.py:390 outputs/pwm_gpio.py:122 outputs/pwm_mqtt.py:196
 #: outputs/pwm_pca9685.py:154 outputs/pwm_python.py:273
 #: outputs/pwm_rpi_gpio.py:120 outputs/pwm_shell.py:109
 msgid "Shutdown Value"
 msgstr "Valor de apagado"
 
-#: config_translations.py:385
+#: config_translations.py:391
 msgid "The output value to set when Mycodo shuts down"
 msgstr "El valor de salida de set cuando Mycodo Cierra"
 
-#: config_translations.py:387 functions/average_last_multiple.py:75
+#: config_translations.py:393 functions/average_last_multiple.py:75
 #: functions/average_past_single.py:78 functions/backup_rsync.py:78
 #: functions/examples/custom_function_simple_loop_with_status.py:70
 #: functions/humidity_wet_dry_bulb.py:87 functions/regulate_ph_ec.py:190
@@ -1787,7 +1834,7 @@ msgstr "El valor de salida de set cuando Mycodo Cierra"
 msgid "Start Offset"
 msgstr "Desplazamiento de inicio"
 
-#: config_translations.py:388 functions/average_last_multiple.py:76
+#: config_translations.py:394 functions/average_last_multiple.py:76
 #: functions/average_past_single.py:79 functions/backup_rsync.py:79
 #: functions/examples/custom_function_simple_loop_with_status.py:71
 #: functions/humidity_wet_dry_bulb.py:88 functions/regulate_ph_ec.py:191
@@ -1797,17 +1844,17 @@ msgstr "Desplazamiento de inicio"
 msgid "The duration to wait before the first operation"
 msgstr "El tiempo de espera antes de la primera operación"
 
-#: config_translations.py:390 outputs/pwm_gpio.py:102 outputs/pwm_mqtt.py:176
+#: config_translations.py:396 outputs/pwm_gpio.py:102 outputs/pwm_mqtt.py:176
 #: outputs/pwm_pca9685.py:133 outputs/pwm_python.py:253
 #: outputs/pwm_rpi_gpio.py:100 outputs/pwm_shell.py:89
 msgid "Startup Value"
 msgstr "Valor de inicio"
 
-#: config_translations.py:391
+#: config_translations.py:397
 msgid "The output value to set when Mycodo starts up"
 msgstr "El valor de salida de set cuando se pone en marcha Mycodo"
 
-#: config_translations.py:393 outputs/on_off_gpio.py:80
+#: config_translations.py:399 outputs/on_off_gpio.py:80
 #: outputs/on_off_grove_multichannel_relay.py:152
 #: outputs/on_off_kasa_hs300.py:112 outputs/on_off_kasa_hs300_0_4_2.py:125
 #: outputs/on_off_kasa_kp303.py:112 outputs/on_off_kasa_kp303_0_4_2.py:125
@@ -1815,22 +1862,23 @@ msgstr "El valor de salida de set cuando se pone en marcha Mycodo"
 #: outputs/on_off_mcp23017.py:89 outputs/on_off_mqtt.py:131
 #: outputs/on_off_neopixel_rgb.py:162 outputs/on_off_neopixel_rgb_spi.py:154
 #: outputs/on_off_pcf8574.py:88 outputs/on_off_pcf8575.py:88
-#: outputs/on_off_pinctrl.py:77 outputs/on_off_python.py:244
-#: outputs/on_off_sequent_8_relay_hat.py:110 outputs/on_off_shell.py:91
-#: outputs/on_off_sparkfun_board_4_relays.py:91
+#: outputs/on_off_pinctrl.py:77 outputs/on_off_piplates_relayplate.py:145
+#: outputs/on_off_python.py:244 outputs/on_off_sequent_8_relay_hat.py:110
+#: outputs/on_off_shell.py:91 outputs/on_off_sparkfun_board_4_relays.py:91
 #: outputs/on_off_wireless_rpi_rf.py:124 outputs/on_off_xl9535.py:88
 #: outputs/pwm_gpio.py:114 outputs/pwm_mqtt.py:188 outputs/pwm_pca9685.py:145
 #: outputs/pwm_python.py:265 outputs/pwm_rpi_gpio.py:112
 #: outputs/pwm_shell.py:101 outputs/remote_output_on_off.py:109
 #: outputs/remote_output_pwm.py:137
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:88
 msgid "Shutdown State"
 msgstr "Estado de apagado"
 
-#: config_translations.py:394
+#: config_translations.py:400
 msgid "When Mycodo shuts down, set the output state"
 msgstr "Cuando Mycodo se apaga, establece el estado de salida"
 
-#: config_translations.py:396 outputs/on_off_gpio.py:69
+#: config_translations.py:402 outputs/on_off_gpio.py:69
 #: outputs/on_off_grove_multichannel_relay.py:141
 #: outputs/on_off_kasa_hs300.py:100 outputs/on_off_kasa_hs300_0_4_2.py:113
 #: outputs/on_off_kasa_kp303.py:100 outputs/on_off_kasa_kp303_0_4_2.py:113
@@ -1838,44 +1886,45 @@ msgstr "Cuando Mycodo se apaga, establece el estado de salida"
 #: outputs/on_off_mcp23017.py:78 outputs/on_off_mqtt.py:119
 #: outputs/on_off_neopixel_rgb.py:150 outputs/on_off_neopixel_rgb_spi.py:142
 #: outputs/on_off_pcf8574.py:77 outputs/on_off_pcf8575.py:77
-#: outputs/on_off_pinctrl.py:66 outputs/on_off_python.py:232
-#: outputs/on_off_sequent_8_relay_hat.py:99 outputs/on_off_shell.py:79
-#: outputs/on_off_sparkfun_board_4_relays.py:80
+#: outputs/on_off_pinctrl.py:66 outputs/on_off_piplates_relayplate.py:134
+#: outputs/on_off_python.py:232 outputs/on_off_sequent_8_relay_hat.py:99
+#: outputs/on_off_shell.py:79 outputs/on_off_sparkfun_board_4_relays.py:80
 #: outputs/on_off_wireless_rpi_rf.py:112 outputs/on_off_xl9535.py:77
 #: outputs/pwm_gpio.py:94 outputs/pwm_mqtt.py:168 outputs/pwm_pca9685.py:124
 #: outputs/pwm_python.py:245 outputs/pwm_rpi_gpio.py:92 outputs/pwm_shell.py:81
 #: outputs/remote_output_on_off.py:97 outputs/remote_output_pwm.py:118
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:77
 msgid "Startup State"
 msgstr "Estado Inicial"
 
-#: config_translations.py:397
+#: config_translations.py:403
 msgid "When Mycodo starts, set the output state"
 msgstr "Cuando Mycodo se inicia, configure el estado del relé"
 
-#: config_translations.py:400
+#: config_translations.py:406
 msgid "Edge detection: low to high (rising), high to low (falling), or both"
 msgstr "Detección de bordes: baja a alta (subida), alta a baja (caída), o ambas"
 
-#: config_translations.py:402
+#: config_translations.py:408
 msgid "Bounce Time"
 msgstr "Tiempo de rebote"
 
-#: config_translations.py:402 outputs/on_off_kasa_rgb_bulbs.py:90
+#: config_translations.py:408 outputs/on_off_kasa_rgb_bulbs.py:90
 #: outputs/on_off_kasa_rgb_bulbs.py:113 outputs/on_off_kasa_rgb_bulbs.py:136
 #: outputs/on_off_kasa_rgb_bulbs.py:159 outputs/on_off_kasa_rgb_bulbs.py:182
 #: outputs/on_off_kasa_rgb_bulbs.py:205 outputs/on_off_kasa_rgb_bulbs.py:221
 msgid "Milliseconds"
 msgstr "Milisegundos"
 
-#: config_translations.py:403
+#: config_translations.py:409
 msgid "The amount of time to bounce the input signal"
 msgstr "La cantidad de tiempo para rebotar la señal de entrada"
 
-#: config_translations.py:405 mycodo_flask/forms/forms_input.py:161
+#: config_translations.py:411 mycodo_flask/forms/forms_input.py:161
 msgid "Reset Period"
 msgstr "Periodo de restablecimiento"
 
-#: config_translations.py:406
+#: config_translations.py:412
 msgid ""
 "Wait a period of time after the first edge detection to begin detecting "
 "again"
@@ -1883,60 +1932,60 @@ msgstr ""
 "Esperar un período de tiempo después de la primera detección de bordes "
 "para comenzar a detectar de nuevo"
 
-#: config_translations.py:408
+#: config_translations.py:414
 msgid "RTD Probe Type"
 msgstr "Tipo de sonda RTD"
 
-#: config_translations.py:409
+#: config_translations.py:415
 msgid "The type of thermocouple connected"
 msgstr "El tipo de termopar conectado"
 
-#: config_translations.py:411
+#: config_translations.py:417
 msgid "Times to Check"
 msgstr "Tiempos de verificación"
 
-#: config_translations.py:412
+#: config_translations.py:418
 msgid "Number of times to check"
 msgstr "Número de veces para comprobar"
 
-#: config_translations.py:414
+#: config_translations.py:420
 msgid "Trigger at Startup"
 msgstr "Gatillo al inicio"
 
-#: config_translations.py:415
+#: config_translations.py:421
 msgid "Whether or not to trigger Functions when Mycodo starts"
 msgstr "Activar o no funciones cuando se inicia Mycodo"
 
-#: config_translations.py:417
+#: config_translations.py:423
 msgid "UART Device"
 msgstr "Dispositivo UART"
 
-#: config_translations.py:418
+#: config_translations.py:424
 msgid "The UART device location (e.g. /dev/ttyUSB1)"
 msgstr "La ubicación del dispositivo UART (por ejemplo, / dev / ttyUSB1)"
 
-#: config_translations.py:420
+#: config_translations.py:426
 msgid "Unique ID"
 msgstr "Identificación única"
 
-#: config_translations.py:421
+#: config_translations.py:427
 #, fuzzy
 msgid "A unique ID to distinguish this from others"
 msgstr "Un nombre para distinguir esto de los demás"
 
-#: config_translations.py:423
+#: config_translations.py:429
 msgid "Analyze Python with Pylint"
 msgstr "Analizar Python con Pylint"
 
-#: config_translations.py:424
+#: config_translations.py:430
 msgid "Analyze the Python code with pylint and return the output"
 msgstr "Analizar el código Python con Pylint y mostrar la salida"
 
-#: config_translations.py:426
+#: config_translations.py:432
 msgid "Weighting"
 msgstr "Ponderación"
 
-#: config_translations.py:428
+#: config_translations.py:434
 msgid ""
 "The weighting of the previous measurement on the current measurement. "
 "Range: 0.0 - 1.0. Used for smoothing measurements. 0.0 means no "
@@ -1946,11 +1995,11 @@ msgstr ""
 "- 1.0. Utilizado para alisar medidas. 0.0 significa que no hay "
 "ponderación."
 
-#: config_translations.py:433 config_translations.py:436
+#: config_translations.py:439 config_translations.py:442
 msgid "Always Min"
 msgstr "Siempre Min"
 
-#: actions/pid_setpoint_raise.py:17 config_translations.py:433
+#: actions/pid_setpoint_raise.py:17 config_translations.py:439
 #: mycodo_flask/forms/forms_pid.py:34 mycodo_flask/forms/forms_pid.py:101
 #: mycodo_flask/forms/forms_pid.py:102 mycodo_flask/forms/forms_pid.py:118
 #: mycodo_flask/forms/forms_pid.py:126 mycodo_flask/forms/forms_pid.py:134
@@ -1960,11 +2009,11 @@ msgstr "Siempre Min"
 msgid "Raise"
 msgstr "Aumento"
 
-#: config_translations.py:434 config_translations.py:437
+#: config_translations.py:440 config_translations.py:443
 msgid "Never allow duty cycle to go below Min."
 msgstr "Nunca permita que el ciclo de trabajo para ir por debajo Min."
 
-#: actions/pid_setpoint_lower.py:17 config_translations.py:436
+#: actions/pid_setpoint_lower.py:17 config_translations.py:442
 #: mycodo_flask/forms/forms_pid.py:35 mycodo_flask/forms/forms_pid.py:103
 #: mycodo_flask/forms/forms_pid.py:104 mycodo_flask/forms/forms_pid.py:145
 #: mycodo_flask/forms/forms_pid.py:153 mycodo_flask/forms/forms_pid.py:161
@@ -2380,6 +2429,14 @@ msgstr ""
 "estructura breve de la página del tablero de instrumentos que se "
 "generaría con múltiples widgets que se muestran."
 
+#: actions/camera_capture_photo.py:16
+msgid "Capture Photo"
+msgstr "Captura de fotos"
+
+#: actions/camera_capture_photo.py:26
+msgid "Capture a photo with the selected Camera."
+msgstr "Permite tomar una fotografía con la cámara seleccionada."
+
 #: actions/clear_total_kWh.py:13 actions/clear_total_volume.py:13
 msgid "Flow Meter"
 msgstr "Medidor de caudal"
@@ -2439,8 +2496,8 @@ msgstr "mediciones de la fuerza para llevar a cabo para una entrada"
 
 #: actions/input_action_equation.py:11 actions/input_action_equation.py:38
 #: functions/equation.py:45 functions/equation_multi.py:112
-#: mycodo_flask/forms/forms_settings.py:287
-#: mycodo_flask/forms/forms_settings.py:295
+#: mycodo_flask/forms/forms_settings.py:302
+#: mycodo_flask/forms/forms_settings.py:310
 #: mycodo_flask/templates/pages/form_options/Measurements_Configure.html:15
 #: mycodo_flask/templates/pages/form_options/Measurements_Configure.html:101
 #: mycodo_flask/templates/pages/form_options/Measurements_Configure.html:118
@@ -2448,7 +2505,7 @@ msgid "Equation"
 msgstr "Ecuación"
 
 #: actions/input_action_mqtt_publish.py:44 actions/mqtt_publish.py:39
-#: mycodo_flask/forms/forms_settings.py:424
+#: mycodo_flask/forms/forms_settings.py:439
 #: mycodo_flask/templates/settings/general.html:79
 #: mycodo_flask/templates/settings/general.html:89 outputs/on_off_mqtt.py:58
 #: outputs/pwm_mqtt.py:78 outputs/value_mqtt.py:57
@@ -2512,14 +2569,6 @@ msgid "Set a delay between executing Actions when self.run_all_actions() is used
 msgstr ""
 "Establecer un retardo entre acciones de ejecución cuando se utiliza "
 "self.run_all_actions ()."
-
-#: actions/photo.py:13
-msgid "Capture Photo"
-msgstr "Captura de fotos"
-
-#: actions/photo.py:23
-msgid "Capture a photo with the selected Camera."
-msgstr "Permite tomar una fotografía con la cámara seleccionada."
 
 #: actions/pid_method.py:18
 msgid "Set Method"
@@ -2635,62 +2684,72 @@ msgstr ""
 "La cantidad por encima y por debajo de la consigna que define la banda de"
 " control"
 
-#: functions/camera_libcamera.py:61
+#: functions/camera_libcamera.py:61 functions/camera_rpicam.py:61
 msgid "Last Timelapse Image"
 msgstr "Última imagen del lapso de tiempo"
 
-#: functions/camera_libcamera.py:65
+#: functions/camera_libcamera.py:65 functions/camera_rpicam.py:65
 msgid "Last Still Image"
 msgstr "Última imágen fija"
 
-#: functions/camera_libcamera.py:69
+#: functions/camera_libcamera.py:69 functions/camera_rpicam.py:69
 msgid "Last Video"
 msgstr "Último vídeo"
 
 #: functions/camera_libcamera.py:81 functions/camera_libcamera.py:242
 #: functions/camera_libcamera.py:251 functions/camera_libcamera.py:267
+#: functions/camera_rpicam.py:81 functions/camera_rpicam.py:242
+#: functions/camera_rpicam.py:251 functions/camera_rpicam.py:267
 msgid "Image"
 msgstr "Imagen"
 
 #: functions/camera_libcamera.py:81 functions/camera_libcamera.py:398
-#: functions/camera_libcamera.py:407
+#: functions/camera_libcamera.py:407 functions/camera_rpicam.py:81
+#: functions/camera_rpicam.py:398 functions/camera_rpicam.py:407
 msgid "Video"
 msgstr "Video"
 
 #: functions/camera_libcamera.py:242 functions/camera_libcamera.py:398
+#: functions/camera_rpicam.py:242 functions/camera_rpicam.py:398
 msgid "Width"
 msgstr "Ancho"
 
 #: functions/camera_libcamera.py:251 functions/camera_libcamera.py:407
+#: functions/camera_rpicam.py:251 functions/camera_rpicam.py:407
 msgid "Height"
 msgstr "Altura"
 
-#: functions/camera_libcamera.py:267 mycodo_flask/forms/forms_camera.py:59
+#: functions/camera_libcamera.py:267 functions/camera_rpicam.py:267
+#: mycodo_flask/forms/forms_camera.py:59
 msgid "Contrast"
 msgstr "Contraste"
 
-#: functions/camera_libcamera.py:283 mycodo_flask/forms/forms_camera.py:103
+#: functions/camera_libcamera.py:283 functions/camera_rpicam.py:283
+#: mycodo_flask/forms/forms_camera.py:103
 msgid "Sharpness"
 msgstr "Nitidez"
 
-#: functions/camera_libcamera.py:291 mycodo_flask/forms/forms_camera.py:102
+#: functions/camera_libcamera.py:291 functions/camera_rpicam.py:291
+#: mycodo_flask/forms/forms_camera.py:102
 msgid "Shutter Speed"
 msgstr "velocidad de obturación"
 
-#: functions/camera_libcamera.py:291
+#: functions/camera_libcamera.py:291 functions/camera_rpicam.py:291
 msgid "Microseconds"
 msgstr "Microsegundos"
 
 #: functions/camera_libcamera.py:317 functions/camera_libcamera.py:325
-#: functions/camera_libcamera.py:333 mycodo_flask/forms/forms_camera.py:69
+#: functions/camera_libcamera.py:333 functions/camera_rpicam.py:317
+#: functions/camera_rpicam.py:325 functions/camera_rpicam.py:333
+#: mycodo_flask/forms/forms_camera.py:69
 msgid "White Balance"
 msgstr "Balance de Blancos"
 
-#: functions/camera_libcamera.py:355
+#: functions/camera_libcamera.py:355 functions/camera_rpicam.py:355
 msgid "Rotate"
 msgstr "Rotar"
 
-#: functions/camera_libcamera.py:355
+#: functions/camera_libcamera.py:355 functions/camera_rpicam.py:355
 msgid "Degrees"
 msgstr "Grados"
 
@@ -2853,6 +2912,259 @@ msgstr "Desplazamiento de la temperatura"
 msgid "Pulses per Liter"
 msgstr "Pulsos por litro"
 
+#: inputs/hx711_circuitpython.py:172 inputs/hx711_rpigpio.py:160
+msgid "Data Pin (DT)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:173 inputs/hx711_rpigpio.py:161
+#, fuzzy
+msgid "The GPIO pin connected to the HX711 data pin (DT/DOUT)"
+msgstr "El dispositivo FTDI conectado a la entrada/salida/etc."
+
+#: inputs/hx711_circuitpython.py:179 inputs/hx711_rpigpio.py:167
+msgid "Clock Pin (SCK)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:180 inputs/hx711_rpigpio.py:168
+msgid "The GPIO pin connected to the HX711 clock pin (SCK/PD_SCK)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:194 inputs/hx711_rpigpio.py:182
+msgid "Channel A Enabled"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:195 inputs/hx711_rpigpio.py:183
+#, fuzzy
+msgid "Enable Channel A measurement"
+msgstr "Medición redimensionada"
+
+#: inputs/hx711_circuitpython.py:205 inputs/hx711_rpigpio.py:193
+#, fuzzy
+msgid "Gain (Channel A)"
+msgstr "Canal"
+
+#: inputs/hx711_circuitpython.py:206 inputs/hx711_rpigpio.py:194
+msgid "The gain for Channel A (128 or 64)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:212 inputs/hx711_rpigpio.py:200
+msgid "Tare Value (Channel A)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:213 inputs/hx711_rpigpio.py:201
+msgid "The raw value to subtract for Channel A. Set to 0 for no tare."
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:219 inputs/hx711_rpigpio.py:207
+msgid "Calibration Factor (Channel A)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:220 inputs/hx711_rpigpio.py:208
+msgid "The factor to convert Channel A raw value to grams"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:234 inputs/hx711_rpigpio.py:222
+msgid "Channel B Enabled"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:235 inputs/hx711_rpigpio.py:223
+#, fuzzy
+msgid "Enable Channel B measurement"
+msgstr "Medición redimensionada"
+
+#: inputs/hx711_circuitpython.py:241 inputs/hx711_rpigpio.py:229
+msgid "Tare Value (Channel B)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:242 inputs/hx711_rpigpio.py:230
+msgid "The raw value to subtract for Channel B. Set to 0 for no tare."
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:248 inputs/hx711_rpigpio.py:236
+msgid "Calibration Factor (Channel B)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:249 inputs/hx711_rpigpio.py:237
+msgid "The factor to convert Channel B raw value to grams"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:263 inputs/hx711_rpigpio.py:251
+#, fuzzy
+msgid "Samples"
+msgstr "Velocidad de muestreo"
+
+#: inputs/hx711_circuitpython.py:264 inputs/hx711_rpigpio.py:252
+#, fuzzy
+msgid "The number of samples to average for each measurement"
+msgstr ""
+"El número de veces para medir cada canal. Un promedio de las mediciones "
+"se almacenará."
+
+#: inputs/hx711_circuitpython.py:270 inputs/hx711_rpigpio.py:258
+msgid "Outlier Filter Enabled"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:271 inputs/hx711_rpigpio.py:259
+msgid "Filter spikes using a robust median/MAD filter before averaging"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:277 inputs/hx711_rpigpio.py:265
+msgid "Outlier MAD Threshold"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:278 inputs/hx711_rpigpio.py:266
+msgid "Lower is stricter. Typical range: 2.5–5.0"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:292
+#, fuzzy
+msgid "Zero Tracking Enabled"
+msgstr "Tipo de seguimiento de punto de ajuste"
+
+#: inputs/hx711_circuitpython.py:293
+msgid "Slowly correct tare drift when the scale returns to empty"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:299
+msgid "Zero Tracking Threshold (g)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:300
+msgid "Only adjust tare when the measured weight is within this range"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:306
+#, fuzzy
+msgid "Zero Tracking Rate"
+msgstr "Tipo de seguimiento de punto de ajuste"
+
+#: inputs/hx711_circuitpython.py:307
+msgid "Fraction of offset corrected per measurement (0.0–1.0)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:321
+msgid "Read Delay (ms)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:322
+msgid "Delay between raw samples to improve stability on Linux GPIO"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:328
+msgid "Max Retries"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:329
+msgid "Retries for saturated or invalid samples"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:335
+msgid "Clock Delay (µs)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:336
+msgid "Delay per HX711 clock pulse"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:342
+#, fuzzy
+msgid "Ready Timeout (ms)"
+msgstr "Hora de finalización (HH:MM)"
+
+#: inputs/hx711_circuitpython.py:343
+msgid "Timeout waiting for HX711 ready"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:349
+#, fuzzy
+msgid "Filter Invalid Samples"
+msgstr "Filtrar nombres"
+
+#: inputs/hx711_circuitpython.py:350
+msgid "Discard saturated samples (0x7FFFFF/0x800000)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:356
+msgid "Auto Gain Fallback"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:357
+msgid "Retry A/64 and B/32 when saturated samples occur"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:387 inputs/hx711_rpigpio.py:296
+#, fuzzy
+msgid "Channel for Tare"
+msgstr "Opciones de canal"
+
+#: inputs/hx711_circuitpython.py:388 inputs/hx711_circuitpython.py:420
+#: inputs/hx711_rpigpio.py:297 inputs/hx711_rpigpio.py:329
+msgid "Select which channel to calibrate"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:394 inputs/hx711_rpigpio.py:303
+#, fuzzy
+msgid "Tare Samples"
+msgstr "Ejemplo"
+
+#: inputs/hx711_circuitpython.py:395 inputs/hx711_rpigpio.py:304
+msgid "Number of samples to collect for tare (default: 20)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:401 inputs/hx711_rpigpio.py:310
+#, fuzzy
+msgid "Calibrate Tare"
+msgstr "Calibrar"
+
+#: inputs/hx711_circuitpython.py:419 inputs/hx711_rpigpio.py:328
+#, fuzzy
+msgid "Channel for Factor"
+msgstr "Opciones de canal"
+
+#: inputs/hx711_circuitpython.py:426 inputs/hx711_rpigpio.py:335
+msgid "Known Weight (grams)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:427 inputs/hx711_rpigpio.py:336
+msgid "The exact weight of your calibration object in grams"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:433 inputs/hx711_rpigpio.py:342
+#, fuzzy
+msgid "Samples per Run"
+msgstr "Pulsos por Revolución"
+
+#: inputs/hx711_circuitpython.py:434 inputs/hx711_rpigpio.py:343
+msgid "Number of samples per calibration run (default: 20)"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:440 inputs/hx711_rpigpio.py:349
+#, fuzzy
+msgid "Number of Runs"
+msgstr "Número de mediciones"
+
+#: inputs/hx711_circuitpython.py:441 inputs/hx711_rpigpio.py:350
+msgid "Number of runs to average (default: 5). Outlier runs are filtered out."
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:447 inputs/hx711_rpigpio.py:356
+#, fuzzy
+msgid "Calibrate Factor"
+msgstr "Calibrar"
+
+#: inputs/hx711_circuitpython.py:466 inputs/hx711_rpigpio.py:375
+#, fuzzy
+msgid "Channel to Clear"
+msgstr "Canal"
+
+#: inputs/hx711_circuitpython.py:467 inputs/hx711_rpigpio.py:376
+msgid "Select which channel calibration to reset"
+msgstr ""
+
+#: inputs/hx711_circuitpython.py:473 inputs/hx711_rpigpio.py:382
+msgid "Reset Calibration to Defaults"
+msgstr ""
+
 #: inputs/linux_command.py:50
 msgid "Command Timeout"
 msgstr "Tiempo de espera de comandos"
@@ -2877,6 +3189,7 @@ msgstr "Medición de la tienda"
 #: mycodo_flask/forms/forms_conditional.py:71 outputs/on_off_gpio.py:58
 #: outputs/on_off_pinctrl.py:55 outputs/on_off_wireless_rpi_rf.py:61
 #: outputs/pump_gpio.py:84 outputs/pwm_gpio.py:81 outputs/pwm_rpi_gpio.py:79
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:66
 msgid "BCM"
 msgstr "BCM"
 
@@ -2927,7 +3240,7 @@ msgstr "Eliminación de copia de seguridad en progreso"
 msgid "Restore in progress"
 msgstr "Restauración en progreso"
 
-#: mycodo_flask/routes_admin.py:500
+#: mycodo_flask/routes_admin.py:511
 msgid ""
 "There was an error encountered during the upgrade process. Check the "
 "upgrade log for details."
@@ -2935,19 +3248,19 @@ msgstr ""
 "Se ha producido un error durante el proceso de actualización. Consulte el"
 " registro de actualización para obtener más información."
 
-#: mycodo_flask/routes_admin.py:585
+#: mycodo_flask/routes_admin.py:596
 msgid "The upgrade (from master branch) has started"
 msgstr "La actualización (desde la rama principal) ha comenzado"
 
-#: mycodo_flask/routes_admin.py:603
+#: mycodo_flask/routes_admin.py:614
 msgid "The upgrade has started"
 msgstr "La actualización ha comenzado"
 
-#: mycodo_flask/routes_admin.py:624
+#: mycodo_flask/routes_admin.py:635
 msgid "The major version upgrade has started"
 msgstr "La actualización de la versión principal ha comenzado"
 
-#: mycodo_flask/routes_admin.py:627
+#: mycodo_flask/routes_admin.py:638
 msgid "You cannot upgrade if an upgrade is not available"
 msgstr "No se puede actualizar si no hay una actualización disponible"
 
@@ -3048,7 +3361,7 @@ msgstr "Código caducado o no válido"
 
 #: mycodo_flask/forms/forms_authentication.py:23
 #: mycodo_flask/forms/forms_settings.py:92
-#: mycodo_flask/forms/forms_settings.py:363
+#: mycodo_flask/forms/forms_settings.py:378
 #: mycodo_flask/templates/create_admin.html:39
 #: mycodo_flask/templates/create_admin.html:85
 #: mycodo_flask/templates/layout.html:294
@@ -3061,9 +3374,9 @@ msgstr "Idioma"
 #: mycodo_flask/forms/forms_authentication.py:45
 #: mycodo_flask/forms/forms_authentication.py:93
 #: mycodo_flask/forms/forms_authentication.py:94
-#: mycodo_flask/forms/forms_settings.py:349
-#: mycodo_flask/forms/forms_settings.py:391
-#: mycodo_flask/forms/forms_settings.py:392
+#: mycodo_flask/forms/forms_settings.py:364
+#: mycodo_flask/forms/forms_settings.py:406
+#: mycodo_flask/forms/forms_settings.py:407
 msgid "Repeat Password"
 msgstr "Repetir la clave"
 
@@ -3169,7 +3482,7 @@ msgstr "Exposición"
 
 #: mycodo_flask/forms/forms_camera.py:70
 #: mycodo_flask/templates/pages/dashboard.html:108
-#: mycodo_flask/templates/pages/data_options/input_options.html:208
+#: mycodo_flask/templates/pages/data_options/input_options.html:238
 #: mycodo_flask/templates/pages/output_options.html:148
 msgid "Custom Options"
 msgstr "Opciones personalizadas"
@@ -3319,7 +3632,7 @@ msgstr "Número de mediciones"
 msgid "Add Dashboard Widget"
 msgstr "Añadir Dashboard Widget"
 
-#: mycodo_flask/forms/forms_dashboard.py:54
+#: mycodo_flask/forms/forms_dashboard.py:53
 msgid "Enable Drag Handle"
 msgstr "Habilitar el control de arrastre"
 
@@ -3352,7 +3665,7 @@ msgid "Bounce Time (ms)"
 msgstr "Tiempo de rebote (ms)"
 
 #: mycodo_flask/forms/forms_input.py:193
-#: mycodo_flask/templates/pages/data_options/input_options.html:119
+#: mycodo_flask/templates/pages/data_options/input_options.html:149
 msgid "Acquire Measurements Now"
 msgstr "Adquirir mediciones ahora"
 
@@ -3580,7 +3893,7 @@ msgstr "Máximo Integrador"
 
 #: mycodo_flask/forms/forms_pid.py:102 mycodo_flask/forms/forms_pid.py:104
 #: mycodo_flask/templates/pages/actions.html:18
-#: mycodo_flask/templates/pages/data_options/input_options.html:313
+#: mycodo_flask/templates/pages/data_options/input_options.html:343
 #: mycodo_flask/templates/pages/function_options/conditional_options.html:153
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:285
 #: mycodo_flask/templates/pages/function_options/function_options.html:64
@@ -3846,258 +4159,265 @@ msgstr "Tasa de muestreo"
 msgid "Import Controller Module"
 msgstr "Módulo Controlador de importación"
 
-#: mycodo_flask/forms/forms_settings.py:191
+#: mycodo_flask/forms/forms_settings.py:187
+#: mycodo_flask/forms/forms_settings.py:220
+#: mycodo_flask/forms/forms_settings.py:253
+#, fuzzy
+msgid "Replace"
+msgstr "Espaciador"
+
+#: mycodo_flask/forms/forms_settings.py:196
 #: mycodo_flask/templates/settings/action.html:13
 msgid "Import Action Module"
 msgstr "Módulo de acción de importación"
 
-#: mycodo_flask/forms/forms_settings.py:205
+#: mycodo_flask/forms/forms_settings.py:210
 #: mycodo_flask/templates/settings/input.html:13
 msgid "Import Input Module"
 msgstr "Importar módulo de entrada"
 
-#: mycodo_flask/forms/forms_settings.py:219
+#: mycodo_flask/forms/forms_settings.py:229
 #: mycodo_flask/templates/settings/output.html:13
 msgid "Import Output Module"
 msgstr "Módulo de salida de importación"
 
-#: mycodo_flask/forms/forms_settings.py:233
+#: mycodo_flask/forms/forms_settings.py:243
 #: mycodo_flask/templates/settings/widget.html:13
 msgid "Import Widget Module"
 msgstr "Módulo de importación de widgets"
 
-#: mycodo_flask/forms/forms_settings.py:247
-#: mycodo_flask/forms/forms_settings.py:256
+#: mycodo_flask/forms/forms_settings.py:262
+#: mycodo_flask/forms/forms_settings.py:271
 msgid "Measurement ID"
 msgstr "medición ID"
 
-#: mycodo_flask/forms/forms_settings.py:249
-#: mycodo_flask/forms/forms_settings.py:257
+#: mycodo_flask/forms/forms_settings.py:264
+#: mycodo_flask/forms/forms_settings.py:272
 msgid "Measurement Name"
 msgstr "Nombre de medición"
 
-#: mycodo_flask/forms/forms_settings.py:250
-#: mycodo_flask/forms/forms_settings.py:258
+#: mycodo_flask/forms/forms_settings.py:265
+#: mycodo_flask/forms/forms_settings.py:273
 msgid "Measurement Units"
 msgstr "Unidades de Medida"
 
-#: mycodo_flask/forms/forms_settings.py:251
+#: mycodo_flask/forms/forms_settings.py:266
 #: mycodo_flask/templates/settings/measurement.html:13
 msgid "Add Measurement"
 msgstr "Añadir medida"
 
-#: mycodo_flask/forms/forms_settings.py:264
-#: mycodo_flask/forms/forms_settings.py:274
+#: mycodo_flask/forms/forms_settings.py:279
+#: mycodo_flask/forms/forms_settings.py:289
 msgid "Unit ID"
 msgstr "ID de unidad"
 
-#: mycodo_flask/forms/forms_settings.py:266
-#: mycodo_flask/forms/forms_settings.py:275
+#: mycodo_flask/forms/forms_settings.py:281
+#: mycodo_flask/forms/forms_settings.py:290
 msgid "Unit Name"
 msgstr "Nombre de la unidad"
 
-#: mycodo_flask/forms/forms_settings.py:268
-#: mycodo_flask/forms/forms_settings.py:276
+#: mycodo_flask/forms/forms_settings.py:283
+#: mycodo_flask/forms/forms_settings.py:291
 msgid "Unit Abbreviation"
 msgstr "Abreviatura de unidad"
 
-#: mycodo_flask/forms/forms_settings.py:269
+#: mycodo_flask/forms/forms_settings.py:284
 #: mycodo_flask/templates/settings/measurement.html:50
 msgid "Add Unit"
 msgstr "Agregar Unidad"
 
-#: mycodo_flask/forms/forms_settings.py:283
-#: mycodo_flask/forms/forms_settings.py:293
+#: mycodo_flask/forms/forms_settings.py:298
+#: mycodo_flask/forms/forms_settings.py:308
 msgid "Convert From Unit"
 msgstr "Convertir de unidad"
 
-#: mycodo_flask/forms/forms_settings.py:285
-#: mycodo_flask/forms/forms_settings.py:294
+#: mycodo_flask/forms/forms_settings.py:300
+#: mycodo_flask/forms/forms_settings.py:309
 msgid "Convert To Unit"
 msgstr "Convertir a unidad"
 
-#: mycodo_flask/forms/forms_settings.py:288
+#: mycodo_flask/forms/forms_settings.py:303
 #: mycodo_flask/templates/settings/measurement.html:83
 msgid "Add Conversion"
 msgstr "Agregar conversión"
 
-#: mycodo_flask/forms/forms_settings.py:306
+#: mycodo_flask/forms/forms_settings.py:321
 msgid "Role Name"
 msgstr "Nombre de rol"
 
-#: mycodo_flask/forms/forms_settings.py:307
+#: mycodo_flask/forms/forms_settings.py:322
 #: mycodo_flask/templates/tools/logview.html:3
 msgid "View Logs"
 msgstr "Ver Logs"
 
-#: mycodo_flask/forms/forms_settings.py:308
+#: mycodo_flask/forms/forms_settings.py:323
 msgid "View Stats"
 msgstr "Ver Estadísticas"
 
-#: mycodo_flask/forms/forms_settings.py:309
+#: mycodo_flask/forms/forms_settings.py:324
 msgid "View Camera"
 msgstr "Ver Cámara"
 
-#: mycodo_flask/forms/forms_settings.py:310
+#: mycodo_flask/forms/forms_settings.py:325
 msgid "View Settings"
 msgstr "Ver Configuraciones"
 
-#: mycodo_flask/forms/forms_settings.py:311
+#: mycodo_flask/forms/forms_settings.py:326
 msgid "Edit Users"
 msgstr "Editar Usuarios"
 
-#: mycodo_flask/forms/forms_settings.py:312
+#: mycodo_flask/forms/forms_settings.py:327
 msgid "Edit Controllers"
 msgstr "Editar Controladores"
 
-#: mycodo_flask/forms/forms_settings.py:313
+#: mycodo_flask/forms/forms_settings.py:328
 msgid "Edit Settings"
 msgstr "Editar Configuraciones"
 
-#: mycodo_flask/forms/forms_settings.py:314
+#: mycodo_flask/forms/forms_settings.py:329
 #: mycodo_flask/templates/forgot_password.html:26
 #: mycodo_flask/templates/reset_password.html:26
 msgid "Reset Password"
 msgstr "Restablecer contraseña"
 
-#: mycodo_flask/forms/forms_settings.py:316
+#: mycodo_flask/forms/forms_settings.py:331
 msgid "Add Role"
 msgstr "Añadir Permiso"
 
-#: mycodo_flask/forms/forms_settings.py:322
+#: mycodo_flask/forms/forms_settings.py:337
 msgid "Default Login Page"
 msgstr "Página de inicio de sesión por defecto"
 
-#: mycodo_flask/forms/forms_settings.py:341
-#: mycodo_flask/forms/forms_settings.py:382
+#: mycodo_flask/forms/forms_settings.py:356
+#: mycodo_flask/forms/forms_settings.py:397
 msgid "Passwords must match"
 msgstr "La clave debe coincidir"
 
-#: mycodo_flask/forms/forms_settings.py:344
-#: mycodo_flask/forms/forms_settings.py:386
+#: mycodo_flask/forms/forms_settings.py:359
+#: mycodo_flask/forms/forms_settings.py:401
 msgid "Password must be 6 or more characters"
 msgstr "La clave debe ser de 6 o más caracteres"
 
-#: mycodo_flask/forms/forms_settings.py:351
-#: mycodo_flask/forms/forms_settings.py:394
-#: mycodo_flask/forms/forms_settings.py:395
+#: mycodo_flask/forms/forms_settings.py:366
+#: mycodo_flask/forms/forms_settings.py:409
+#: mycodo_flask/forms/forms_settings.py:410
 msgid "Keypad Code"
 msgstr "Código del teclado"
 
-#: mycodo_flask/forms/forms_settings.py:352
+#: mycodo_flask/forms/forms_settings.py:367
 msgid "Optional"
 msgstr "Opcional"
 
-#: mycodo_flask/forms/forms_settings.py:354
+#: mycodo_flask/forms/forms_settings.py:369
 msgid "Role"
 msgstr "Rol"
 
-#: mycodo_flask/forms/forms_settings.py:357
+#: mycodo_flask/forms/forms_settings.py:372
 #: mycodo_flask/templates/settings/users.html:130
 msgid "Add User"
 msgstr "Agregar Usuario"
 
-#: mycodo_flask/forms/forms_settings.py:377
+#: mycodo_flask/forms/forms_settings.py:392
 msgid "New Password"
 msgstr "Nueva Contraseña"
 
-#: mycodo_flask/forms/forms_settings.py:398
+#: mycodo_flask/forms/forms_settings.py:413
 msgid "Role ID"
 msgstr "Identificación del rol"
 
-#: mycodo_flask/forms/forms_settings.py:414
+#: mycodo_flask/forms/forms_settings.py:429
 msgid "Enable I2C"
 msgstr "Habilitar I2C"
 
-#: mycodo_flask/forms/forms_settings.py:415
+#: mycodo_flask/forms/forms_settings.py:430
 msgid "Disable I2C"
 msgstr "Deshabilitar I2C"
 
-#: mycodo_flask/forms/forms_settings.py:416
+#: mycodo_flask/forms/forms_settings.py:431
 msgid "Enable 1-Wire"
 msgstr "Habilitar 1 cable"
 
-#: mycodo_flask/forms/forms_settings.py:417
+#: mycodo_flask/forms/forms_settings.py:432
 msgid "Disable 1-Wire"
 msgstr "Deshabilitar 1 cable"
 
-#: mycodo_flask/forms/forms_settings.py:418
+#: mycodo_flask/forms/forms_settings.py:433
 msgid "Enable Serial"
 msgstr "Habilitar serie"
 
-#: mycodo_flask/forms/forms_settings.py:419
+#: mycodo_flask/forms/forms_settings.py:434
 msgid "Disable Serial"
 msgstr "Deshabilitar serie"
 
-#: mycodo_flask/forms/forms_settings.py:420
+#: mycodo_flask/forms/forms_settings.py:435
 msgid "Enable SPI"
 msgstr "Habilitar SPI"
 
-#: mycodo_flask/forms/forms_settings.py:421
+#: mycodo_flask/forms/forms_settings.py:436
 msgid "Disable SPI"
 msgstr "Deshabilitar SPI"
 
-#: mycodo_flask/forms/forms_settings.py:422
+#: mycodo_flask/forms/forms_settings.py:437
 msgid "Enable SSH"
 msgstr "Habilitar SSH"
 
-#: mycodo_flask/forms/forms_settings.py:423
+#: mycodo_flask/forms/forms_settings.py:438
 msgid "Disable SSH"
 msgstr "Deshabilitar SSH"
 
-#: mycodo_flask/forms/forms_settings.py:425
+#: mycodo_flask/forms/forms_settings.py:440
 msgid "Change Hostname"
 msgstr "Cambiar nombre de host"
 
-#: mycodo_flask/forms/forms_settings.py:426
+#: mycodo_flask/forms/forms_settings.py:441
 msgid "Configure pigpiod"
 msgstr "Configurar pigpiod"
 
-#: mycodo_flask/forms/forms_settings.py:427
+#: mycodo_flask/forms/forms_settings.py:442
 msgid "Reconfigure"
 msgstr "Reconfigurar"
 
-#: mycodo_flask/forms/forms_settings.py:435
+#: mycodo_flask/forms/forms_settings.py:450
 msgid "Delete All Dashboards"
 msgstr "Borrar todos los cuadros de mando"
 
-#: mycodo_flask/forms/forms_settings.py:436
+#: mycodo_flask/forms/forms_settings.py:451
 msgid "Delete All Inputs"
 msgstr "Borrar todas las entradas"
 
-#: mycodo_flask/forms/forms_settings.py:437
+#: mycodo_flask/forms/forms_settings.py:452
 msgid "Delete All Notes and Note Tags"
 msgstr "Eliminar todas las notas y etiquetas de notas"
 
-#: mycodo_flask/forms/forms_settings.py:438
+#: mycodo_flask/forms/forms_settings.py:453
 msgid "Delete All Outputs"
 msgstr "Eliminar todas las salidas"
 
-#: mycodo_flask/forms/forms_settings.py:439
+#: mycodo_flask/forms/forms_settings.py:454
 msgid "Delete Settings Database"
 msgstr "Eliminar la base de datos de configuración"
 
-#: mycodo_flask/forms/forms_settings.py:440
-#: mycodo_flask/forms/forms_settings.py:441
+#: mycodo_flask/forms/forms_settings.py:455
+#: mycodo_flask/forms/forms_settings.py:456
 msgid "Delete File"
 msgstr "Borrar archivo"
 
-#: mycodo_flask/forms/forms_settings.py:444
-#: mycodo_flask/utils/utils_settings.py:1948
+#: mycodo_flask/forms/forms_settings.py:459
+#: mycodo_flask/utils/utils_settings.py:2409
 msgid "Reset Email Counter"
 msgstr "Correo electrónico de restablecimiento de contador"
 
-#: mycodo_flask/forms/forms_settings.py:445
-#: mycodo_flask/utils/utils_settings.py:1965
+#: mycodo_flask/forms/forms_settings.py:460
+#: mycodo_flask/utils/utils_settings.py:2426
 msgid "Install Dependencies"
 msgstr "Instalar dependencias"
 
-#: mycodo_flask/forms/forms_settings.py:446
+#: mycodo_flask/forms/forms_settings.py:461
 msgid "Regenerate Widget HTML"
 msgstr "Regenerar el HTML del widget"
 
-#: mycodo_flask/forms/forms_settings.py:447
-#: mycodo_flask/utils/utils_settings.py:2019
+#: mycodo_flask/forms/forms_settings.py:462
+#: mycodo_flask/utils/utils_settings.py:2480
 msgid "Set to Upgrade to Master"
 msgstr "Configurar para actualizar a maestro"
 
@@ -4809,15 +5129,16 @@ msgstr "Seleccione una medición con la unidad"
 #: outputs/on_off_kasa_plugs.py:136 outputs/on_off_kasa_rgb_bulbs.py:305
 #: outputs/on_off_mcp23017.py:115 outputs/on_off_mqtt.py:153
 #: outputs/on_off_pcf8574.py:114 outputs/on_off_pcf8575.py:114
-#: outputs/on_off_pinctrl.py:103 outputs/on_off_python.py:266
-#: outputs/on_off_sequent_8_relay_hat.py:136 outputs/on_off_shell.py:113
-#: outputs/on_off_sparkfun_board_4_relays.py:117
+#: outputs/on_off_pinctrl.py:103 outputs/on_off_piplates_relayplate.py:171
+#: outputs/on_off_python.py:266 outputs/on_off_sequent_8_relay_hat.py:136
+#: outputs/on_off_shell.py:113 outputs/on_off_sparkfun_board_4_relays.py:117
 #: outputs/on_off_wireless_rpi_rf.py:146 outputs/on_off_xl9535.py:114
 #: outputs/pump_atlas_ezo_pmp.py:101 outputs/pump_gpio.py:138
 #: outputs/pump_mcp23017.py:147 outputs/pump_pcf8574.py:140
 #: outputs/pwm_gpio.py:164 outputs/pwm_mqtt.py:218 outputs/pwm_pca9685.py:176
 #: outputs/pwm_python.py:302 outputs/pwm_rpi_gpio.py:151
 #: outputs/pwm_shell.py:138
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:114
 msgid "Amps"
 msgstr "amperios"
 
@@ -5104,14 +5425,14 @@ msgstr "Producto"
 msgid "Additional"
 msgstr "Más información en"
 
-#: mycodo_flask/templates/pages/data_options/input_options.html:135
+#: mycodo_flask/templates/pages/data_options/input_options.html:165
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:150
 #: mycodo_flask/templates/pages/output_options.html:107
 #: mycodo_flask/templates/user_templates/widget_template_widget_graph_synchronous_title_bar.html:18
 msgid "Options"
 msgstr "Opciones"
 
-#: mycodo_flask/templates/pages/data_options/input_options.html:231
+#: mycodo_flask/templates/pages/data_options/input_options.html:261
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:193
 #: mycodo_flask/templates/pages/output_options.html:173
 msgid "Channel Options"
@@ -5128,7 +5449,7 @@ msgstr "Enviar"
 msgid "Are you sure you want to do this?"
 msgstr "¿Estás seguro de que quieres hacer esto?"
 
-#: mycodo_flask/templates/pages/data_options/input_options.html:290
+#: mycodo_flask/templates/pages/data_options/input_options.html:320
 #: mycodo_flask/templates/pages/function_options/custom_function_options.html:257
 #: mycodo_flask/templates/settings/measurement.html:4
 #: mycodo_flask/templates/settings/measurement.html:6
@@ -6172,6 +6493,9 @@ msgid "Select one or more tags"
 msgstr "Seleccione una o más etiquetas"
 
 #: mycodo_flask/templates/user_templates/widget_template_widget_graph_synchronous_title_bar.html:8
+#: mycodo_flask/utils/utils_settings.py:625
+#: mycodo_flask/utils/utils_settings.py:1069
+#: mycodo_flask/utils/utils_settings.py:1487
 #, fuzzy
 msgid "Update"
 msgstr "Dupicar"
@@ -6237,7 +6561,7 @@ msgstr "Sin Conexión"
 msgid "Daemon response: %(resp)s"
 msgstr "Respuesta de Daemon: %(resp)s"
 
-#: mycodo_flask/utils/utils_controller.py:52
+#: mycodo_flask/utils/utils_controller.py:53
 #: mycodo_flask/utils/utils_input.py:340
 msgid "Deactivate controller before modifying its settings"
 msgstr "Desactiva el controlador antes de modificar su configuración"
@@ -6301,7 +6625,7 @@ msgstr "Dispositivo no válido o permisos incorrectos para leer el dispositivo"
 msgid "Pin (GPIO) must be set"
 msgstr "Pin (GPIO) debe ajustarse"
 
-#: mycodo_flask/utils/utils_input.py:854
+#: mycodo_flask/utils/utils_input.py:852
 msgid ""
 "Activate controller before attempting to force the acquisition of "
 "measurements"
@@ -6378,7 +6702,7 @@ msgid "Energy Usage with ID %(id)s (%(uuid)s) successfully added"
 msgstr "Uso de energía con ID %(id)s (%(uuid)s) añadido correctamente"
 
 #: mycodo_flask/utils/utils_notes.py:217 mycodo_flask/utils/utils_notes.py:258
-#: mycodo_flask/utils/utils_settings.py:1891
+#: mycodo_flask/utils/utils_settings.py:2352
 msgid "File"
 msgstr "Expediente"
 
@@ -6389,11 +6713,7 @@ msgstr "Expediente"
 msgid "%(err)s"
 msgstr "%(err)s"
 
-#: mycodo_flask/utils/utils_pid.py:276
-msgid "Raise and lower outputs cannot be the same"
-msgstr "Subir y bajar los salidas no pueden ser los mismos"
-
-#: mycodo_flask/utils/utils_pid.py:373
+#: mycodo_flask/utils/utils_pid.py:369
 msgid ""
 "Cannot activate PID controller if the associated Input controller is "
 "inactive"
@@ -6401,7 +6721,7 @@ msgstr ""
 "No se puede activar el regulador PID si el regulador de entrada asociado "
 "está inactivo"
 
-#: mycodo_flask/utils/utils_pid.py:380
+#: mycodo_flask/utils/utils_pid.py:376
 msgid ""
 "Cannot activate PID controller if raise and/or lower output IDs are not "
 "selected"
@@ -6444,42 +6764,42 @@ msgstr "Otro usuario ya tiene esa dirección de correo electrónico."
 msgid "Invalid password"
 msgstr "Contraseña invalida"
 
-#: mycodo_flask/utils/utils_settings.py:1218
+#: mycodo_flask/utils/utils_settings.py:1672
 #, python-format
 msgid "Measurement with ID %(id)s (%(uuid)s) successfully added"
 msgstr "Medición con ID %(id)s (%(uuid)s) agregado con éxito"
 
-#: mycodo_flask/utils/utils_settings.py:1306
-#: mycodo_flask/utils/utils_settings.py:1346
-#: mycodo_flask/utils/utils_settings.py:1399
+#: mycodo_flask/utils/utils_settings.py:1760
+#: mycodo_flask/utils/utils_settings.py:1800
+#: mycodo_flask/utils/utils_settings.py:1853
 msgid "Unit"
 msgstr "Unidad"
 
-#: mycodo_flask/utils/utils_settings.py:1328
+#: mycodo_flask/utils/utils_settings.py:1782
 #, python-format
 msgid "Unit with ID %(id)s (%(uuid)s) successfully added"
 msgstr "Unidad con ID %(id)s (%(uuid)s) agregada correctamente"
 
-#: mycodo_flask/utils/utils_settings.py:1437
-#: mycodo_flask/utils/utils_settings.py:1479
-#: mycodo_flask/utils/utils_settings.py:1512
+#: mycodo_flask/utils/utils_settings.py:1891
+#: mycodo_flask/utils/utils_settings.py:1933
+#: mycodo_flask/utils/utils_settings.py:1966
 msgid "Conversion"
 msgstr "Conversión"
 
-#: mycodo_flask/utils/utils_settings.py:1461
+#: mycodo_flask/utils/utils_settings.py:1915
 #, python-format
 msgid "Conversion with ID %(id)s (%(uuid)s) successfully added"
 msgstr "Conversión con ID %(id)s (%(uuid)s) agregado con éxito"
 
-#: mycodo_flask/utils/utils_settings.py:1697
+#: mycodo_flask/utils/utils_settings.py:2158
 msgid "Pi Settings"
 msgstr "Configuración Pi"
 
-#: mycodo_flask/utils/utils_settings.py:1707
+#: mycodo_flask/utils/utils_settings.py:2168
 msgid "Alert Settings"
 msgstr "Configuracion de Alertas"
 
-#: mycodo_flask/utils/utils_settings.py:1719
+#: mycodo_flask/utils/utils_settings.py:2180
 #, python-format
 msgid ""
 "Test email sent to %(recip)s. Check your inbox to see if it was "
@@ -6488,11 +6808,11 @@ msgstr ""
 "Correo electrónico de prueba enviado a %(recip)s. Revisa tu bandeja de "
 "entrada para ver si tuvo éxito."
 
-#: mycodo_flask/utils/utils_settings.py:1916
+#: mycodo_flask/utils/utils_settings.py:2377
 msgid "Recreate InfluxDB 1.x Database"
 msgstr "Recrear base de datos InfluxDB 1.x"
 
-#: mycodo_flask/utils/utils_settings.py:1932
+#: mycodo_flask/utils/utils_settings.py:2393
 msgid "Recreate InfluxDB 2.x Database"
 msgstr "Recrear base de datos InfluxDB 2.x"
 
@@ -6533,17 +6853,19 @@ msgstr "Unipolar"
 #: outputs/on_off_mcp23017.py:31 outputs/on_off_mqtt.py:29
 #: outputs/on_off_neopixel_rgb.py:32 outputs/on_off_neopixel_rgb_spi.py:32
 #: outputs/on_off_pcf8574.py:31 outputs/on_off_pcf8575.py:31
-#: outputs/on_off_pinctrl.py:31 outputs/on_off_python.py:168
-#: outputs/on_off_sequent_8_relay_hat.py:33 outputs/on_off_shell.py:30
-#: outputs/on_off_sparkfun_board_4_relays.py:30
+#: outputs/on_off_pinctrl.py:31 outputs/on_off_piplates_relayplate.py:85
+#: outputs/on_off_python.py:168 outputs/on_off_sequent_8_relay_hat.py:33
+#: outputs/on_off_shell.py:30 outputs/on_off_sparkfun_board_4_relays.py:30
 #: outputs/on_off_wireless_rpi_rf.py:31 outputs/on_off_xl9535.py:31
 #: outputs/remote_output_on_off.py:32
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:38
 msgid "On/Off"
 msgstr "Activado/desactivado"
 
 #: outputs/on_off_gpio.py:59 outputs/on_off_pinctrl.py:56
 #: outputs/on_off_wireless_rpi_rf.py:62 outputs/pump_gpio.py:85
 #: outputs/pwm_gpio.py:82 outputs/pwm_rpi_gpio.py:80
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:67
 msgid "The pin to control the state of"
 msgstr "El pin para controlar el estado de"
 
@@ -6554,11 +6876,12 @@ msgstr "El pin para controlar el estado de"
 #: outputs/on_off_mcp23017.py:107 outputs/on_off_mqtt.py:138
 #: outputs/on_off_neopixel_rgb.py:169 outputs/on_off_neopixel_rgb_spi.py:161
 #: outputs/on_off_pcf8574.py:106 outputs/on_off_pcf8575.py:106
-#: outputs/on_off_pinctrl.py:95 outputs/on_off_python.py:251
-#: outputs/on_off_sequent_8_relay_hat.py:128 outputs/on_off_shell.py:98
-#: outputs/on_off_sparkfun_board_4_relays.py:109
+#: outputs/on_off_pinctrl.py:95 outputs/on_off_piplates_relayplate.py:163
+#: outputs/on_off_python.py:251 outputs/on_off_sequent_8_relay_hat.py:128
+#: outputs/on_off_shell.py:98 outputs/on_off_sparkfun_board_4_relays.py:109
 #: outputs/on_off_wireless_rpi_rf.py:131 outputs/on_off_xl9535.py:106
 #: outputs/remote_output_on_off.py:123
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:106
 msgid "Trigger Functions at Startup"
 msgstr "Funciones de activación en el arranque"
 
@@ -6568,15 +6891,16 @@ msgstr "Funciones de activación en el arranque"
 #: outputs/on_off_kasa_plugs.py:136 outputs/on_off_kasa_rgb_bulbs.py:305
 #: outputs/on_off_mcp23017.py:115 outputs/on_off_mqtt.py:153
 #: outputs/on_off_pcf8574.py:114 outputs/on_off_pcf8575.py:114
-#: outputs/on_off_pinctrl.py:103 outputs/on_off_python.py:266
-#: outputs/on_off_sequent_8_relay_hat.py:136 outputs/on_off_shell.py:113
-#: outputs/on_off_sparkfun_board_4_relays.py:117
+#: outputs/on_off_pinctrl.py:103 outputs/on_off_piplates_relayplate.py:171
+#: outputs/on_off_python.py:266 outputs/on_off_sequent_8_relay_hat.py:136
+#: outputs/on_off_shell.py:113 outputs/on_off_sparkfun_board_4_relays.py:117
 #: outputs/on_off_wireless_rpi_rf.py:146 outputs/on_off_xl9535.py:114
 #: outputs/pump_atlas_ezo_pmp.py:101 outputs/pump_gpio.py:138
 #: outputs/pump_mcp23017.py:147 outputs/pump_pcf8574.py:140
 #: outputs/pwm_gpio.py:164 outputs/pwm_mqtt.py:218 outputs/pwm_pca9685.py:176
 #: outputs/pwm_python.py:302 outputs/pwm_rpi_gpio.py:151
 #: outputs/pwm_shell.py:138
+#: outputs/waveshare_8channel_pi_relay_board_b_gpio.py:114
 msgid "Current"
 msgstr "Corriente"
 

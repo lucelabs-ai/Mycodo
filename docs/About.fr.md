@@ -12,4 +12,4 @@ Lorsque les entrées et les sorties sont combinées, les contrôleurs de fonctio
 
 Les déclencheurs peuvent être configurés pour activer des événements en fonction de dates et d'heures spécifiques, en fonction de durées, ou du lever/coucher du soleil à une latitude et une longitude spécifiques.
 
-Mycodo has been translated to several languages. By default, the language of the browser will determine which language is used, but may be overridden in the General Settings, on the `[Gear Icon] -> Configure -> General` page. If you find an issue and would like to correct a translation or would like to add another language, this can be done at [https://translate.kylegabriel.com](https://translate.kylegabriel.com/engage/mycodo/).
+Mycodo a été traduit en plusieurs langues. Par défaut, la langue du navigateur détermine la langue utilisée, mais elle peut être modifiée dans les paramètres généraux, sur la page `[Gear Icon] -> Configure -> General`. Si vous constatez un problème et souhaitez corriger une traduction ou ajouter une autre langue, vous pouvez le faire à l'adresse [https://translate.kylegabriel.com](https://translate.kylegabriel.com/engage/mycodo/).

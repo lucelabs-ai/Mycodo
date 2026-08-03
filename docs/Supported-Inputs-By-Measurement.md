@@ -37,6 +37,7 @@ Measurements
  - [Length](#length)
  - [Light](#light)
  - [Magnetic Flux Density](#magnetic-flux-density)
+ - [Mass](#mass)
  - [Methane](#methane)
  - [Moisture](#moisture)
  - [Oxygen](#oxygen)
@@ -131,7 +132,7 @@ Measurements
 
 ## Boolean
 
-### [Mycodo: Output State (On/Off)](/Mycodo/Supported-Inputs/#mycodo-output-state-on-off)
+### [Mycodo: Output State (On/Off)](/Mycodo/Supported-Inputs/#mycodo-output-state-onoff)
 
 ### [Mycodo: Server Ping](/Mycodo/Supported-Inputs/#mycodo-server-ping)
 
@@ -203,7 +204,7 @@ Measurements
 
 ## Dewpoint
 
-### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315-am2320)
+### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315am2320)
 
 ### [AOSONG: DHT11](/Mycodo/Supported-Inputs/#aosong-dht11)
 
@@ -227,7 +228,7 @@ Measurements
 
 ### [Ruuvi: RuuviTag](/Mycodo/Supported-Inputs/#ruuvi-ruuvitag)
 
-### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht11-22)
+### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht1122)
 
 ### [Senseair: K96](/Mycodo/Supported-Inputs/#senseair-k96)
 
@@ -237,7 +238,7 @@ Measurements
 
 ### [Sensirion: SCD30 (scd30_i2c)](/Mycodo/Supported-Inputs/#sensirion-scd30-scd30_i2c)
 
-### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x-7x)
+### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x7x)
 
 ### [Sensirion: SHT2x (sht20)](/Mycodo/Supported-Inputs/#sensirion-sht2x-sht20)
 
@@ -255,9 +256,9 @@ Measurements
 
 ### [Silicon Labs: Si7021](/Mycodo/Supported-Inputs/#silicon-labs-si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301-si7021)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301)
 
 ### [TE Connectivity: HTU21D (Adafruit_CircuitPython_HTU21D)](/Mycodo/Supported-Inputs/#te-connectivity-htu21d-adafruit_circuitpython_htu21d)
 
@@ -267,7 +268,7 @@ Measurements
 
 ### [Weather: OpenWeatherMap (City, Current)](/Mycodo/Supported-Inputs/#weather-openweathermap-city-current)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ## Direction
 
@@ -275,7 +276,7 @@ Measurements
 
 ### [Weather: OpenWeatherMap (City, Current)](/Mycodo/Supported-Inputs/#weather-openweathermap-city-current)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ## Disk
 
@@ -291,7 +292,7 @@ Measurements
 
 ### [Mycodo: Uptime](/Mycodo/Supported-Inputs/#mycodo-uptime)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ## Duty Cycle
 
@@ -307,9 +308,9 @@ Measurements
 
 ### [Atlas Scientific: Atlas EC](/Mycodo/Supported-Inputs/#atlas-scientific-atlas-ec)
 
-### [Texas Instruments: ADS1115: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1115-generic-analog-ph-ec)
+### [Texas Instruments: ADS1115: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1115-generic-analog-phec)
 
-### [Texas Instruments: ADS1256: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1256-generic-analog-ph-ec)
+### [Texas Instruments: ADS1256: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1256-generic-analog-phec)
 
 ### [Xiaomi: Miflora](/Mycodo/Supported-Inputs/#xiaomi-miflora)
 
@@ -319,7 +320,7 @@ Measurements
 
 ### [Power Monitor: RPi 6-Channel Power Monitor (v0.4.0)](/Mycodo/Supported-Inputs/#power-monitor-rpi-6-channel-power-monitor-v040)
 
-### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plug-strip-energy-statistics)
+### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plugstrip-energy-statistics)
 
 ### [Tasmota: Tasmota Outlet Energy Monitor (HTTP)](/Mycodo/Supported-Inputs/#tasmota-tasmota-outlet-energy-monitor-http)
 
@@ -339,7 +340,7 @@ Measurements
 
 ### [Power Monitor: RPi 6-Channel Power Monitor (v0.4.0)](/Mycodo/Supported-Inputs/#power-monitor-rpi-6-channel-power-monitor-v040)
 
-### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plug-strip-energy-statistics)
+### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plugstrip-energy-statistics)
 
 ### [Tasmota: Tasmota Outlet Energy Monitor (HTTP)](/Mycodo/Supported-Inputs/#tasmota-tasmota-outlet-energy-monitor-http)
 
@@ -347,7 +348,7 @@ Measurements
 
 ### [Texas Instruments: ADS1115](/Mycodo/Supported-Inputs/#texas-instruments-ads1115)
 
-### [Texas Instruments: ADS1256: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1256-generic-analog-ph-ec)
+### [Texas Instruments: ADS1256: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1256-generic-analog-phec)
 
 ### [Texas Instruments: ADS1256](/Mycodo/Supported-Inputs/#texas-instruments-ads1256)
 
@@ -359,7 +360,7 @@ Measurements
 
 ### [Power Monitor: RPi 6-Channel Power Monitor (v0.4.0)](/Mycodo/Supported-Inputs/#power-monitor-rpi-6-channel-power-monitor-v040)
 
-### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plug-strip-energy-statistics)
+### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plugstrip-energy-statistics)
 
 ### [Tasmota: Tasmota Outlet Energy Monitor (HTTP)](/Mycodo/Supported-Inputs/#tasmota-tasmota-outlet-energy-monitor-http)
 
@@ -373,7 +374,7 @@ Measurements
 
 ## Humidity
 
-### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315-am2320)
+### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315am2320)
 
 ### [AOSONG: DHT11](/Mycodo/Supported-Inputs/#aosong-dht11)
 
@@ -401,7 +402,7 @@ Measurements
 
 ### [Ruuvi: RuuviTag](/Mycodo/Supported-Inputs/#ruuvi-ruuvitag)
 
-### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht11-22)
+### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht1122)
 
 ### [Senseair: K96](/Mycodo/Supported-Inputs/#senseair-k96)
 
@@ -411,7 +412,7 @@ Measurements
 
 ### [Sensirion: SCD30 (scd30_i2c)](/Mycodo/Supported-Inputs/#sensirion-scd30-scd30_i2c)
 
-### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x-7x)
+### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x7x)
 
 ### [Sensirion: SHT2x (sht20)](/Mycodo/Supported-Inputs/#sensirion-sht2x-sht20)
 
@@ -429,9 +430,9 @@ Measurements
 
 ### [Silicon Labs: Si7021](/Mycodo/Supported-Inputs/#silicon-labs-si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301-si7021)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301)
 
 ### [TE Connectivity: HTU21D (Adafruit_CircuitPython_HTU21D)](/Mycodo/Supported-Inputs/#te-connectivity-htu21d-adafruit_circuitpython_htu21d)
 
@@ -441,7 +442,7 @@ Measurements
 
 ### [Weather: OpenWeatherMap (City, Current)](/Mycodo/Supported-Inputs/#weather-openweathermap-city-current)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ### [Xiaomi: Mijia LYWSD03MMC (ATC and non-ATC modes)](/Mycodo/Supported-Inputs/#xiaomi-mijia-lywsd03mmc-atc-and-non-atc-modes)
 
@@ -451,9 +452,9 @@ Measurements
 
 ### [Atlas Scientific: Atlas pH](/Mycodo/Supported-Inputs/#atlas-scientific-atlas-ph)
 
-### [Texas Instruments: ADS1115: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1115-generic-analog-ph-ec)
+### [Texas Instruments: ADS1115: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1115-generic-analog-phec)
 
-### [Texas Instruments: ADS1256: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1256-generic-analog-ph-ec)
+### [Texas Instruments: ADS1256: Generic Analog pH/EC](/Mycodo/Supported-Inputs/#texas-instruments-ads1256-generic-analog-phec)
 
 ## Length
 
@@ -479,9 +480,13 @@ Measurements
 
 ### [Catnip Electronics: Chirp](/Mycodo/Supported-Inputs/#catnip-electronics-chirp)
 
+### [LITE-ON: LTR390](/Mycodo/Supported-Inputs/#lite-on-ltr390)
+
 ### [ROHM: BH1750](/Mycodo/Supported-Inputs/#rohm-bh1750)
 
 ### [Silicon Labs: SI1145](/Mycodo/Supported-Inputs/#silicon-labs-si1145)
+
+### [VISHAY: VEML7700](/Mycodo/Supported-Inputs/#vishay-veml7700)
 
 ### [Xiaomi: Miflora](/Mycodo/Supported-Inputs/#xiaomi-miflora)
 
@@ -492,6 +497,12 @@ Measurements
 ### [Melexis: MLX90393](/Mycodo/Supported-Inputs/#melexis-mlx90393)
 
 ### [Raspberry Pi Foundation: Sense HAT](/Mycodo/Supported-Inputs/#raspberry-pi-foundation-sense-hat)
+
+## Mass
+
+### [Avia Semiconductor: HX711 (CircuitPython)](/Mycodo/Supported-Inputs/#avia-semiconductor-hx711-circuitpython)
+
+### [Avia Semiconductor: HX711 (RPi.GPIO, Legacy)](/Mycodo/Supported-Inputs/#avia-semiconductor-hx711-rpigpio-legacy)
 
 ## Methane
 
@@ -533,7 +544,7 @@ Measurements
 
 ### [Power Monitor: RPi 6-Channel Power Monitor (v0.4.0)](/Mycodo/Supported-Inputs/#power-monitor-rpi-6-channel-power-monitor-v040)
 
-### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plug-strip-energy-statistics)
+### [TP-Link: Kasa WiFi Power Plug/Strip Energy Statistics](/Mycodo/Supported-Inputs/#tp-link-kasa-wifi-power-plugstrip-energy-statistics)
 
 ### [Tasmota: Tasmota Outlet Energy Monitor (HTTP)](/Mycodo/Supported-Inputs/#tasmota-tasmota-outlet-energy-monitor-http)
 
@@ -583,7 +594,7 @@ Measurements
 
 ### [Weather: OpenWeatherMap (City, Current)](/Mycodo/Supported-Inputs/#weather-openweathermap-city-current)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ## Pulse Width
 
@@ -619,13 +630,13 @@ Measurements
 
 ### [Weather: OpenWeatherMap (City, Current)](/Mycodo/Supported-Inputs/#weather-openweathermap-city-current)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ## Temperature
 
 ### [AMS: CCS811 (with Temperature)](/Mycodo/Supported-Inputs/#ams-ccs811-with-temperature)
 
-### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315-am2320)
+### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315am2320)
 
 ### [AOSONG: DHT11](/Mycodo/Supported-Inputs/#aosong-dht11)
 
@@ -701,11 +712,11 @@ Measurements
 
 ### [Raspberry Pi Foundation: Sense HAT](/Mycodo/Supported-Inputs/#raspberry-pi-foundation-sense-hat)
 
-### [Raspberry Pi: CPU/GPU Temperature](/Mycodo/Supported-Inputs/#raspberry-pi-cpu-gpu-temperature)
+### [Raspberry Pi: CPU/GPU Temperature](/Mycodo/Supported-Inputs/#raspberry-pi-cpugpu-temperature)
 
 ### [Ruuvi: RuuviTag](/Mycodo/Supported-Inputs/#ruuvi-ruuvitag)
 
-### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht11-22)
+### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht1122)
 
 ### [Senseair: K96](/Mycodo/Supported-Inputs/#senseair-k96)
 
@@ -715,7 +726,7 @@ Measurements
 
 ### [Sensirion: SCD30 (scd30_i2c)](/Mycodo/Supported-Inputs/#sensirion-scd30-scd30_i2c)
 
-### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x-7x)
+### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x7x)
 
 ### [Sensirion: SHT2x (sht20)](/Mycodo/Supported-Inputs/#sensirion-sht2x-sht20)
 
@@ -733,11 +744,11 @@ Measurements
 
 ### [Silicon Labs: Si7021](/Mycodo/Supported-Inputs/#silicon-labs-si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301-si7021)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with DS18B20](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-ds18b20)
+### [Sonoff: TH16/10 (Tasmota firmware) with DS18B20](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-ds18b20)
 
 ### [TE Connectivity: HTU21D (Adafruit_CircuitPython_HTU21D)](/Mycodo/Supported-Inputs/#te-connectivity-htu21d-adafruit_circuitpython_htu21d)
 
@@ -749,7 +760,7 @@ Measurements
 
 ### [Weather: OpenWeatherMap (City, Current)](/Mycodo/Supported-Inputs/#weather-openweathermap-city-current)
 
-### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-lat-lon-current-future)
+### [Weather: OpenWeatherMap (Lat/Lon, Current/Future)](/Mycodo/Supported-Inputs/#weather-openweathermap-latlon-currentfuture)
 
 ### [Xiaomi: Miflora](/Mycodo/Supported-Inputs/#xiaomi-miflora)
 
@@ -761,7 +772,7 @@ Measurements
 
 ## Vapor Pressure Deficit
 
-### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315-am2320)
+### [AOSONG: AM2315/AM2320](/Mycodo/Supported-Inputs/#aosong-am2315am2320)
 
 ### [AOSONG: DHT11](/Mycodo/Supported-Inputs/#aosong-dht11)
 
@@ -781,7 +792,7 @@ Measurements
 
 ### [Ruuvi: RuuviTag](/Mycodo/Supported-Inputs/#ruuvi-ruuvitag)
 
-### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht11-22)
+### [Seeedstudio: DHT11/22](/Mycodo/Supported-Inputs/#seeedstudio-dht1122)
 
 ### [Senseair: K96](/Mycodo/Supported-Inputs/#senseair-k96)
 
@@ -791,7 +802,7 @@ Measurements
 
 ### [Sensirion: SCD30 (scd30_i2c)](/Mycodo/Supported-Inputs/#sensirion-scd30-scd30_i2c)
 
-### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x-7x)
+### [Sensirion: SHT1x/7x](/Mycodo/Supported-Inputs/#sensirion-sht1x7x)
 
 ### [Sensirion: SHT2x (sht20)](/Mycodo/Supported-Inputs/#sensirion-sht2x-sht20)
 
@@ -809,9 +820,9 @@ Measurements
 
 ### [Silicon Labs: Si7021](/Mycodo/Supported-Inputs/#silicon-labs-si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301-si7021)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301/Si7021](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301si7021)
 
-### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th16-10-tasmota-firmware-with-am2301)
+### [Sonoff: TH16/10 (Tasmota firmware) with AM2301](/Mycodo/Supported-Inputs/#sonoff-th1610-tasmota-firmware-with-am2301)
 
 ### [TE Connectivity: HTU21D (Adafruit_CircuitPython_HTU21D)](/Mycodo/Supported-Inputs/#te-connectivity-htu21d-adafruit_circuitpython_htu21d)
 

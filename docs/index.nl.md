@@ -2,7 +2,7 @@ description: Documentation for Mycodo, an open source environmental monitoring a
 
 ## Mycodo Milieubewakings- en regelsysteem
 
-Mycodo is open source software ontworpen om te draaien op de [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi) en andere single-board computers (SBC's). Het koppelt inputs en outputs op interessante manieren om de omgeving aan te voelen en te manipuleren.
+Mycodo is open source software die is ontworpen om te draaien op de [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi) en andere single-board computers (SBC's). Het koppelt inputs en outputs op interessante manieren om de omgeving te voelen en te manipuleren.
 
 ### Informatie
 

@@ -529,6 +529,66 @@ Calibration Measurement is an optional setting that provides a temperature measu
 - Default Value: 10.0</td><td>The pH of the high point calibration solution</td></tr><tr><td>Calibrate High</td><td>Button</td><td></td></tr><tr><td colspan="3">Calibration Export/Import: Export calibration to a series of strings. These can later be imported to restore the calibration. Watch the Daemon Log for the output.</td></tr><tr><td>Export Calibration</td><td>Button</td><td></td></tr><tr><td>Calibration String</td><td>Text</td><td>The calibration string to import</td></tr><tr><td>Import Calibration</td><td>Button</td><td></td></tr><tr><td colspan="3">The I2C address can be changed. Enter a new address in the 0xYY format (e.g. 0x22, 0x50), then press Set I2C Address. Remember to deactivate and change the I2C address option after setting the new address.</td></tr><tr><td>New I2C Address</td><td>Text
 - Default Value: 0x63</td><td>The new I2C to set the device to</td></tr><tr><td>Set I2C Address</td><td>Button</td><td></td></tr></tbody></table>
 
+### Avia Semiconductor: HX711 (CircuitPython)
+
+- Manufacturer: Avia Semiconductor
+- Measurements: Mass (Channel A, Channel B)
+- Interfaces: GPIO
+- Libraries: Adafruit_CircuitPython_HX711
+- Dependencies: [libgpiod-dev](https://packages.debian.org/search?keywords=libgpiod-dev), [pyusb](https://pypi.org/project/pyusb), [adafruit-circuitpython-hx711](https://pypi.org/project/adafruit-circuitpython-hx711)
+- Manufacturer URL: [Link](https://www.aviaic.com/)
+- Datasheet URL: [Link](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf)
+- Product URL: [Link](https://www.amazon.com/s?k=hx711)
+
+Dual-channel HX711 input using CircuitPython/Blinka GPIO. Supports simultaneous measurement on Channel A and Channel B. Connect DT to a GPIO data pin and SCK to a GPIO clock pin. Each channel has independent tare and calibration settings.
+<table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>Measurements Enabled</td><td>Multi-Select</td><td>The measurements to record</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr><tr><td colspan="3"><strong>General Settings</strong></td></tr><tr><td>Data Pin (DT)</td><td>Integer
+- Default Value: 17</td><td>The GPIO pin connected to the HX711 data pin (DT/DOUT)</td></tr><tr><td>Clock Pin (SCK)</td><td>Integer
+- Default Value: 21</td><td>The GPIO pin connected to the HX711 clock pin (SCK/PD_SCK)</td></tr><tr><td colspan="3"><strong>Channel A Settings</strong></td></tr><tr><td>Channel A Enabled</td><td>Boolean
+- Default Value: True</td><td>Enable Channel A measurement</td></tr><tr><td>Gain (Channel A)</td><td>Select(Options: [<strong>128</strong> | 64] (Default in <strong>bold</strong>)</td><td>The gain for Channel A (128 or 64)</td></tr><tr><td>Tare Value (Channel A)</td><td>Decimal</td><td>The raw value to subtract for Channel A. Set to 0 for no tare.</td></tr><tr><td>Calibration Factor (Channel A)</td><td>Decimal
+- Default Value: 1.0</td><td>The factor to convert Channel A raw value to grams</td></tr><tr><td colspan="3"><strong>Channel B Settings</strong></td></tr><tr><td>Channel B Enabled</td><td>Boolean</td><td>Enable Channel B measurement</td></tr><tr><td>Tare Value (Channel B)</td><td>Decimal</td><td>The raw value to subtract for Channel B. Set to 0 for no tare.</td></tr><tr><td>Calibration Factor (Channel B)</td><td>Decimal
+- Default Value: 1.0</td><td>The factor to convert Channel B raw value to grams</td></tr><tr><td colspan="3"><strong>Sampling & Filtering</strong></td></tr><tr><td>Samples</td><td>Integer
+- Default Value: 3</td><td>The number of samples to average for each measurement</td></tr><tr><td>Outlier Filter Enabled</td><td>Boolean
+- Default Value: True</td><td>Filter spikes using a robust median/MAD filter before averaging</td></tr><tr><td>Outlier MAD Threshold</td><td>Decimal
+- Default Value: 3.5</td><td>Lower is stricter. Typical range: 2.5–5.0</td></tr><tr><td colspan="3"><strong>Zero Tracking</strong></td></tr><tr><td>Zero Tracking Enabled</td><td>Boolean</td><td>Slowly correct tare drift when the scale returns to empty</td></tr><tr><td>Zero Tracking Threshold (g)</td><td>Decimal
+- Default Value: 2.0</td><td>Only adjust tare when the measured weight is within this range</td></tr><tr><td>Zero Tracking Rate</td><td>Decimal
+- Default Value: 0.05</td><td>Fraction of offset corrected per measurement (0.0–1.0)</td></tr><tr><td colspan="3"><strong>Advanced Settings</strong></td></tr><tr><td>Read Delay (ms)</td><td>Decimal
+- Default Value: 1.0</td><td>Delay between raw samples to improve stability on Linux GPIO</td></tr><tr><td>Max Retries</td><td>Integer
+- Default Value: 3</td><td>Retries for saturated or invalid samples</td></tr><tr><td>Clock Delay (µs)</td><td>Decimal
+- Default Value: 1.0</td><td>Delay per HX711 clock pulse</td></tr><tr><td>Ready Timeout (ms)</td><td>Decimal
+- Default Value: 100.0</td><td>Timeout waiting for HX711 ready</td></tr><tr><td>Filter Invalid Samples</td><td>Boolean
+- Default Value: True</td><td>Discard saturated samples (0x7FFFFF/0x800000)</td></tr><tr><td>Auto Gain Fallback</td><td>Boolean
+- Default Value: True</td><td>Retry A/64 and B/32 when saturated samples occur</td></tr><tr><td colspan="3">Commands</td></tr><tr><td colspan="3"><strong>Tare Calibration</strong> — Remove all weight from scale</td></tr><tr><td>Channel for Tare</td><td>Select(Options: [<strong>Channel A</strong> | Channel B] (Default in <strong>bold</strong>)</td><td>Select which channel to calibrate</td></tr><tr><td>Tare Samples</td><td>Integer
+- Default Value: 20</td><td>Number of samples to collect for tare (default: 20)</td></tr><tr><td>Calibrate Tare</td><td>Button</td><td></td></tr><tr><td colspan="3"><strong>Factor Calibration</strong> — Place known weight on scale</td></tr><tr><td>Channel for Factor</td><td>Select(Options: [<strong>Channel A</strong> | Channel B] (Default in <strong>bold</strong>)</td><td>Select which channel to calibrate</td></tr><tr><td>Known Weight (grams)</td><td>Decimal
+- Default Value: 1000.0</td><td>The exact weight of your calibration object in grams</td></tr><tr><td>Samples per Run</td><td>Integer
+- Default Value: 20</td><td>Number of samples per calibration run (default: 20)</td></tr><tr><td>Number of Runs</td><td>Integer
+- Default Value: 5</td><td>Number of runs to average (default: 5). Outlier runs are filtered out.</td></tr><tr><td>Calibrate Factor</td><td>Button</td><td></td></tr><tr><td colspan="3"><strong>Quick Actions</strong></td></tr><tr><td>Channel to Clear</td><td>Select(Options: [<strong>Channel A</strong> | Channel B | Both Channels] (Default in <strong>bold</strong>)</td><td>Select which channel calibration to reset</td></tr><tr><td>Reset Calibration to Defaults</td><td>Button</td><td></td></tr></tbody></table>
+
+### Avia Semiconductor: HX711 (RPi.GPIO, Legacy)
+
+- Manufacturer: Avia Semiconductor
+- Measurements: Mass (Channel A, Channel B)
+- Interfaces: GPIO
+- Libraries: hx711
+- Dependencies: [RPi.GPIO](https://pypi.org/project/RPi.GPIO), [hx711](https://pypi.org/project/hx711)
+- Manufacturer URL: [Link](https://www.aviaic.com/)
+- Datasheet URL: [Link](https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf)
+- Product URL: [Link](https://www.amazon.com/s?k=hx711)
+
+Dual-channel HX711 input using legacy RPi.GPIO (Pi 4 and earlier only). For Raspberry Pi 5 and broad compatibility, use the HX711 (CircuitPython) input. Supports simultaneous measurement on Channel A and Channel B. Each channel has independent tare and calibration settings.
+<table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>Measurements Enabled</td><td>Multi-Select</td><td>The measurements to record</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr><tr><td colspan="3"><strong>General Settings</strong></td></tr><tr><td>Data Pin (DT)</td><td>Integer
+- Default Value: 17</td><td>The GPIO pin connected to the HX711 data pin (DT/DOUT)</td></tr><tr><td>Clock Pin (SCK)</td><td>Integer
+- Default Value: 21</td><td>The GPIO pin connected to the HX711 clock pin (SCK/PD_SCK)</td></tr><tr><td colspan="3"><strong>Channel A Settings</strong></td></tr><tr><td>Channel A Enabled</td><td>Boolean
+- Default Value: True</td><td>Enable Channel A measurement</td></tr><tr><td>Gain (Channel A)</td><td>Select(Options: [<strong>128</strong> | 64] (Default in <strong>bold</strong>)</td><td>The gain for Channel A (128 or 64)</td></tr><tr><td>Tare Value (Channel A)</td><td>Decimal</td><td>The raw value to subtract for Channel A. Set to 0 for no tare.</td></tr><tr><td>Calibration Factor (Channel A)</td><td>Decimal
+- Default Value: 1.0</td><td>The factor to convert Channel A raw value to grams</td></tr><tr><td colspan="3"><strong>Channel B Settings</strong></td></tr><tr><td>Channel B Enabled</td><td>Boolean</td><td>Enable Channel B measurement</td></tr><tr><td>Tare Value (Channel B)</td><td>Decimal</td><td>The raw value to subtract for Channel B. Set to 0 for no tare.</td></tr><tr><td>Calibration Factor (Channel B)</td><td>Decimal
+- Default Value: 1.0</td><td>The factor to convert Channel B raw value to grams</td></tr><tr><td colspan="3"><strong>Sampling & Filtering</strong></td></tr><tr><td>Samples</td><td>Integer
+- Default Value: 3</td><td>The number of samples to average for each measurement</td></tr><tr><td>Outlier Filter Enabled</td><td>Boolean
+- Default Value: True</td><td>Filter spikes using a robust median/MAD filter before averaging</td></tr><tr><td>Outlier MAD Threshold</td><td>Decimal
+- Default Value: 3.5</td><td>Lower is stricter. Typical range: 2.5–5.0</td></tr><tr><td colspan="3">Commands</td></tr><tr><td colspan="3"><strong>Tare Calibration</strong> — Remove all weight from scale</td></tr><tr><td>Channel for Tare</td><td>Select(Options: [<strong>Channel A</strong> | Channel B] (Default in <strong>bold</strong>)</td><td>Select which channel to calibrate</td></tr><tr><td>Tare Samples</td><td>Integer
+- Default Value: 20</td><td>Number of samples to collect for tare (default: 20)</td></tr><tr><td>Calibrate Tare</td><td>Button</td><td></td></tr><tr><td colspan="3"><strong>Factor Calibration</strong> — Place known weight on scale</td></tr><tr><td>Channel for Factor</td><td>Select(Options: [<strong>Channel A</strong> | Channel B] (Default in <strong>bold</strong>)</td><td>Select which channel to calibrate</td></tr><tr><td>Known Weight (grams)</td><td>Decimal
+- Default Value: 1000.0</td><td>The exact weight of your calibration object in grams</td></tr><tr><td>Samples per Run</td><td>Integer
+- Default Value: 20</td><td>Number of samples per calibration run (default: 20)</td></tr><tr><td>Number of Runs</td><td>Integer
+- Default Value: 5</td><td>Number of runs to average (default: 5). Outlier runs are filtered out.</td></tr><tr><td>Calibrate Factor</td><td>Button</td><td></td></tr><tr><td colspan="3"><strong>Quick Actions</strong></td></tr><tr><td>Channel to Clear</td><td>Select(Options: [<strong>Channel A</strong> | Channel B | Both Channels] (Default in <strong>bold</strong>)</td><td>Select which channel calibration to reset</td></tr><tr><td>Reset Calibration to Defaults</td><td>Button</td><td></td></tr></tbody></table>
+
 ### BOSCH: BME280 (Adafruit_BME280)
 
 - Manufacturer: BOSCH
@@ -681,6 +741,17 @@ This is similar to the other BMP280 Input, except it uses a different library, w
 - Manufacturer URL: [Link](https://www.infineon.com/cms/en/product/sensor/pressure-sensors/pressure-sensors-for-iot/dps310/)
 - Datasheet URL: [Link](https://www.infineon.com/dgdl/Infineon-DPS310-DataSheet-v01_02-EN.pdf?fileId=5546d462576f34750157750826c42242)
 - Product URLs: [Link 1](https://www.adafruit.com/product/4494), [Link 2](https://shop.pimoroni.com/products/adafruit-dps310-precision-barometric-pressure-altitude-sensor-stemma-qt-qwiic), [Link 3](https://www.berrybase.de/sensoren-module/luftdruck-wasserdruck/adafruit-dps310-pr-228-zisions-barometrischer-druck-und-h-246-hen-sensor)
+<table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>I<sup>2</sup>C Address</td><td>Text</td><td>The address of the I<sup>2</sup>C device.</td></tr><tr><td>I<sup>2</sup>C Bus</td><td>Integer</td><td>The Bus the I<sup>2</sup>C device is connected.</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr></tbody></table>
+
+### LITE-ON: LTR390
+
+- Manufacturer: LITE-ON
+- Measurements: Light/UV
+- Interfaces: I<sup>2</sup>C
+- Libraries: adafruit-circuitpython-ltr390
+- Dependencies: [pyusb](https://pypi.org/project/pyusb), [Adafruit-extended-bus](https://pypi.org/project/Adafruit-extended-bus), [adafruit-circuitpython-ltr390](https://pypi.org/project/adafruit-circuitpython-ltr390)
+- Datasheet URL: [Link](https://optoelectronics.liteon.com/upload/download/DS86-2015-0004/LTR-390UV_Final_%20DS_V1%201.pdf)
+- Product URL: [Link](https://www.adafruit.com/product/4831)
 <table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>I<sup>2</sup>C Address</td><td>Text</td><td>The address of the I<sup>2</sup>C device.</td></tr><tr><td>I<sup>2</sup>C Bus</td><td>Integer</td><td>The Bus the I<sup>2</sup>C device is connected.</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr></tbody></table>
 
 ### MAXIM: DS1822
@@ -873,7 +944,7 @@ A single topic is subscribed to and the returned JSON payload contains one or mo
 - Default Value: 1883</td><td>Host port number</td></tr><tr><td>Topic</td><td>Text
 - Default Value: mqtt/test/input</td><td>The topic to subscribe to</td></tr><tr><td>Keep Alive</td><td>Integer
 - Default Value: 60</td><td>Maximum amount of time between received signals. Set to 0 to disable.</td></tr><tr><td>Client ID</td><td>Text
-- Default Value: client_qty5tMmS</td><td>Unique client ID for connecting to the server</td></tr><tr><td>Use Login</td><td>Boolean</td><td>Send login credentials</td></tr><tr><td>Use TLS</td><td>Boolean</td><td>Send login credentials using TLS</td></tr><tr><td>Username</td><td>Text
+- Default Value: client_d41HSbhY</td><td>Unique client ID for connecting to the server</td></tr><tr><td>Use Login</td><td>Boolean</td><td>Send login credentials</td></tr><tr><td>Use TLS</td><td>Boolean</td><td>Send login credentials using TLS</td></tr><tr><td>Username</td><td>Text
 - Default Value: user</td><td>Username for connecting to the server</td></tr><tr><td>Password</td><td>Text</td><td>Password for connecting to the server. Leave blank to disable.</td></tr><tr><td>Use Websockets</td><td>Boolean</td><td>Use websockets to connect to the server.</td></tr><tr><td colspan="3">Channel Options</td></tr><tr><td>Name</td><td>Text</td><td>A name to distinguish this from others</td></tr><tr><td>JMESPATH Expression</td><td>Text</td><td>JMESPATH expression to find value in JSON response</td></tr></tbody></table>
 
 ### MQTT: MQTT Subscribe (Value payload)
@@ -889,7 +960,7 @@ A topic is subscribed to for each channel Subscription Topic and the returned pa
 - Default Value: localhost</td><td>Host or IP address</td></tr><tr><td>Port</td><td>Integer
 - Default Value: 1883</td><td>Host port number</td></tr><tr><td>Keep Alive</td><td>Integer
 - Default Value: 60</td><td>Maximum amount of time between received signals. Set to 0 to disable.</td></tr><tr><td>Client ID</td><td>Text
-- Default Value: client_2NluwVOT</td><td>Unique client ID for connecting to the server</td></tr><tr><td>Use Login</td><td>Boolean</td><td>Send login credentials</td></tr><tr><td>Use TLS</td><td>Boolean</td><td>Send login credentials using TLS</td></tr><tr><td>Username</td><td>Text
+- Default Value: client_i8teejb1</td><td>Unique client ID for connecting to the server</td></tr><tr><td>Use Login</td><td>Boolean</td><td>Send login credentials</td></tr><tr><td>Use TLS</td><td>Boolean</td><td>Send login credentials using TLS</td></tr><tr><td>Username</td><td>Text
 - Default Value: user</td><td>Username for connecting to the server</td></tr><tr><td>Password</td><td>Text</td><td>Password for connecting to the server. Leave blank to disable.</td></tr><tr><td>Use Websockets</td><td>Boolean</td><td>Use websockets to connect to the server.</td></tr><tr><td colspan="3">Channel Options</td></tr><tr><td>Name</td><td>Text</td><td>A name to distinguish this from others</td></tr><tr><td>Subscription Topic</td><td>Text</td><td>The MQTT topic to subscribe to</td></tr></tbody></table>
 
 ### Melexis: MLX90393
@@ -1137,7 +1208,7 @@ Notes when setting a custom timing budget: A higher timing budget results in gre
 - Manufacturer: Seeedstudio
 - Measurements: Humidity/Temperature
 - Interfaces: GROVE
-- Libraries: grovepi
+- Libraries: grovepi, libatlas-base-dev
 - Dependencies: [libatlas-base-dev](https://packages.debian.org/search?keywords=libatlas-base-dev), [grovepi](https://pypi.org/project/grovepi)
 - Manufacturer URLs: [Link 1](https://wiki.seeedstudio.com/Grove-Temperature_and_Humidity_Sensor_Pro/), [Link 2](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
 
@@ -1368,7 +1439,7 @@ This Input module allows the use of any temperature/humidity sensor with the TH1
 This measures from several Kasa power devices (plugs/strips) capable of measuring energy consumption. These include, but are not limited to the KP115 and HS600.
 <table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>Measurements Enabled</td><td>Multi-Select</td><td>The measurements to record</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr><tr><td>Device Type</td><td>Select</td><td>The type of Kasa device</td></tr><tr><td>Host</td><td>Text
 - Default Value: 0.0.0.0</td><td>Host or IP address</td></tr><tr><td>Asyncio RPC Port</td><td>Integer
-- Default Value: 18752</td><td>The port to start the asyncio RPC server. Must be unique from other Kasa Outputs.</td></tr><tr><td colspan="3">Commands</td></tr><tr><td colspan="3">The total kWh can be cleared with the following button or with the Clear Total kWh Function Action. This will also clear all energy stats on the device, not just the total kWh.</td></tr><tr><td>Clear Total: Kilowatt-hour</td><td>Button</td><td></td></tr></tbody></table>
+- Default Value: 18157</td><td>The port to start the asyncio RPC server. Must be unique from other Kasa Outputs.</td></tr><tr><td colspan="3">Commands</td></tr><tr><td colspan="3">The total kWh can be cleared with the following button or with the Clear Total kWh Function Action. This will also clear all energy stats on the device, not just the total kWh.</td></tr><tr><td>Clear Total: Kilowatt-hour</td><td>Button</td><td></td></tr></tbody></table>
 
 ### Tasmota: Tasmota Outlet Energy Monitor (HTTP)
 
@@ -1551,6 +1622,17 @@ This Input receives and stores measurements from the Data Storage Integration on
 This Input receives and stores measurements from the Data Storage Integration on The Things Network. The given Payload jmespath Expression is used as a JMESPATH expression to find the corresponding value that will be stored for that channel. Be sure you select and save the Measurement Unit for each channel. Once the unit has been saved, you can convert to other units in the Convert Measurement section. Example expressions for jmespath (https://jmespath.org) include <i>temperature</i>, <i>sensors[0].temperature</i>, and <i>bathroom.temperature</i> which refer to the temperature as a direct key within the first entry of sensors or as a subkey of bathroom, respectively. Jmespath elements and keys that contain special characters have to be enclosed in double quotes, e.g. <i>"sensor-1".temperature</i>.
 <table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>Measurements Enabled</td><td>Multi-Select</td><td>The measurements to record</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Start Offset (Seconds)</td><td>Integer</td><td>The duration to wait before the first operation</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr><tr><td>Application ID</td><td>Text</td><td>The Things Network Application ID</td></tr><tr><td>App API Key</td><td>Text</td><td>The Things Network Application API Key</td></tr><tr><td>Device ID</td><td>Text</td><td>The Things Network Device ID</td></tr><tr><td colspan="3">Channel Options</td></tr><tr><td>Name</td><td>Text</td><td>A name to distinguish this from others</td></tr><tr><td>Payload jmespath Expression</td><td>Text</td><td>The TTN jmespath expression to return the value to store</td></tr></tbody></table>
 
+### VISHAY: VEML7700
+
+- Manufacturer: VISHAY
+- Measurements: Light
+- Interfaces: I<sup>2</sup>C
+- Libraries: adafruit-circuitpython-veml7700
+- Dependencies: [pyusb](https://pypi.org/project/pyusb), [Adafruit-extended-bus](https://pypi.org/project/Adafruit-extended-bus), [adafruit-circuitpython-veml7700](https://pypi.org/project/adafruit-circuitpython-veml7700)
+- Datasheet URL: [Link](https://www.vishay.com/docs/84286/veml7700.pdf)
+- Product URL: [Link](https://www.adafruit.com/product/4162)
+<table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>I<sup>2</sup>C Address</td><td>Text</td><td>The address of the I<sup>2</sup>C device.</td></tr><tr><td>I<sup>2</sup>C Bus</td><td>Integer</td><td>The Bus the I<sup>2</sup>C device is connected.</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr></tbody></table>
+
 ### Weather: OpenWeatherMap (City, Current)
 
 - Manufacturer: Weather
@@ -1648,7 +1730,7 @@ This is the B version of the sensor that includes the ability to conduct automat
 - Measurements: Battery/Humidity/Temperature
 - Interfaces: BT
 - Libraries: bluepy/bluez
-- Dependencies: [libglib2.0](https://packages.debian.org/search?keywords=libglib2.0), [bluez](https://packages.debian.org/search?keywords=bluez), [bluetooth](https://packages.debian.org/search?keywords=bluetooth), [libbluetooth-dev](https://packages.debian.org/search?keywords=libbluetooth-dev), [bluepy](https://pypi.org/project/bluepy), [bluetooth](https://github.com/pybluez/pybluez)
+- Dependencies: [libglib2.0-0](https://packages.debian.org/search?keywords=libglib2.0-0), [bluez](https://packages.debian.org/search?keywords=bluez), [bluetooth](https://packages.debian.org/search?keywords=bluetooth), [libbluetooth-dev](https://packages.debian.org/search?keywords=libbluetooth-dev), [bluepy](https://pypi.org/project/bluepy), [bluetooth](https://github.com/pybluez/pybluez)
 
 More information about ATC mode can be found at https://github.com/JsBergbau/MiTemperature2
 <table><thead><tr class="header"><th>Option</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>Bluetooth MAC (XX:XX:XX:XX:XX:XX)</td><td>Text</td><td>The Hci location of the Bluetooth device.</td></tr><tr><td>Bluetooth Adapter (hci[X])</td><td>Text</td><td>The adapter of the Bluetooth device.</td></tr><tr><td>Measurements Enabled</td><td>Multi-Select</td><td>The measurements to record</td></tr><tr><td>Period (Seconds)</td><td>Decimal</td><td>The duration between measurements or actions</td></tr><tr><td>Pre Output</td><td>Select</td><td>Turn the selected output on before taking every measurement</td></tr><tr><td>Pre Out Duration (Seconds)</td><td>Decimal</td><td>If a Pre Output is selected, set the duration to turn the Pre Output on for before every measurement is acquired.</td></tr><tr><td>Pre During Measure</td><td>Boolean</td><td>Check to turn the output off after (opposed to before) the measurement is complete</td></tr><tr><td>Enable ATC Mode</td><td>Boolean</td><td>Enable sensor ATC mode</td></tr></tbody></table>
