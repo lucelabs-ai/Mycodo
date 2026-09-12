@@ -91,6 +91,18 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
 
     path_file = os.path.join(save_path, filename)
 
+    if tmp_filename and os.path.exists(path_file):
+        # This is a throwaway scratch file meant to be freshly overwritten
+        # every call. If a previous capture ran as a different user/process
+        # than this one, the file's ownership can block a later write with
+        # a silent (or hard-to-see) permission error -- removing it first
+        # lets whichever process captures next create it fresh with its own
+        # ownership instead of fighting the old one.
+        try:
+            os.remove(path_file)
+        except Exception as err:
+            logger.warning(f"Could not remove stale temp file {path_file}: {err}")
+
     # Turn on output, if configured
     output_already_on = False
     output_id = None
