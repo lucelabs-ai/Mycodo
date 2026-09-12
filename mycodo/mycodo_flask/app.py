@@ -270,6 +270,13 @@ def extension_session(app):
     #     pass
 
     app.config['SESSION_TYPE'] = 'filesystem'
+    # Browsers treat this cookie as third-party when Mycodo is loaded in an
+    # iframe from another origin (e.g. the Home Assistant "Mycodo Bridge"
+    # panel) and will refuse to store/send it at all unless it's explicitly
+    # marked SameSite=None -- which itself requires Secure, satisfied here
+    # since Mycodo is served over HTTPS.
+    app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+    app.config['SESSION_COOKIE_SECURE'] = True
     Session(app)
 
     return app
