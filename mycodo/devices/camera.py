@@ -399,9 +399,13 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                     img_edited = imutils.rotate_bound(img_orig, settings.rotation)
 
                 if edited:
-                    cv2.imwrite(path_file, img_edited)
+                    write_success = cv2.imwrite(path_file, img_edited)
                 else:
-                    cv2.imwrite(path_file, img_orig)
+                    write_success = cv2.imwrite(path_file, img_orig)
+
+                if not write_success:
+                    logger.error(f"Could not write image to {path_file}")
+                    return None, None
 
             elif record_type == 'video':
                 # TODO: opencv video recording is currently not working. No idea why. Try to fix later.
