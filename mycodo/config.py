@@ -200,7 +200,7 @@ CAMERA_INFO = {
         'dependencies_module': [
             ('pip-pypi', 'imutils', 'imutils==0.5.4'),
             ('apt', 'libgl1', 'libgl1'),
-            ('pip-pypi', 'cv2', 'opencv-python==4.6.0.66')
+            ('pip-pypi', 'cv2', 'opencv-python')
         ],
         'capable_image': True,
         'capable_stream': True
@@ -224,7 +224,7 @@ CAMERA_INFO = {
         'dependencies_module': [
             ('pip-pypi', 'imutils', 'imutils==0.5.4'),
             ('apt', 'libgl1', 'libgl1'),
-            ('pip-pypi', 'cv2', 'opencv-python==4.6.0.66')
+            ('pip-pypi', 'cv2', 'opencv-python')
         ],
         'capable_image': True,
         'capable_stream': True
@@ -234,7 +234,7 @@ CAMERA_INFO = {
         'dependencies_module': [
             ('pip-pypi', 'imutils', 'imutils==0.5.4'),
             ('apt', 'libgl1', 'libgl1'),
-            ('pip-pypi', 'cv2', 'opencv-python==4.6.0.66')
+            ('pip-pypi', 'cv2', 'opencv-python')
         ],
         'capable_image': True,
         'capable_stream': False
