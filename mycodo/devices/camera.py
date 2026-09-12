@@ -615,7 +615,14 @@ def count_cameras_opencv():
     max_tested = 10
     for i in range(max_tested):
         temp_camera = cv2.VideoCapture(i)
+        # Many USB/UVC cameras expose more than one /dev/videoN node per
+        # physical device (e.g. a separate metadata-only node) -- those
+        # nodes often still report isOpened() but never deliver a real
+        # frame, so also require a successful read() before counting one
+        # as an actual usable camera.
         if temp_camera.isOpened():
-            temp_camera.release()
-            camera_ids.append(i)
+            status, frame = temp_camera.read()
+            if status and frame is not None:
+                camera_ids.append(i)
+        temp_camera.release()
     return camera_ids
