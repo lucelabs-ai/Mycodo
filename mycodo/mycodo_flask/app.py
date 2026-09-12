@@ -85,7 +85,11 @@ def register_extensions(app):
 
                 if misc.force_https:
                     csp = {'default-src': ['*', '\'unsafe-inline\'', '\'unsafe-eval\'']}
-                    Talisman(app, content_security_policy=csp)
+                    # frame_options=None: don't send X-Frame-Options, so Mycodo
+                    # can be embedded in an iframe from another origin (e.g.
+                    # the Home Assistant "Mycodo Bridge" panel). Talisman
+                    # defaults this to 'SAMEORIGIN', which blocks that.
+                    Talisman(app, content_security_policy=csp, frame_options=None)
 
 
 def register_blueprints(app):
