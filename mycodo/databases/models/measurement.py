@@ -95,7 +95,11 @@ class DeviceMeasurements(CRUDMixin, db.Model):
     scale_to_max = db.Column(db.Float, default=20)
 
     conversion_id = db.Column(db.String(36), default='')
-
+    conversion = db.relationship(
+        "Conversion",
+        primaryjoin="foreign(DeviceMeasurements.conversion_id) == Conversion.unique_id",
+        uselist=False,
+        viewonly=True)
 
 class DeviceMeasurementsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
