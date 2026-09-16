@@ -1,0 +1,59 @@
+<div class="form-group">
+  {{form_camera.device.label(class_='control-label')}}
+  <div>
+    <select class="form-control form-tooltip form-dropdown" id="device" name="device" title="" data-original-title="Select which physical USB port this camera is plugged into.">
+      <option value="1"{% if each_camera.device == '1' %} selected{% endif %}>USB Port 1</option>
+      <option value="2"{% if each_camera.device == '2' %} selected{% endif %}>USB Port 2</option>
+      <option value="3"{% if each_camera.device == '3' %} selected{% endif %}>USB Port 3</option>
+      <option value="4"{% if each_camera.device == '4' %} selected{% endif %}>USB Port 4</option>
+    </select>
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.width.label(class_='control-label')}}
+  <div>
+    {{form_camera.width(class_='form-control', value=each_camera.width)}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.height.label(class_='control-label')}}
+  <div>
+    {{form_camera.height(class_='form-control', value=each_camera.height)}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.rotation.label(class_='control-label')}}
+  <div>
+    {{form_camera.rotation(class_='form-control', value=each_camera.rotation, **{'title':_('Only 0, 90, 180, or 270 degrees are supported.')})}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.brightness.label(class_='control-label')}}
+  <div>
+    {{form_camera.brightness(class_='form-control', value=each_camera.brightness, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.contrast.label(class_='control-label')}}
+  <div>
+    {{form_camera.contrast(class_='form-control', value=each_camera.contrast, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.saturation.label(class_='control-label')}}
+  <div>
+    {{form_camera.saturation(class_='form-control', value=each_camera.saturation, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.gain.label(class_='control-label')}}
+  <div>
+    {{form_camera.gain(class_='form-control', value=each_camera.gain, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
+   </div>
+</div>
+<div class="form-group">
+  {{form_camera.exposure.label(class_='control-label')}}
+  <div>
+    {{form_camera.exposure(class_='form-control', value=each_camera.exposure, **{'title':_('Leave blank for auto-exposure. Set a value to switch to manual exposure.')})}}
+   </div>
+</div>
