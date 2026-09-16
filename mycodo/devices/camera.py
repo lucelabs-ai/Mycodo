@@ -3,6 +3,7 @@ import datetime
 import json
 import logging
 import os
+import threading
 import time
 
 from mycodo.config import MYCODO_DB_PATH
@@ -19,6 +20,31 @@ from mycodo.utils.system_pi import set_user_grp
 from mycodo.utils.utils import random_alphanumeric
 
 logger = logging.getLogger(__name__)
+
+# -----------------------------------------------------------------------
+# Fixed USB port -> stable device path mapping for 'leaf_usb' cameras.
+#
+# Confirmed by plugging one camera into each of the 4 physical USB ports
+# in turn and inspecting /dev/v4l/by-path/ -- each port enumerates under
+# the same PCIe/USB controller path with only the final ".N" segment
+# (1.1 / 1.2 / 1.3 / 1.4) changing per port. "video-index0" is the actual
+# capture-capable node for these cameras (video-index1 is metadata-only).
+#
+# If Mycodo is ever deployed on different hardware (a different board can
+# have a different PCIe/USB controller address), re-run the by-path check
+# with one camera per port and update this template to match.
+# -----------------------------------------------------------------------
+LEAF_USB_PORT_DEVICE_TEMPLATE = (
+    "/dev/v4l/by-path/platform-fd500000.pcie-pci-0000:01:00.0-"
+    "usb-0:1.{port}:1.0-video-index0"
+)
+
+# On many single-board computers all USB ports share one upstream USB
+# controller, so two 'leaf_usb' cameras capturing at the same instant can
+# corrupt each other's frames. This lock is process-wide (shared by every
+# 'leaf_usb' Camera captured by this daemon) so at most one such capture
+# ever happens at a time, regardless of which port/device it uses.
+_LEAF_USB_CAPTURE_LOCK = threading.Lock()
 
 
 #
@@ -447,6 +473,97 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                 return None, None
         except:
             logger.exception("opencv")
+
+    elif settings.library == 'leaf_usb':
+        if record_type not in ['photo', 'timelapse']:
+            logger.error("The leaf_usb library only supports still images (photo/timelapse), not video.")
+            return None, None
+
+        # Serialized process-wide: see _LEAF_USB_CAPTURE_LOCK comment above.
+        with _LEAF_USB_CAPTURE_LOCK:
+            try:
+                import cv2
+
+                port = str(settings.device).strip()
+                if port not in ('1', '2', '3', '4'):
+                    logger.error(
+                        f"leaf_usb 'device' must be a USB port number (1-4), got: {settings.device!r}")
+                    return None, None
+                device_path = LEAF_USB_PORT_DEVICE_TEMPLATE.format(port=port)
+
+                # Open/close the device fresh for every single capture
+                # (rather than holding it open continuously) so a camera
+                # only holds USB bandwidth for the brief moment it's
+                # actually grabbing a frame.
+                cap = cv2.VideoCapture(device_path, cv2.CAP_V4L2)
+                try:
+                    if not cap.isOpened():
+                        logger.error(f"Could not open camera on USB port {port} ({device_path})")
+                        return None, None
+
+                    # Request MJPG (compressed) rather than the raw default
+                    # to cut USB bandwidth. Must be set before width/height
+                    # to take effect on most UVC cameras.
+                    cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+                    cap.set(cv2.CAP_PROP_FRAME_WIDTH, settings.width)
+                    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, settings.height)
+
+                    # A value of -1 (the default) on brightness/contrast/
+                    # saturation/gain means "leave this V4L2 control at the
+                    # camera's own default" rather than force a value.
+                    if settings.brightness is not None and settings.brightness >= 0:
+                        cap.set(cv2.CAP_PROP_BRIGHTNESS, settings.brightness)
+                    if settings.contrast is not None and settings.contrast >= 0:
+                        cap.set(cv2.CAP_PROP_CONTRAST, settings.contrast)
+                    if settings.saturation is not None and settings.saturation >= 0:
+                        cap.set(cv2.CAP_PROP_SATURATION, settings.saturation)
+                    if settings.gain is not None and settings.gain >= 0:
+                        cap.set(cv2.CAP_PROP_GAIN, settings.gain)
+
+                    # Exposure left unset (None) means auto-exposure stays on.
+                    if settings.exposure is not None:
+                        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1)  # manual, most V4L2 UVC drivers
+                        cap.set(cv2.CAP_PROP_EXPOSURE, settings.exposure)
+                    else:
+                        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 3)  # auto, most V4L2 UVC drivers
+
+                    # Discard a couple of frames while auto-exposure/gain
+                    # settle and the format switch takes effect.
+                    for _ in range(2):
+                        cap.read()
+                    status, img_orig = cap.read()
+                finally:
+                    cap.release()
+
+                if not status or img_orig is None:
+                    logger.error(f"Could not acquire image from USB port {port} ({device_path})")
+                    return None, None
+
+                img_edited = img_orig
+                if settings.hflip and settings.vflip:
+                    img_edited = cv2.flip(img_edited, -1)
+                elif settings.hflip:
+                    img_edited = cv2.flip(img_edited, 1)
+                elif settings.vflip:
+                    img_edited = cv2.flip(img_edited, 0)
+
+                rotation = int(settings.rotation or 0)
+                if rotation == 90:
+                    img_edited = cv2.rotate(img_edited, cv2.ROTATE_90_CLOCKWISE)
+                elif rotation == 180:
+                    img_edited = cv2.rotate(img_edited, cv2.ROTATE_180)
+                elif rotation == 270:
+                    img_edited = cv2.rotate(img_edited, cv2.ROTATE_90_COUNTERCLOCKWISE)
+                elif rotation != 0:
+                    logger.warning(
+                        f"leaf_usb only supports rotation of 0/90/180/270 degrees, ignoring {rotation}")
+
+                write_success = cv2.imwrite(path_file, img_edited)
+                if not write_success:
+                    logger.error(f"Could not write image to {path_file}")
+                    return None, None
+            except:
+                logger.exception("leaf_usb")
 
     elif settings.library == 'http_address':
         try:
