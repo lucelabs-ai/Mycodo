@@ -88,6 +88,21 @@ def camera_add(form_camera):
         new_camera.url_still = 'https://192.168.0.29/api/cameras/capture_image/149591a0-e9a8-4ae6-a8f8-bd3855840f4b'
         new_camera.url_stream = ''
         new_camera.json_headers = '{"Accept": "application/vnd.mycodo.v1+json", "X-API-KEY": "YOUR_API_KEY"}'
+    elif form_camera.library.data == 'leaf_usb':
+        # 'device' stores the USB port number (1-4), not a device path --
+        # see LEAF_USB_PORT_DEVICE_TEMPLATE in devices/camera.py.
+        new_camera.device = '1'
+        new_camera.width = 1280
+        new_camera.height = 720
+        # -1 (the model default of None/0 is overridden below) means
+        # "leave this V4L2 control at the camera's own default" for
+        # brightness/contrast/saturation/gain; exposure left as None
+        # means auto-exposure stays enabled.
+        new_camera.brightness = -1
+        new_camera.contrast = -1
+        new_camera.saturation = -1
+        new_camera.gain = -1
+        new_camera.exposure = None
     if not error:
         try:
             new_camera.save()
@@ -204,6 +219,17 @@ def camera_mod(form_camera):
             mod_camera.url_still = form_camera.url_still.data
             mod_camera.url_stream = form_camera.url_stream.data
             mod_camera.json_headers = form_camera.json_headers.data
+        elif mod_camera.library == 'leaf_usb':
+            # width, height, hflip, vflip, rotation, brightness are already
+            # assigned unconditionally above for every library.
+            if form_camera.device.data not in ('1', '2', '3', '4'):
+                messages["error"].append("USB Port must be 1, 2, 3, or 4")
+            else:
+                mod_camera.device = form_camera.device.data
+            mod_camera.contrast = form_camera.contrast.data
+            mod_camera.saturation = form_camera.saturation.data
+            mod_camera.gain = form_camera.gain.data
+            mod_camera.exposure = form_camera.exposure.data
         else:
             messages["error"].append("Unknown camera library")
 
