@@ -239,6 +239,14 @@ CAMERA_INFO = {
         'capable_image': True,
         'capable_stream': False
     },
+    'leaf_usb': {
+        'name': 'LEAF USB Camera (opencv-headless, V4L2)',
+        'dependencies_module': [
+            ('pip-pypi', 'cv2', 'opencv-python-headless')
+        ],
+        'capable_image': True,
+        'capable_stream': False
+    },
 }
 
 METHOD_DEP_BASE = [

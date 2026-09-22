@@ -3,6 +3,7 @@ import datetime
 import json
 import logging
 import os
+import threading
 import time
 
 from mycodo.config import MYCODO_DB_PATH
@@ -19,6 +20,69 @@ from mycodo.utils.system_pi import set_user_grp
 from mycodo.utils.utils import random_alphanumeric
 
 logger = logging.getLogger(__name__)
+
+# -----------------------------------------------------------------------
+# USB port -> stable device path mapping for 'leaf_usb' cameras.
+#
+# Each entry maps a Camera's selected "USB Port" number to the physical
+# USB topology path segment for that port, exactly as reported by
+# `v4l2-ctl --list-devices` or `ls -l /dev/v4l/by-path/` (the part between
+# "usb-0:" and ":1.0-video-index0"). "video-index0" is the actual
+# capture-capable node for these cameras (video-index1 is metadata-only).
+#
+# Ports '1'-'4' are the original 4-port hub, plugged directly into the
+# Pi -- used directly when the second hub isn't plugged in.
+# Ports 'H1'-'H10' are a second hub added to reach 12+ cameras per Pi,
+# labeled with an 'H' prefix so they're visually distinct from the
+# original 4 in the dropdown, numbered to match the second hub's own
+# port labeling exactly. Its topology strings (1.2.X / 1.2.1.X /
+# 1.2.4.X) show it's plugged into port '2' of the original hub, which
+# means port '2' below no longer has a camera directly on it (selecting
+# it will just correctly fail to open, same as any other empty port).
+# If that assumption is wrong -- if the second hub is actually plugged
+# in somewhere else -- update the "1.2..." prefixes below to match
+# wherever `v4l2-ctl --list-devices` actually shows it.
+#
+# Adding another hub or port later is just one more line here -- nothing
+# else in this file needs to change. Keep the option list in
+# mycodo_flask/templates/pages/camera_options/leaf_usb.html in sync with
+# whatever keys exist in this dict.
+#
+# If Mycodo is ever deployed on different hardware (a different board can
+# have a different PCIe/USB controller address), re-run the by-path check
+# and update LEAF_USB_DEVICE_PATH_PREFIX below to match.
+# -----------------------------------------------------------------------
+LEAF_USB_DEVICE_PATH_PREFIX = (
+    "/dev/v4l/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:"
+)
+LEAF_USB_DEVICE_PATH_SUFFIX = ":1.0-video-index0"
+
+LEAF_USB_PORT_MAP = {
+    # Original 4-port hub
+    '1': '1.1',
+    '2': '1.2',
+    '3': '1.3',
+    '4': '1.4',
+    # Second hub (10 ports), 'H'-prefixed and numbered to match its own
+    # port labeling exactly
+    'H1': '1.2.3',
+    'H2': '1.2.2',
+    'H3': '1.2.1.3',
+    'H4': '1.2.1.2',
+    'H5': '1.2.1.1',
+    'H6': '1.2.1.4',
+    'H7': '1.2.4.3',
+    'H8': '1.2.4.2',
+    'H9': '1.2.4.1',
+    'H10': '1.2.4.4',
+}
+
+# On many single-board computers all USB ports share one upstream USB
+# controller, so two 'leaf_usb' cameras capturing at the same instant can
+# corrupt each other's frames. This lock is process-wide (shared by every
+# 'leaf_usb' Camera captured by this daemon) so at most one such capture
+# ever happens at a time, regardless of which port/device it uses.
+_LEAF_USB_CAPTURE_LOCK = threading.Lock()
 
 
 #
@@ -447,6 +511,100 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                 return None, None
         except:
             logger.exception("opencv")
+
+    elif settings.library == 'leaf_usb':
+        if record_type not in ['photo', 'timelapse']:
+            logger.error("The leaf_usb library only supports still images (photo/timelapse), not video.")
+            return None, None
+
+        # Serialized process-wide: see _LEAF_USB_CAPTURE_LOCK comment above.
+        with _LEAF_USB_CAPTURE_LOCK:
+            try:
+                import cv2
+
+                port = str(settings.device).strip()
+                topology = LEAF_USB_PORT_MAP.get(port)
+                if topology is None:
+                    logger.error(
+                        f"leaf_usb 'device' must be one of {list(LEAF_USB_PORT_MAP)}, "
+                        f"got: {settings.device!r}")
+                    return None, None
+                device_path = f"{LEAF_USB_DEVICE_PATH_PREFIX}{topology}{LEAF_USB_DEVICE_PATH_SUFFIX}"
+
+                # Open/close the device fresh for every single capture
+                # (rather than holding it open continuously) so a camera
+                # only holds USB bandwidth for the brief moment it's
+                # actually grabbing a frame.
+                cap = cv2.VideoCapture(device_path, cv2.CAP_V4L2)
+                try:
+                    if not cap.isOpened():
+                        logger.error(f"Could not open camera on USB port {port} ({device_path})")
+                        return None, None
+
+                    # Request MJPG (compressed) rather than the raw default
+                    # to cut USB bandwidth. Must be set before width/height
+                    # to take effect on most UVC cameras.
+                    cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+                    cap.set(cv2.CAP_PROP_FRAME_WIDTH, settings.width)
+                    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, settings.height)
+
+                    # A value of -1 (the default) on brightness/contrast/
+                    # saturation/gain means "leave this V4L2 control at the
+                    # camera's own default" rather than force a value.
+                    if settings.brightness is not None and settings.brightness >= 0:
+                        cap.set(cv2.CAP_PROP_BRIGHTNESS, settings.brightness)
+                    if settings.contrast is not None and settings.contrast >= 0:
+                        cap.set(cv2.CAP_PROP_CONTRAST, settings.contrast)
+                    if settings.saturation is not None and settings.saturation >= 0:
+                        cap.set(cv2.CAP_PROP_SATURATION, settings.saturation)
+                    if settings.gain is not None and settings.gain >= 0:
+                        cap.set(cv2.CAP_PROP_GAIN, settings.gain)
+
+                    # Exposure left unset (None) means auto-exposure stays on.
+                    if settings.exposure is not None:
+                        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1)  # manual, most V4L2 UVC drivers
+                        cap.set(cv2.CAP_PROP_EXPOSURE, settings.exposure)
+                    else:
+                        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 3)  # auto, most V4L2 UVC drivers
+
+                    # Discard a couple of frames while auto-exposure/gain
+                    # settle and the format switch takes effect.
+                    for _ in range(2):
+                        cap.read()
+                    status, img_orig = cap.read()
+                finally:
+                    cap.release()
+
+                if not status or img_orig is None:
+                    logger.error(f"Could not acquire image from USB port {port} ({device_path})")
+                    return None, None
+
+                img_edited = img_orig
+                if settings.hflip and settings.vflip:
+                    img_edited = cv2.flip(img_edited, -1)
+                elif settings.hflip:
+                    img_edited = cv2.flip(img_edited, 1)
+                elif settings.vflip:
+                    img_edited = cv2.flip(img_edited, 0)
+
+                rotation = int(settings.rotation or 0)
+                if rotation == 90:
+                    img_edited = cv2.rotate(img_edited, cv2.ROTATE_90_CLOCKWISE)
+                elif rotation == 180:
+                    img_edited = cv2.rotate(img_edited, cv2.ROTATE_180)
+                elif rotation == 270:
+                    img_edited = cv2.rotate(img_edited, cv2.ROTATE_90_COUNTERCLOCKWISE)
+                elif rotation != 0:
+                    logger.warning(
+                        f"leaf_usb only supports rotation of 0/90/180/270 degrees, ignoring {rotation}")
+
+                write_success = cv2.imwrite(path_file, img_edited)
+                if not write_success:
+                    logger.error(f"Could not write image to {path_file}")
+                    return None, None
+            except Exception:
+                logger.exception("leaf_usb")
+                return None, None
 
     elif settings.library == 'http_address':
         try:

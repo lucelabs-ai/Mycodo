@@ -223,6 +223,10 @@
         <div class="col-12" style="color: red">
           {{_("Different options are available depending on the camera being used.")}}
         </div>
+      {% elif each_camera.library == 'leaf_usb' %}
+        <div class="col-12" style="color: red">
+          {{_("Different options are available depending on the camera being used.")}} {{_("Use 'v4l2-ctl --list-devices' and 'ls -l /dev/v4l/by-path/' to identify which USB port maps to which camera on your hardware.")}}
+        </div>
       {% endif %}
 
         <div class="col-12 col-sm-3">
