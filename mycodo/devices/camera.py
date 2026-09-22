@@ -22,22 +22,60 @@ from mycodo.utils.utils import random_alphanumeric
 logger = logging.getLogger(__name__)
 
 # -----------------------------------------------------------------------
-# Fixed USB port -> stable device path mapping for 'leaf_usb' cameras.
+# USB port -> stable device path mapping for 'leaf_usb' cameras.
 #
-# Confirmed by plugging one camera into each of the 4 physical USB ports
-# in turn and inspecting /dev/v4l/by-path/ -- each port enumerates under
-# the same PCIe/USB controller path with only the final ".N" segment
-# (1.1 / 1.2 / 1.3 / 1.4) changing per port. "video-index0" is the actual
+# Each entry maps a Camera's selected "USB Port" number to the physical
+# USB topology path segment for that port, exactly as reported by
+# `v4l2-ctl --list-devices` or `ls -l /dev/v4l/by-path/` (the part between
+# "usb-0:" and ":1.0-video-index0"). "video-index0" is the actual
 # capture-capable node for these cameras (video-index1 is metadata-only).
+#
+# Ports '1'-'4' are the original 4-port hub, plugged directly into the
+# Pi -- used directly when the second hub isn't plugged in.
+# Ports 'H1'-'H10' are a second hub added to reach 12+ cameras per Pi,
+# labeled with an 'H' prefix so they're visually distinct from the
+# original 4 in the dropdown, numbered to match the second hub's own
+# port labeling exactly. Its topology strings (1.2.X / 1.2.1.X /
+# 1.2.4.X) show it's plugged into port '2' of the original hub, which
+# means port '2' below no longer has a camera directly on it (selecting
+# it will just correctly fail to open, same as any other empty port).
+# If that assumption is wrong -- if the second hub is actually plugged
+# in somewhere else -- update the "1.2..." prefixes below to match
+# wherever `v4l2-ctl --list-devices` actually shows it.
+#
+# Adding another hub or port later is just one more line here -- nothing
+# else in this file needs to change. Keep the option list in
+# mycodo_flask/templates/pages/camera_options/leaf_usb.html in sync with
+# whatever keys exist in this dict.
 #
 # If Mycodo is ever deployed on different hardware (a different board can
 # have a different PCIe/USB controller address), re-run the by-path check
-# with one camera per port and update this template to match.
+# and update LEAF_USB_DEVICE_PATH_PREFIX below to match.
 # -----------------------------------------------------------------------
-LEAF_USB_PORT_DEVICE_TEMPLATE = (
-    "/dev/v4l/by-path/platform-fd500000.pcie-pci-0000:01:00.0-"
-    "usb-0:1.{port}:1.0-video-index0"
+LEAF_USB_DEVICE_PATH_PREFIX = (
+    "/dev/v4l/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:"
 )
+LEAF_USB_DEVICE_PATH_SUFFIX = ":1.0-video-index0"
+
+LEAF_USB_PORT_MAP = {
+    # Original 4-port hub
+    '1': '1.1',
+    '2': '1.2',
+    '3': '1.3',
+    '4': '1.4',
+    # Second hub (10 ports), 'H'-prefixed and numbered to match its own
+    # port labeling exactly
+    'H1': '1.2.3',
+    'H2': '1.2.2',
+    'H3': '1.2.1.3',
+    'H4': '1.2.1.2',
+    'H5': '1.2.1.1',
+    'H6': '1.2.1.4',
+    'H7': '1.2.4.3',
+    'H8': '1.2.4.2',
+    'H9': '1.2.4.1',
+    'H10': '1.2.4.4',
+}
 
 # On many single-board computers all USB ports share one upstream USB
 # controller, so two 'leaf_usb' cameras capturing at the same instant can
@@ -485,11 +523,13 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                 import cv2
 
                 port = str(settings.device).strip()
-                if port not in ('1', '2', '3', '4'):
+                topology = LEAF_USB_PORT_MAP.get(port)
+                if topology is None:
                     logger.error(
-                        f"leaf_usb 'device' must be a USB port number (1-4), got: {settings.device!r}")
+                        f"leaf_usb 'device' must be one of {list(LEAF_USB_PORT_MAP)}, "
+                        f"got: {settings.device!r}")
                     return None, None
-                device_path = LEAF_USB_PORT_DEVICE_TEMPLATE.format(port=port)
+                device_path = f"{LEAF_USB_DEVICE_PATH_PREFIX}{topology}{LEAF_USB_DEVICE_PATH_SUFFIX}"
 
                 # Open/close the device fresh for every single capture
                 # (rather than holding it open continuously) so a camera
