@@ -76,7 +76,11 @@ trap 'abort' 0
 
 set -e
 
-clear
+# No `clear` here -- this is the *unattended* installer, so nothing is
+# ever watching an interactive screen for it to clear, and unattended
+# callers (e.g. leaf_pi's firstrun.sh, run with no controlling terminal
+# and no TERM set at all) can hit an unhelpful terminfo-driven failure
+# from a plain `clear` before a single real install step even runs.
 SECONDS=0
 NOW=$(date)
 printf "#### Mycodo installation began %s\n" "${NOW}" 2>&1 | tee -a "${LOG_LOCATION}"
