@@ -602,8 +602,9 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                 if not write_success:
                     logger.error(f"Could not write image to {path_file}")
                     return None, None
-            except:
+            except Exception:
                 logger.exception("leaf_usb")
+                return None, None
 
     elif settings.library == 'http_address':
         try:
