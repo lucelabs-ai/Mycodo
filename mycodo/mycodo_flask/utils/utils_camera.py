@@ -11,6 +11,7 @@ from flask import url_for
 from mycodo.config import PATH_CAMERAS
 from mycodo.config_translations import TRANSLATIONS
 from mycodo.databases.models import Camera
+from mycodo.devices.camera import LEAF_USB_PORT_MAP
 from mycodo.mycodo_client import DaemonControl
 from mycodo.mycodo_flask.extensions import db
 from mycodo.mycodo_flask.utils.utils_general import delete_entry_with_id
@@ -89,8 +90,8 @@ def camera_add(form_camera):
         new_camera.url_stream = ''
         new_camera.json_headers = '{"Accept": "application/vnd.mycodo.v1+json", "X-API-KEY": "YOUR_API_KEY"}'
     elif form_camera.library.data == 'leaf_usb':
-        # 'device' stores the USB port number (1-4), not a device path --
-        # see LEAF_USB_PORT_DEVICE_TEMPLATE in devices/camera.py.
+        # 'device' stores a USB port number (a key in LEAF_USB_PORT_MAP,
+        # devices/camera.py), not a device path.
         new_camera.device = '1'
         new_camera.width = 1280
         new_camera.height = 720
@@ -222,8 +223,9 @@ def camera_mod(form_camera):
         elif mod_camera.library == 'leaf_usb':
             # width, height, hflip, vflip, rotation, brightness are already
             # assigned unconditionally above for every library.
-            if form_camera.device.data not in ('1', '2', '3', '4'):
-                messages["error"].append("USB Port must be 1, 2, 3, or 4")
+            if form_camera.device.data not in LEAF_USB_PORT_MAP:
+                messages["error"].append(
+                    f"USB Port must be one of {list(LEAF_USB_PORT_MAP)}")
             else:
                 mod_camera.device = form_camera.device.data
             mod_camera.contrast = form_camera.contrast.data
