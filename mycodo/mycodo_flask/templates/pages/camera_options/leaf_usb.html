@@ -2,11 +2,8 @@
   {{form_camera.device.label(class_='control-label')}}
   <div>
     <select class="form-control form-tooltip form-dropdown" id="device" name="device" title="" data-original-title="Select which physical USB port this camera is plugged into. 1-4 are the original hub's direct ports; H1-H10 are the second hub's ports.">
-      {% for port_num in range(1, 5) %}
-      <option value="{{port_num}}"{% if each_camera.device == port_num|string %} selected{% endif %}>USB Port {{port_num}}</option>
-      {% endfor %}
-      {% for port_num in range(1, 11) %}
-      <option value="H{{port_num}}"{% if each_camera.device == 'H' ~ port_num %} selected{% endif %}>USB Port H{{port_num}}</option>
+      {% for port in leaf_usb_ports %}
+      <option value="{{port}}"{% if each_camera.device == port %} selected{% endif %}>USB Port {{port}}</option>
       {% endfor %}
     </select>
    </div>

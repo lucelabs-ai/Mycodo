@@ -11,7 +11,9 @@ from flask import url_for
 from mycodo.config import PATH_CAMERAS
 from mycodo.config_translations import TRANSLATIONS
 from mycodo.databases.models import Camera
-from mycodo.devices.camera import LEAF_USB_PORT_MAP
+from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
+from mycodo.devices.luce_leaf_usb import LeafUsbError
+from mycodo.devices.luce_leaf_usb import leaf_usb_device_path
 from mycodo.mycodo_client import DaemonControl
 from mycodo.mycodo_flask.extensions import db
 from mycodo.mycodo_flask.utils.utils_general import delete_entry_with_id
@@ -228,6 +230,12 @@ def camera_mod(form_camera):
                     f"USB Port must be one of {list(LEAF_USB_PORT_MAP)}")
             else:
                 mod_camera.device = form_camera.device.data
+                # Saved either way: the camera may simply not be plugged
+                # in yet. The same lookup the capture makes says so now.
+                try:
+                    leaf_usb_device_path(mod_camera.device)
+                except LeafUsbError as err:
+                    messages["warning"].append(str(err))
             mod_camera.contrast = form_camera.contrast.data
             mod_camera.saturation = form_camera.saturation.data
             mod_camera.gain = form_camera.gain.data
