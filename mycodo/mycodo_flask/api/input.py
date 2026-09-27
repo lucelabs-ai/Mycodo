@@ -92,11 +92,21 @@ class SettingsInputsUniqueID(Resource):
                     InputChannel.query.filter_by(
                         input_id=unique_id).all(), many=True))
 
+            # No `.join(DeviceMeasurements.conversion, ...)` here -- despite
+            # DeviceMeasurementsSchema nesting a ConversionSchema field,
+            # DeviceMeasurements has never had an ORM relationship() for
+            # "conversion", only a plain conversion_id string column. The
+            # join raised AttributeError on every call, crashing this
+            # endpoint for every Input on every request (confirmed against
+            # a stock v8.17.0 install, not something introduced by a luce
+            # patch). Marshmallow's Nested field degrades to nulls for the
+            # missing attribute instead of raising, same as a real join
+            # would with no matching Conversion row.
             measure_schema = DeviceMeasurementsSchema()
             list_measurements = return_list_of_dictionaries(
                 measure_schema.dump(
                     DeviceMeasurements.query.filter_by(
-                        device_id=unique_id).join(DeviceMeasurements.conversion, isouter=True).all(), many=True))
+                        device_id=unique_id).all(), many=True))
 
             return {
                 'input settings': list_data,
