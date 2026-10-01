@@ -12,9 +12,9 @@ from mycodo.databases.models import CustomController
 from mycodo.databases.models import OutputChannel
 from mycodo.databases.utils import session_scope
 from mycodo.devices.luce_leaf_usb import LeafUsbError
-from mycodo.devices.luce_leaf_usb import leaf_usb_capture_lock
+from mycodo.devices.luce_leaf_usb import leaf_usb_capture
 from mycodo.devices.luce_leaf_usb import leaf_usb_device_path
-from mycodo.devices.luce_leaf_usb import leaf_usb_run_bounded
+from mycodo.devices.luce_leaf_usb import leaf_usb_read_frame
 from mycodo.mycodo_client import DaemonControl
 from mycodo.utils.database import db_retrieve_table_daemon
 from mycodo.utils.system_pi import assure_path_exists
@@ -500,18 +500,17 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                         cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 3)  # auto, most V4L2 UVC drivers
 
                     # Discard a couple of frames while auto-exposure/gain
-                    # settle and the format switch takes effect.
-                    for _ in range(2):
-                        cap.read()
-                    return cap.read()
+                    # settle and the format switch takes effect, then read
+                    # the frame itself -- an empty MJPG frame is a retry, not
+                    # a failed capture (OpenCV 5 raises cv2.error on one).
+                    return leaf_usb_read_frame(cap, (cv2.error,))
                 finally:
                     cap.release()
 
             # One leaf_usb capture at a time across the daemon and the web
-            # UI, and a wedged camera abandoned after a time limit instead
-            # of holding up every other camera: see devices/luce_leaf_usb.py.
-            with leaf_usb_capture_lock():
-                status, img_orig = leaf_usb_run_bounded(device_path, grab)
+            # UI, and a wedged camera abandoned after a time limit, with the
+            # lock held until it really returns: see devices/luce_leaf_usb.py.
+            status, img_orig = leaf_usb_capture(device_path, grab)
 
             if not status or img_orig is None:
                 logger.error(f"Could not acquire image from USB port {port} ({device_path})")
