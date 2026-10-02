@@ -35,6 +35,7 @@ from mycodo.databases.models import (PID, AlembicVersion, Camera, Conversion,
                                      Measurement, Misc, Notes, NoteTags,
                                      Output, OutputChannel, Unit, Widget)
 from mycodo.devices.camera import camera_record
+from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
 from mycodo.mycodo_client import DaemonControl, daemon_active
 from mycodo.mycodo_flask.extensions import db
 from mycodo.mycodo_flask.forms import forms_camera, forms_misc, forms_notes
@@ -287,6 +288,7 @@ def page_camera():
                            latest_img_tl=latest_img_tl,
                            latest_img_tl_ts=latest_img_tl_ts,
                            latest_img_tl_size=latest_img_tl_size,
+                           leaf_usb_ports=list(LEAF_USB_PORT_MAP),
                            misc=misc,
                            opencv_devices=opencv_devices,
                            output=output,
