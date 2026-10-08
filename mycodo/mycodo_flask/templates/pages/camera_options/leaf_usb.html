@@ -1,3 +1,5 @@
+{% set info = leaf_usb_info.get(each_camera.unique_id, {}) %}
+{% set queried = info.get('controls') %}
 <div class="form-group">
   {{form_camera.device.label(class_='control-label')}}
   <div>
@@ -9,50 +11,57 @@
    </div>
 </div>
 <div class="form-group">
+  <label class="control-label" for="leaf_usb_capture_delay_{{each_camera.unique_id}}">Capture Delay (seconds)</label>
+  <div>
+    <input class="form-control form-tooltip" id="leaf_usb_capture_delay_{{each_camera.unique_id}}" name="leaf_usb_capture_delay" type="number" min="0" max="{{leaf_usb_max_delay}}" step="0.1" value="{{info.get('delay', 3.0)}}" title="" data-original-title="After the camera opens, it streams for this long, discarding frames, so auto-exposure and white balance settle; the next frame is the one kept. 0 to {{leaf_usb_max_delay}} seconds.">
+   </div>
+</div>
+
+<div class="col-12" style="margin-top: 1em"><h6>Format and image processing</h6></div>
+<div class="form-group">
   {{form_camera.width.label(class_='control-label')}}
   <div>
-    {{form_camera.width(class_='form-control', value=each_camera.width)}}
+    {{form_camera.width(class_='form-control', value=each_camera.width, **{'title':_('V4L2 format: requested frame width (MJPG).')})}}
    </div>
 </div>
 <div class="form-group">
   {{form_camera.height.label(class_='control-label')}}
   <div>
-    {{form_camera.height(class_='form-control', value=each_camera.height)}}
+    {{form_camera.height(class_='form-control', value=each_camera.height, **{'title':_('V4L2 format: requested frame height (MJPG).')})}}
    </div>
 </div>
 <div class="form-group">
   {{form_camera.rotation.label(class_='control-label')}}
   <div>
-    {{form_camera.rotation(class_='form-control', value=each_camera.rotation, **{'title':_('Only 0, 90, 180, or 270 degrees are supported.')})}}
+    {{form_camera.rotation(class_='form-control', value=each_camera.rotation, **{'title':_('Applied by Mycodo after capture, not a camera setting. Only 0, 90, 180, or 270 degrees are supported.')})}}
    </div>
 </div>
+
+<div class="col-12" style="margin-top: 1em">
+  <h6>V4L2 camera controls</h6>
+  <small>Each setting is the camera's V4L2 control of the same name (<code>v4l2-ctl --list-ctrls</code>). Leave it empty to use the camera's own default, which is set again on every capture.
+  {% if queried is none %}<br><span style="color: red">{{info.get('note') or "This camera's controls could not be read"}}: its defaults and ranges are not shown, and controls it lacks are skipped at capture.</span>{% endif %}</small>
+</div>
+{% for name, cid, fallback_label in leaf_usb_controls %}
+  {% set c = queried.get(name) if queried is not none else none %}
+  {% if queried is none or c is not none %}
+  {% set value = info.get('values', {}).get(name) %}
+  {% set field_id = 'leaf_usb_v4l2_' + name + '_' + each_camera.unique_id %}
 <div class="form-group">
-  {{form_camera.brightness.label(class_='control-label')}}
+  <label class="control-label" for="{{field_id}}">{{c.label if c else fallback_label}} <small><code>{{name}}</code></small></label>
   <div>
-    {{form_camera.brightness(class_='form-control', value=each_camera.brightness, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
+    {% if c and (c.get('menu') or c.type == 2) %}
+      {% set items = c.get('menu') or {0: 'Off', 1: 'On'} %}
+    <select class="form-control form-tooltip form-dropdown" id="{{field_id}}" name="leaf_usb_v4l2_{{name}}"{% if c.read_only %} disabled{% endif %} title="" data-original-title="{{'Read-only on this camera' if c.read_only else 'V4L2 control ' + name}}">
+      <option value=""{% if value is none %} selected{% endif %}>Camera default ({{items.get(c.default, c.default)}})</option>
+      {% for item_value, item_label in items.items() %}
+      <option value="{{item_value}}"{% if value is not none and value == item_value %} selected{% endif %}>{{item_label}}</option>
+      {% endfor %}
+    </select>
+    {% else %}
+    <input class="form-control form-tooltip" id="{{field_id}}" name="leaf_usb_v4l2_{{name}}" type="number" step="{{c.step if c and c.step else 1}}"{% if c %} min="{{c.min}}" max="{{c.max}}"{% endif %} value="{{'' if value is none else value}}" placeholder="{{'Camera default (' ~ c.default ~ ', range ' ~ c.min ~ ' to ' ~ c.max ~ ')' if c else 'Camera default'}}"{% if c and c.read_only %} disabled{% endif %} title="" data-original-title="{{'V4L2 control ' + name}}{% if c and c.inactive %} (currently inactive: its automatic mode is on){% endif %}">
+    {% endif %}
    </div>
 </div>
-<div class="form-group">
-  {{form_camera.contrast.label(class_='control-label')}}
-  <div>
-    {{form_camera.contrast(class_='form-control', value=each_camera.contrast, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
-   </div>
-</div>
-<div class="form-group">
-  {{form_camera.saturation.label(class_='control-label')}}
-  <div>
-    {{form_camera.saturation(class_='form-control', value=each_camera.saturation, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
-   </div>
-</div>
-<div class="form-group">
-  {{form_camera.gain.label(class_='control-label')}}
-  <div>
-    {{form_camera.gain(class_='form-control', value=each_camera.gain, **{'title':_('Raw V4L2 value. -1 leaves this at the camera default.')})}}
-   </div>
-</div>
-<div class="form-group">
-  {{form_camera.exposure.label(class_='control-label')}}
-  <div>
-    {{form_camera.exposure(class_='form-control', value=each_camera.exposure, **{'title':_('Leave blank for auto-exposure. Set a value to switch to manual exposure.')})}}
-   </div>
-</div>
+  {% endif %}
+{% endfor %}

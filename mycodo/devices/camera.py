@@ -3,6 +3,7 @@ import datetime
 import json
 import logging
 import os
+import threading
 import time
 
 from mycodo.config import MYCODO_DB_PATH
@@ -11,10 +12,13 @@ from mycodo.databases.models import Camera
 from mycodo.databases.models import CustomController
 from mycodo.databases.models import OutputChannel
 from mycodo.databases.utils import session_scope
+from mycodo.devices.luce_leaf_usb import LEAF_USB_CAPTURE_TIMEOUT_SEC
 from mycodo.devices.luce_leaf_usb import LeafUsbError
+from mycodo.devices.luce_leaf_usb import leaf_usb_apply_controls
 from mycodo.devices.luce_leaf_usb import leaf_usb_capture
 from mycodo.devices.luce_leaf_usb import leaf_usb_device_path
-from mycodo.devices.luce_leaf_usb import leaf_usb_read_frame
+from mycodo.devices.luce_leaf_usb import leaf_usb_settings
+from mycodo.devices.luce_leaf_usb import leaf_usb_settle
 from mycodo.mycodo_client import DaemonControl
 from mycodo.utils.database import db_retrieve_table_daemon
 from mycodo.utils.system_pi import assure_path_exists
@@ -462,6 +466,12 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
 
             port = str(settings.device).strip()
             device_path = leaf_usb_device_path(port)
+            capture_delay_s, controls = leaf_usb_settings(
+                settings.custom_options,
+                legacy={'brightness': settings.brightness, 'contrast': settings.contrast,
+                        'saturation': settings.saturation, 'gain': settings.gain,
+                        'exposure': settings.exposure})
+            cancelled = threading.Event()
 
             def grab():
                 # Open/close the device fresh for every single capture
@@ -480,37 +490,26 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                     cap.set(cv2.CAP_PROP_FRAME_WIDTH, settings.width)
                     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, settings.height)
 
-                    # A value of -1 (the default) on brightness/contrast/
-                    # saturation/gain means "leave this V4L2 control at the
-                    # camera's own default" rather than force a value.
-                    if settings.brightness is not None and settings.brightness >= 0:
-                        cap.set(cv2.CAP_PROP_BRIGHTNESS, settings.brightness)
-                    if settings.contrast is not None and settings.contrast >= 0:
-                        cap.set(cv2.CAP_PROP_CONTRAST, settings.contrast)
-                    if settings.saturation is not None and settings.saturation >= 0:
-                        cap.set(cv2.CAP_PROP_SATURATION, settings.saturation)
-                    if settings.gain is not None and settings.gain >= 0:
-                        cap.set(cv2.CAP_PROP_GAIN, settings.gain)
+                    # Every image setting is a V4L2 control, set by its V4L2
+                    # id; one left empty on the Camera page goes back to the
+                    # camera's own default (devices/luce_leaf_usb.py).
+                    for problem in leaf_usb_apply_controls(device_path, controls):
+                        logger.warning(f"leaf_usb port {port}: {problem}")
 
-                    # Exposure left unset (None) means auto-exposure stays on.
-                    if settings.exposure is not None:
-                        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1)  # manual, most V4L2 UVC drivers
-                        cap.set(cv2.CAP_PROP_EXPOSURE, settings.exposure)
-                    else:
-                        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 3)  # auto, most V4L2 UVC drivers
-
-                    # Discard a couple of frames while auto-exposure/gain
-                    # settle and the format switch takes effect, then read
-                    # the frame itself -- an empty MJPG frame is a retry, not
-                    # a failed capture (OpenCV 5 raises cv2.error on one).
-                    return leaf_usb_read_frame(cap, (cv2.error,))
+                    # Stream for the capture delay, discarding frames, so
+                    # auto-exposure and white balance settle; then keep the
+                    # next frame. An empty MJPG frame is a retry, not a
+                    # failed capture (OpenCV 5 raises cv2.error on one).
+                    return leaf_usb_settle(cap, (cv2.error,), capture_delay_s, cancelled)
                 finally:
                     cap.release()
 
             # One leaf_usb capture at a time across the daemon and the web
             # UI, and a wedged camera abandoned after a time limit, with the
             # lock held until it really returns: see devices/luce_leaf_usb.py.
-            status, img_orig = leaf_usb_capture(device_path, grab)
+            status, img_orig = leaf_usb_capture(
+                device_path, grab, timeout_sec=capture_delay_s + LEAF_USB_CAPTURE_TIMEOUT_SEC,
+                cancelled=cancelled)
 
             if not status or img_orig is None:
                 logger.error(f"Could not acquire image from USB port {port} ({device_path})")

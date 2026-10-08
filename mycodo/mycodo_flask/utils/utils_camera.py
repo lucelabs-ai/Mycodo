@@ -6,14 +6,19 @@ import subprocess
 
 import sqlalchemy
 from flask import flash
+from flask import request
 from flask import url_for
 
 from mycodo.config import PATH_CAMERAS
 from mycodo.config_translations import TRANSLATIONS
 from mycodo.databases.models import Camera
+from mycodo.devices.luce_leaf_usb import LEAF_USB_DEFAULT_CAPTURE_DELAY_SEC
 from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
 from mycodo.devices.luce_leaf_usb import LeafUsbError
 from mycodo.devices.luce_leaf_usb import leaf_usb_device_path
+from mycodo.devices.luce_leaf_usb import leaf_usb_query_controls
+from mycodo.devices.luce_leaf_usb import leaf_usb_settings_from_form
+from mycodo.devices.luce_leaf_usb import leaf_usb_settings_json
 from mycodo.mycodo_client import DaemonControl
 from mycodo.mycodo_flask.extensions import db
 from mycodo.mycodo_flask.utils.utils_general import delete_entry_with_id
@@ -97,15 +102,11 @@ def camera_add(form_camera):
         new_camera.device = '1'
         new_camera.width = 1280
         new_camera.height = 720
-        # -1 (the model default of None/0 is overridden below) means
-        # "leave this V4L2 control at the camera's own default" for
-        # brightness/contrast/saturation/gain; exposure left as None
-        # means auto-exposure stays enabled.
-        new_camera.brightness = -1
-        new_camera.contrast = -1
-        new_camera.saturation = -1
-        new_camera.gain = -1
-        new_camera.exposure = None
+        # The capture delay and the V4L2 controls live in custom_options
+        # (devices/luce_leaf_usb.py): every control starts at the camera's
+        # own default.
+        new_camera.custom_options = leaf_usb_settings_json(
+            LEAF_USB_DEFAULT_CAPTURE_DELAY_SEC, {})
     if not error:
         try:
             new_camera.save()
@@ -223,8 +224,9 @@ def camera_mod(form_camera):
             mod_camera.url_stream = form_camera.url_stream.data
             mod_camera.json_headers = form_camera.json_headers.data
         elif mod_camera.library == 'leaf_usb':
-            # width, height, hflip, vflip, rotation, brightness are already
-            # assigned unconditionally above for every library.
+            # width, height, hflip, vflip, rotation are already assigned
+            # unconditionally above for every library.
+            queried = None
             if form_camera.device.data not in LEAF_USB_PORT_MAP:
                 messages["error"].append(
                     f"USB Port must be one of {list(LEAF_USB_PORT_MAP)}")
@@ -233,13 +235,21 @@ def camera_mod(form_camera):
                 # Saved either way: the camera may simply not be plugged
                 # in yet. The same lookup the capture makes says so now.
                 try:
-                    leaf_usb_device_path(mod_camera.device)
+                    queried = leaf_usb_query_controls(
+                        leaf_usb_device_path(mod_camera.device))
                 except LeafUsbError as err:
                     messages["warning"].append(str(err))
-            mod_camera.contrast = form_camera.contrast.data
-            mod_camera.saturation = form_camera.saturation.data
-            mod_camera.gain = form_camera.gain.data
-            mod_camera.exposure = form_camera.exposure.data
+                except OSError as err:
+                    messages["warning"].append(
+                        f"Could not read this camera's controls to check the "
+                        f"values: {err.strerror or err}")
+            # The capture delay and the V4L2 controls (camera_options/
+            # leaf_usb.html), checked against this camera's ranges when it
+            # could be asked.
+            options, form_errors = leaf_usb_settings_from_form(request.form, queried)
+            messages["error"].extend(form_errors)
+            if not form_errors:
+                mod_camera.custom_options = options
         else:
             messages["error"].append("Unknown camera library")
 

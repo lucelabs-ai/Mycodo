@@ -35,7 +35,10 @@ from mycodo.databases.models import (PID, AlembicVersion, Camera, Conversion,
                                      Measurement, Misc, Notes, NoteTags,
                                      Output, OutputChannel, Unit, Widget)
 from mycodo.devices.camera import camera_record
+from mycodo.devices.luce_leaf_usb import LEAF_USB_MAX_CAPTURE_DELAY_SEC
 from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
+from mycodo.devices.luce_leaf_usb import LEAF_USB_V4L2_CONTROLS
+from mycodo.devices.luce_leaf_usb import leaf_usb_page_info
 from mycodo.mycodo_client import DaemonControl, daemon_active
 from mycodo.mycodo_flask.extensions import db
 from mycodo.mycodo_flask.forms import forms_camera, forms_misc, forms_notes
@@ -277,6 +280,16 @@ def page_camera():
     choices_output_channels = utils_general.choices_outputs_channels(
         output, output_channel, dict_outputs)
 
+    # leaf_usb: each camera's capture delay and V4L2 controls, with the
+    # camera's own defaults and ranges where it can be asked.
+    leaf_usb_info = {
+        each_camera.unique_id: leaf_usb_page_info(
+            each_camera.device, each_camera.custom_options,
+            legacy={'brightness': each_camera.brightness, 'contrast': each_camera.contrast,
+                    'saturation': each_camera.saturation, 'gain': each_camera.gain,
+                    'exposure': each_camera.exposure})
+        for each_camera in camera if each_camera.library == 'leaf_usb'}
+
     return render_template('pages/camera.html',
                            camera=camera,
                            camera_info=CAMERA_INFO,
@@ -288,6 +301,9 @@ def page_camera():
                            latest_img_tl=latest_img_tl,
                            latest_img_tl_ts=latest_img_tl_ts,
                            latest_img_tl_size=latest_img_tl_size,
+                           leaf_usb_controls=LEAF_USB_V4L2_CONTROLS,
+                           leaf_usb_info=leaf_usb_info,
+                           leaf_usb_max_delay=LEAF_USB_MAX_CAPTURE_DELAY_SEC,
                            leaf_usb_ports=list(LEAF_USB_PORT_MAP),
                            misc=misc,
                            opencv_devices=opencv_devices,
