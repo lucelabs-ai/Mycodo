@@ -73,7 +73,12 @@ output_set_fields = ns_output.model('Output Modulation Fields', {
         description='The volume to send to an output.',
         required=False,
         example=35.0,
-        min=0)
+        min=0),
+    'value': fields.Float(
+        description='The value to send to a value output (e.g. the voltage of '
+                    'a DAC or the number of steps of a stepper motor). May be negative.',
+        required=False,
+        example=5.0)
 })
 
 
@@ -178,6 +183,7 @@ class Outputs(Resource):
         duration = None
         duty_cycle = None
         volume = None
+        value = None
 
         if ns_output.payload:
             if 'state' in ns_output.payload:
@@ -226,6 +232,14 @@ class Outputs(Resource):
                     except Exception:
                         abort(422, message='volume does not represent float value')
 
+            if 'value' in ns_output.payload:
+                value = ns_output.payload["value"]
+                if value is not None:
+                    try:
+                        value = float(value)
+                    except Exception:
+                        abort(422, message='value does not represent float value')
+
         try:
             if state is not None and duration is not None:
                 return_ = control.output_on_off(
@@ -234,6 +248,9 @@ class Outputs(Resource):
             elif duty_cycle is not None:
                 return_ = control.output_on(
                     unique_id, output_channel=channel, output_type='pwm', amount=duty_cycle)
+            elif value is not None:
+                return_ = control.output_on(
+                    unique_id, output_channel=channel, output_type='value', amount=value)
             elif volume is not None:
                 return_ = control.output_on(
                     unique_id, output_channel=channel, output_type='vol', amount=volume)
