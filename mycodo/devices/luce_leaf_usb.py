@@ -39,6 +39,14 @@ LEAF_USB_LOCK_WAIT_SEC = 30
 LEAF_USB_DEFAULT_CAPTURE_DELAY_SEC = 3.0
 LEAF_USB_MAX_CAPTURE_DELAY_SEC = 10.0
 
+# A read that waits this long and still brings no frame means the camera has
+# stopped streaming. A healthy UVC camera delivers its first frame within
+# about a second of starting the stream, and OpenCV's own wait gives up
+# after about 10 s; the capture ends at the first such read rather than
+# retrying, so a stuck camera holds the capture lock for one wait, not one
+# per attempt.
+LEAF_USB_STALLED_READ_SEC = 5.0
+
 # -----------------------------------------------------------------------
 # USB port -> USB topology for 'leaf_usb' cameras.
 #
@@ -224,7 +232,35 @@ def leaf_usb_capture(key, func, timeout_sec=LEAF_USB_CAPTURE_TIMEOUT_SEC,
     return outcome.get('value')
 
 
-def leaf_usb_read_frame(cap, read_errors, warmup=2, attempts=3):
+def _read(cap, read_errors, clock):
+    """One read: (True, frame), or (False, None) for an empty frame.
+
+    Raises LeafUsbError if the read waited LEAF_USB_STALLED_READ_SEC or more
+    and still brought no frame: the camera has stopped streaming (OpenCV's
+    own wait for a frame is about 10 s), and another read would only hold
+    the capture lock for another full wait. An empty frame that comes back
+    at once (OpenCV 5's cv2.error) is not a stall, and is retried.
+    """
+    started = clock()
+    try:
+        ok, frame = cap.read()
+    except read_errors:
+        ok, frame = False, None
+    if ok and frame is not None:
+        return True, frame
+    waited = clock() - started
+    if waited >= LEAF_USB_STALLED_READ_SEC:
+        raise LeafUsbError(
+            f"the camera stopped sending frames (a read waited {waited:.0f} s for one)")
+    return False, None
+
+
+def _cancelled(cancelled):
+    return cancelled is not None and cancelled.is_set()
+
+
+def leaf_usb_read_frame(cap, read_errors, warmup=2, attempts=3, cancelled=None,
+                        clock=time.monotonic):
     """Return (ok, frame) from an opened capture, tolerating empty frames.
 
     UVC cameras often deliver an empty frame or two right after opening or
@@ -236,19 +272,20 @@ def leaf_usb_read_frame(cap, read_errors, warmup=2, attempts=3):
     exception still propagates.
 
     Discards `warmup` reads while exposure settles, then makes up to
-    `attempts` reads for the frame itself.
+    `attempts` reads for the frame itself. Every read checks `cancelled`
+    first, and a read that stalls ends the capture (_read), so a camera
+    that has stopped streaming releases the capture lock after one wait,
+    not after one per attempt.
     """
     for _ in range(warmup):
-        try:
-            cap.read()
-        except read_errors:
-            pass
+        if _cancelled(cancelled):
+            return False, None
+        _read(cap, read_errors, clock)
     for _ in range(attempts):
-        try:
-            ok, frame = cap.read()
-        except read_errors:
-            continue
-        if ok and frame is not None:
+        if _cancelled(cancelled):
+            return False, None
+        got, frame = _read(cap, read_errors, clock)
+        if got:
             return True, frame
     return False, None
 
@@ -260,19 +297,15 @@ def leaf_usb_settle(cap, read_errors, seconds, cancelled=None, clock=time.monoto
     the camera is streaming (OpenCV starts the stream on the first read), so
     the camera reads and throws frames away for the whole delay rather than
     sitting idle, and the frame kept is the first one after it. Stops early
-    if `cancelled` is set (the caller gave up: leaf_usb_capture).
+    if `cancelled` is set (the caller gave up: leaf_usb_capture), and at the
+    first read that stalls (_read).
     """
     deadline = clock() + max(0.0, seconds)
     while clock() < deadline:
-        if cancelled is not None and cancelled.is_set():
+        if _cancelled(cancelled):
             return False, None
-        try:
-            cap.read()
-        except read_errors:
-            pass
-    if cancelled is not None and cancelled.is_set():
-        return False, None
-    return leaf_usb_read_frame(cap, read_errors, warmup=0)
+        _read(cap, read_errors, clock)
+    return leaf_usb_read_frame(cap, read_errors, warmup=0, cancelled=cancelled, clock=clock)
 
 
 # -----------------------------------------------------------------------

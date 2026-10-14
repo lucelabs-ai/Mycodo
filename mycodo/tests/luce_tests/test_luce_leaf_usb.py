@@ -12,6 +12,7 @@ import time
 
 import pytest
 
+from mycodo.devices import luce_leaf_usb
 from mycodo.devices.luce_leaf_usb import LEAF_USB_DEFAULT_CAPTURE_DELAY_SEC
 from mycodo.devices.luce_leaf_usb import LEAF_USB_MAX_CAPTURE_DELAY_SEC
 from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
@@ -395,6 +396,71 @@ def test_giving_up_on_a_capture_cancels_it(tmp_path):
         capture('dev-cancel', lambda: release.wait(5), tmp_path, timeout_sec=0.2, cancelled=cancelled)
     assert cancelled.is_set()
     release.set()
+
+
+# A camera that has stopped streaming: each read waits (OpenCV's ~10 s) and brings nothing
+
+def test_a_stalled_read_during_the_delay_ends_the_capture():
+    clock = FakeClock(per_read=10)
+    cap = StreamingCapture(clock, *[(False, None)] * 5)
+    with pytest.raises(LeafUsbError, match="stopped sending frames"):
+        leaf_usb_settle(cap, (EmptyFrameError,), 3.0, clock=clock)
+    assert cap.reads == 1  # not one more wait per remaining attempt
+
+
+def test_a_stalled_read_for_the_frame_itself_ends_the_capture():
+    clock = FakeClock(per_read=10)
+    cap = StreamingCapture(clock, *[(False, None)] * 5)
+    with pytest.raises(LeafUsbError, match="a read waited 10 s"):
+        leaf_usb_settle(cap, (EmptyFrameError,), 0, clock=clock)
+    assert cap.reads == 1
+
+
+def test_a_stall_that_raises_an_empty_frame_error_is_still_a_stall():
+    clock = FakeClock(per_read=10)
+    cap = StreamingCapture(clock, *[EmptyFrameError('!buf.empty()')] * 5)
+    with pytest.raises(LeafUsbError, match="stopped sending frames"):
+        leaf_usb_read_frame(cap, (EmptyFrameError,), warmup=0, clock=clock)
+    assert cap.reads == 1
+
+
+def test_giving_up_is_checked_before_every_read_of_the_frame():
+    cancelled = threading.Event()
+
+    class GivesUpAfterOneRead(FakeCapture):
+        def read(self):
+            cancelled.set()  # the caller gives up while this read is under way
+            return super().read()
+
+    cap = GivesUpAfterOneRead(*[(False, None)] * 5)
+    assert leaf_usb_read_frame(cap, (EmptyFrameError,), warmup=0, cancelled=cancelled) == (False, None)
+    assert cap.reads == 1
+
+
+@needs_flock
+def test_a_camera_that_stops_streaming_frees_the_lock_after_one_wait(tmp_path, monkeypatch):
+    # H1 on leaf04: the camera opens, but every read waits and brings nothing. The lock must
+    # come free after the first such read, so the next camera captures at once, instead of
+    # waiting out the delay and three more full reads behind it.
+    monkeypatch.setattr(luce_leaf_usb, 'LEAF_USB_STALLED_READ_SEC', 0.2)
+
+    class StoppedCamera:
+        reads = 0
+
+        def read(self):
+            StoppedCamera.reads += 1
+            time.sleep(0.3)  # waits, then nothing
+            return False, None
+
+    cancelled = threading.Event()
+    started = time.monotonic()
+    with pytest.raises(LeafUsbError, match="stopped sending frames"):
+        capture('dev-h1', lambda: leaf_usb_settle(StoppedCamera(), (EmptyFrameError,), 1.0, cancelled),
+                tmp_path, timeout_sec=5, cancelled=cancelled)
+    assert time.monotonic() - started < 1.0
+    assert StoppedCamera.reads == 1
+
+    assert capture('dev-h2', lambda: (True, 'frame'), tmp_path, lock_wait_sec=0.5) == (True, 'frame')
 
 
 # V4L2 controls, against a camera emulated at the ioctl level

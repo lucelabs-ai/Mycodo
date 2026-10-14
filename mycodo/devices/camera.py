@@ -500,7 +500,10 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                     # auto-exposure and white balance settle; then keep the
                     # next frame. An empty MJPG frame is a retry, not a
                     # failed capture (OpenCV 5 raises cv2.error on one).
-                    return leaf_usb_settle(cap, (cv2.error,), capture_delay_s, cancelled)
+                    try:
+                        return leaf_usb_settle(cap, (cv2.error,), capture_delay_s, cancelled)
+                    except LeafUsbError as err:  # a stalled read: say which camera
+                        raise LeafUsbError(f"USB port {port} ({device_path}): {err}") from err
                 finally:
                     cap.release()
 
