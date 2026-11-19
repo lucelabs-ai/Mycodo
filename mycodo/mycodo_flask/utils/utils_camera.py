@@ -12,6 +12,14 @@ from flask import url_for
 from mycodo.config import PATH_CAMERAS
 from mycodo.config_translations import TRANSLATIONS
 from mycodo.databases.models import Camera
+from mycodo.devices.luce_leaf_gantry_rgb import LEAF_GANTRY_DEFAULT_MAX_AGE_MIN
+from mycodo.devices.luce_leaf_gantry_rgb import LeafGantryError
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_base_url
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_check
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_settings
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_settings_from_form
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_settings_json
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_stop_id
 from mycodo.devices.luce_leaf_usb import LEAF_USB_DEFAULT_CAPTURE_DELAY_SEC
 from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
 from mycodo.devices.luce_leaf_usb import LeafUsbError
@@ -107,6 +115,14 @@ def camera_add(form_camera):
         # own default.
         new_camera.custom_options = leaf_usb_settings_json(
             LEAF_USB_DEFAULT_CAPTURE_DELAY_SEC, {})
+    elif form_camera.library.data == 'leaf_gantry_rgb':
+        # url_still is the gantry's address, device the stop id (empty: taken
+        # from the camera's name, gantry-s03 -> s03), custom_options the
+        # access token and the maximum photo age (devices/luce_leaf_gantry_rgb.py).
+        new_camera.url_still = ''
+        new_camera.device = ''
+        new_camera.custom_options = leaf_gantry_settings_json(
+            '', LEAF_GANTRY_DEFAULT_MAX_AGE_MIN)
     if not error:
         try:
             new_camera.save()
@@ -250,6 +266,35 @@ def camera_mod(form_camera):
             messages["error"].extend(form_errors)
             if not form_errors:
                 mod_camera.custom_options = options
+        elif mod_camera.library == 'leaf_gantry_rgb':
+            # The gantry's address, the stop id and the token
+            # (camera_options/leaf_gantry_rgb.html). The photo itself is
+            # never touched here or at capture: see devices/luce_leaf_gantry_rgb.py.
+            address = (request.form.get('leaf_gantry_address') or '').strip()
+            stop = (request.form.get('leaf_gantry_stop') or '').strip()
+            try:
+                leaf_gantry_base_url(address)
+                mod_camera.url_still = address
+            except LeafGantryError as err:
+                messages["error"].append(str(err))
+            try:
+                stop_id = leaf_gantry_stop_id(stop, form_camera.name.data)
+                mod_camera.device = stop
+            except LeafGantryError as err:
+                stop_id = None
+                messages["error"].append(str(err))
+            options, form_errors = leaf_gantry_settings_from_form(
+                request.form, mod_camera.custom_options)
+            messages["error"].extend(form_errors)
+            if not form_errors:
+                mod_camera.custom_options = options
+            if not messages["error"]:
+                # Saved either way; a gantry that is off or a stop not yet
+                # added is only a warning.
+                token, _ = leaf_gantry_settings(options)
+                problem = leaf_gantry_check(address, stop_id, token)
+                if problem:
+                    messages["warning"].append(problem)
         else:
             messages["error"].append("Unknown camera library")
 

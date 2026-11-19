@@ -247,6 +247,12 @@ CAMERA_INFO = {
         'capable_image': True,
         'capable_stream': False
     },
+    'leaf_gantry_rgb': {
+        'name': 'LEAF Gantry RGB (one stop of a rack gantry, photo relayed unchanged)',
+        'dependencies_module': [],
+        'capable_image': True,
+        'capable_stream': False
+    },
 }
 
 METHOD_DEP_BASE = [

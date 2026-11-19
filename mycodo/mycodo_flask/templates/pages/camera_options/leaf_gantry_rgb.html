@@ -1,0 +1,37 @@
+{% set info = leaf_gantry_info.get(each_camera.unique_id, {}) %}
+{% set uid = each_camera.unique_id %}
+{# The photo is relayed unchanged, so there is no rotation; camera_mod still reads the field. #}
+<input type="hidden" name="rotation" value="0">
+<div class="col-12" style="margin-top: 1em">
+  <h6>Rack gantry stop</h6>
+  <small>This camera takes no photo itself: on every capture it fetches the gantry's newest photo of one stop and saves it unchanged, at the gantry camera's full resolution. Exposure, focus and the stops themselves are set on the gantry's own web page. Use a <b>read</b> token from the gantry's Integrations tab.</small>
+</div>
+<div class="form-group">
+  <label class="control-label" for="leaf_gantry_address_{{uid}}">Gantry address</label>
+  <div>
+    <input class="form-control form-tooltip" id="leaf_gantry_address_{{uid}}" name="leaf_gantry_address" type="text" value="{{each_camera.url_still or ''}}" placeholder="192.168.1.50:{{leaf_gantry_default_port}}" title="" data-original-title="Host name or IP address of the gantry's Pi, with the port if not {{leaf_gantry_default_port}}. The same for every stop of one gantry.">
+   </div>
+</div>
+<div class="form-group">
+  <label class="control-label" for="leaf_gantry_stop_{{uid}}">Stop ID</label>
+  <div>
+    <input class="form-control form-tooltip" id="leaf_gantry_stop_{{uid}}" name="leaf_gantry_stop" type="text" value="{{info.get('stop', '')}}" placeholder="{{info.get('default_stop') or 's03'}}" title="" data-original-title="The stop as registered on the gantry's Stops and rounds tab. Leave empty to take it from this camera's name: gantry-s03 means stop s03.">
+   </div>
+</div>
+<div class="form-group">
+  <label class="control-label" for="leaf_gantry_token_{{uid}}">Access token</label>
+  <div>
+    <input class="form-control form-tooltip" id="leaf_gantry_token_{{uid}}" name="leaf_gantry_token" type="password" value="" autocomplete="new-password" placeholder="{{'Saved: leave empty to keep it' if info.get('has_token') else 'rg_...'}}" title="" data-original-title="A read token created on the gantry's Integrations tab. It is sent only in the Authorization header and is not shown again after saving.">
+   </div>
+</div>
+<div class="form-group">
+  <label class="control-label" for="leaf_gantry_max_age_{{uid}}">Maximum photo age (minutes)</label>
+  <div>
+    <input class="form-control form-tooltip" id="leaf_gantry_max_age_{{uid}}" name="leaf_gantry_max_age" type="number" min="0.1" max="{{leaf_gantry_max_age_limit}}" step="0.1" value="{{info.get('max_age', 15)}}" title="" data-original-title="A photo older than this is refused, so the capture fails and the camera reports a fault instead of passing an old photo as new.">
+   </div>
+</div>
+{% if each_camera.url_still and (info.get('stop') or info.get('default_stop')) %}
+<div class="col-12">
+  <small>Fetches <code>{{each_camera.url_still}}</code> &rarr; <code>/api/v1/stops/{{info.get('stop') or info.get('default_stop')}}/latest</code>. Press Capture Still to test.</small>
+</div>
+{% endif %}

@@ -288,6 +288,7 @@
            </div>
         </div>
       {% endif %}
+      {% if each_camera.library != 'leaf_gantry_rgb' %}
         <div class="col-auto">
           {{form_camera.hflip.label(class_='control-label')}}
           <div class="input-group-text">
@@ -300,6 +301,7 @@
             <input id="vflip" name="vflip" type="checkbox" value="y"{% if each_camera.vflip %} checked{% endif %}>
           </div>
         </div>
+      {% endif %}
         <div class="col-auto">
           {{form_camera.hide_still.label(class_='control-label')}}
           <div class="input-group-text">

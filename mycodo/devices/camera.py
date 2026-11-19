@@ -12,6 +12,11 @@ from mycodo.databases.models import Camera
 from mycodo.databases.models import CustomController
 from mycodo.databases.models import OutputChannel
 from mycodo.databases.utils import session_scope
+from mycodo.devices.luce_leaf_gantry_rgb import LeafGantryError
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_fetch
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_save
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_settings
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_stop_id
 from mycodo.devices.luce_leaf_usb import LEAF_USB_CAPTURE_TIMEOUT_SEC
 from mycodo.devices.luce_leaf_usb import LeafUsbError
 from mycodo.devices.luce_leaf_usb import leaf_usb_apply_controls
@@ -455,6 +460,26 @@ def camera_record(record_type, unique_id, duration_sec=None, tmp_filename=None):
                 return None, None
         except:
             logger.exception("opencv")
+
+    elif settings.library == 'leaf_gantry_rgb':
+        # Relays one stop of a rack gantry (devices/luce_leaf_gantry_rgb.py):
+        # the gantry's newest photo of the stop, bytes unchanged, or no file
+        # at all if it cannot be had or is too old.
+        if record_type not in ['photo', 'timelapse']:
+            logger.error("The leaf_gantry_rgb library only supports still images (photo/timelapse), not video.")
+            return None, None
+        try:
+            token, max_age_min = leaf_gantry_settings(settings.custom_options)
+            stop_id = leaf_gantry_stop_id(settings.device, settings.name)
+            data, info = leaf_gantry_fetch(settings.url_still, stop_id, token, max_age_min)
+            leaf_gantry_save(data, path_file)
+            logger.debug(
+                f"leaf_gantry_rgb: {settings.name}: stop {stop_id}, {len(data)} bytes, "
+                f"taken {info['captured_at']} ({info['age_min']:.1f} min ago)")
+        except LeafGantryError as err:
+            logger.error(f"leaf_gantry_rgb: {settings.name}: {err}")
+        except Exception:
+            logger.exception(f"leaf_gantry_rgb: {settings.name}")
 
     elif settings.library == 'leaf_usb':
         if record_type not in ['photo', 'timelapse']:
