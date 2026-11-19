@@ -35,6 +35,9 @@ from mycodo.databases.models import (PID, AlembicVersion, Camera, Conversion,
                                      Measurement, Misc, Notes, NoteTags,
                                      Output, OutputChannel, Unit, Widget)
 from mycodo.devices.camera import camera_record
+from mycodo.devices.luce_leaf_gantry_rgb import LEAF_GANTRY_DEFAULT_PORT
+from mycodo.devices.luce_leaf_gantry_rgb import LEAF_GANTRY_MAX_AGE_LIMIT_MIN
+from mycodo.devices.luce_leaf_gantry_rgb import leaf_gantry_page_info
 from mycodo.devices.luce_leaf_usb import LEAF_USB_MAX_CAPTURE_DELAY_SEC
 from mycodo.devices.luce_leaf_usb import LEAF_USB_PORT_MAP
 from mycodo.devices.luce_leaf_usb import LEAF_USB_V4L2_CONTROLS
@@ -290,6 +293,13 @@ def page_camera():
                     'exposure': each_camera.exposure})
         for each_camera in camera if each_camera.library == 'leaf_usb'}
 
+    # leaf_gantry_rgb: each camera's stop id, maximum photo age and whether a
+    # token is saved (the token itself is never sent back to the page).
+    leaf_gantry_info = {
+        each_camera.unique_id: leaf_gantry_page_info(
+            each_camera.device, each_camera.custom_options, each_camera.name)
+        for each_camera in camera if each_camera.library == 'leaf_gantry_rgb'}
+
     return render_template('pages/camera.html',
                            camera=camera,
                            camera_info=CAMERA_INFO,
@@ -301,6 +311,9 @@ def page_camera():
                            latest_img_tl=latest_img_tl,
                            latest_img_tl_ts=latest_img_tl_ts,
                            latest_img_tl_size=latest_img_tl_size,
+                           leaf_gantry_default_port=LEAF_GANTRY_DEFAULT_PORT,
+                           leaf_gantry_info=leaf_gantry_info,
+                           leaf_gantry_max_age_limit=LEAF_GANTRY_MAX_AGE_LIMIT_MIN,
                            leaf_usb_controls=LEAF_USB_V4L2_CONTROLS,
                            leaf_usb_info=leaf_usb_info,
                            leaf_usb_max_delay=LEAF_USB_MAX_CAPTURE_DELAY_SEC,
